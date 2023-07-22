@@ -16,7 +16,7 @@ public extension UIScreen {
     }()
     
     // Returns the display corner radius, or a default value of 10 if unavailable
-    public var displayCornerRadius: CGFloat {
+    var displayCornerRadius: CGFloat {
         guard let cornerRadius = self.value(forKey: Self.cornerRadiusKey) as? CGFloat else {
             return 10
         }

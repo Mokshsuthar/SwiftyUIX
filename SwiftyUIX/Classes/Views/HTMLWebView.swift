@@ -70,7 +70,6 @@ struct HTMLWebView: NSViewRepresentable {
     
     func makeNSView(context: Context) -> WKWebView {
         let WebView = WKWebView()
-        WebView.backgroundColor = NSColor.clear
         return WebView
     }
     

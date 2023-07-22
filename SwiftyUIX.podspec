@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "SwiftyUIX"
   spec.version      = "0.0.1"
-  spec.summary      = "SwiftyUIX is a time-saving CocoaPod library, offering useful extensions and custom views to simplify iOS app development. Enhance UIs, reduce code complexity, and accelerate your project with its developer-friendly features."
+  spec.summary      = "SwiftyUIX is a time-saving CocoaPod library, offering useful extensions and custom views to simplify development."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -69,7 +69,7 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target = "13.0"
   spec.osx.deployment_target = "12.0"
-  
+  spec.swift_version = "4.2"
   # spec.platform     = :ios
   # spec.platform     = :ios, "5.0"
 
@@ -84,7 +84,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/Mokshsuthar/SwiftyUIX.gitt", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/Mokshsuthar/SwiftyUIX.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -95,7 +95,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "SwiftyUIX/**/*.{h,m,swift}"
+  spec.source_files  = "SwiftyUIX", "SwiftyUIX/**/*.{h,m,swift}"
   #spec.source_files  = "Classes", "Classes/**/*.{h,m}"
   #spec.exclude_files = "Classes/Exclude"
 
