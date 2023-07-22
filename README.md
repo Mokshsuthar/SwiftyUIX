@@ -1,5 +1,4 @@
 # SwiftyUIX
-![Static Badge](https://img.shields.io/badge/:badgeContent)
 
 SwiftyUIX is a powerful and versatile library for iOS and macOS developers that provides a collection of useful extensions and pre-defined views. With SwiftyUIX, you can enhance your development workflow, improve code readability, and accelerate app development by leveraging its handy utilities.
 ## Installation
