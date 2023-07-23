@@ -77,6 +77,9 @@ Text("Hello World")
 // or
 Text("Hello World")
        squareFrame(size : 100, alignment : .leading)
+```
+</details>
+
 
 </details>
 
@@ -107,6 +110,7 @@ Access the height of the device's top safe area (notch, if applicable) and the b
   }
 ```
 </details>
+
 
 
 
