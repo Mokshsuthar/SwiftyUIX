@@ -92,4 +92,52 @@ struct ContentView: View {
       
 </details>
 
+<details>
+  <summary>Thread Extensions</summary>
+      
+A collection of useful extensions for managing threads in Swift.
+
+### Features
+
+1. **On Main Thread Execution**
+   - `OnMainThread(_:)`: Executes the given closure on the main thread if the current thread is already the main thread. Otherwise, dispatches it asynchronously to the main thread for execution.
+
+2. **On Background Thread Execution**
+   - `OnBackGroudThread(_:)`: Executes the given closure on a background thread using a global background queue.
+
+3. **Delayed Execution on Main Thread**
+   - `runAfter(_:completion:)`: Schedules the given closure to run after a specified delay (in seconds) on the main thread using `DispatchQueue.main.asyncAfter`.
+
+4. **Custom Thread Creation**
+   - `startNewThread(name:qos:execute:)`: Creates and manages custom threads with specific configurations. This extension allows you to start a new thread with a custom name and Quality of Service (QoS).
+
+### Usage Example
+
+```swift
+import Foundation
+
+// Execute a closure on the main thread after a delay of 2 seconds
+Thread.runAfter(2) {
+    print("This will be executed after 2 seconds on the main thread.")
+}
+
+// Execute a closure on the main thread
+Thread.OnMainThread {
+    print("This will be executed on the main thread.")
+}
+
+// Execute a closure on a background thread
+Thread.OnBackGroudThread {
+    print("This will be executed on a background thread.")
+}
+
+// Create and start a custom thread
+Thread.startNewThread(name: "CustomThread", qos: .userInitiated) {
+    print("This is a custom thread with name 'CustomThread' and QoS 'userInitiated'.")
+}
+```
+
+</details>
+
+
 
