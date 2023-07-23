@@ -22,9 +22,10 @@ Follow the prompts to complete the installation.
 
 ## Usage
 ### Extensions
-### Extensions
 <details>
+      
 <summary>Frame Extensions</summary>
+      
 ###### 1. full frame (.fullframe())
 
 `fullframe()` is a concise SwiftUI extension that enables seamless full-frame viewing with customizable alignment options. Enjoy immersive content without distractions.
