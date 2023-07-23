@@ -31,5 +31,6 @@ or
 ```sh
 ZStack{
     Text("Hello")
-}.fullframe(alignment : .leading)
+}
+.fullframe(alignment : .leading)
 ```
