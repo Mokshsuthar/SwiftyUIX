@@ -25,40 +25,40 @@ Follow the prompts to complete the installation.
       
 <summary>swiftui Views Extensions</summary>
 
-      1. **Device Dimensions**
+1. **Device Dimensions**
    - `screenWidth`: Retrieves the width of the device screen in `CGFloat`.
    - `screenHeight`: Retrieves the height of the device screen in `CGFloat`.
    - `topSafeAreaHeight`: Retrieves the height of the top safe area (notch, if applicable) in `CGFloat`.
    - `bottomSafeAreaHeight`: Retrieves the height of the bottom safe area in `CGFloat`.
 
-2. **Screen Corner Radius**
+3. **Screen Corner Radius**
    - `screenCornerRadius(minimum:)`: Calculates and returns the corner radius of the device's display. Optional minimum value can be set.
 
-3. **Home Indicator**
+4. **Home Indicator**
    - `hideHomeIndicator()`: Hides the home indicator on devices running iOS 16.0 or later. Compatibility handled for earlier iOS versions.
 
-4. **Haptic Feedback**
+5. **Haptic Feedback**
    - `playHapticFeedback(_:)`: Plays haptic feedback using the specified `feedbackType`.
 
-5. **View Frame Manipulation**
+6. **View Frame Manipulation**
    - `fullframe(alignment:)`: Makes a view occupy the full parent's space with optional alignment.
    - `fullWidth(height:alignment:)`: Sets the frame with full available width and optional height.
    - `fullHeight(width:alignment:)`: Sets the frame with full available height and optional width.
    - `squareFrame(size:alignment:)`: Creates a square frame for views with a specified size and alignment.
 
-6. **Safe Area Ignoring**
+7. **Safe Area Ignoring**
    - `ignoreSafeArea_C()`: Ignores the safe area insets of the device on iOS 14 and above.
 
-7. **View Masking**
+8. **View Masking**
    - `cornerRadius(_:)`: Adds a continuous corner radius to the view.
 
-8. **Scroll Position Detection**
+9. **Scroll Position Detection**
    - `getScrollPosition(key:handler:)`: Detects the scroll position of a view and calls the handler with the offset.
 
-9. **System Icon Image View**
+10. **System Icon Image View**
    - `systemImage(_:)`: Creates an image view with a system icon.
 
-10. **View Border**
+11. **View Border**
     - `border(lineWidth:cornerRadius:color:)`: Adds a border to the view with specified line width, corner radius, and color.
 
 </details>
