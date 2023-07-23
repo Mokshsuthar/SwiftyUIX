@@ -63,7 +63,33 @@ Follow the prompts to complete the installation.
 
 </details>
 
+<details>
+  <summary>SwiftUI Image Extensions</summary>
 
+A set of helpful SwiftUI extensions to manipulate image views easily.
 
+### Features
+
+1. **Square Frame with Aspect Ratio**
+   - `squareFrameWithApectRatio(value:contentMode:)`: Resizes the image to a square frame with a specified size while maintaining its aspect ratio. The `contentMode` parameter allows you to control how the image fills the frame.
+
+2. **Resize with Aspect Ratio**
+   - `resizeWithApectRatio(contentMode:)`: Resizes the image while maintaining its aspect ratio. The `contentMode` parameter lets you control how the image fits within its new frame.
+
+### Usage Example
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        Image("exampleImage")
+            .squareFrameWithApectRatio(value: 100, contentMode: .fill)
+            .border(lineWidth: 2, cornerRadius: 10, color: .blue)
+    }
+}
+```
+      
+</details>
 
 
