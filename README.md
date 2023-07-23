@@ -97,8 +97,9 @@ Easily retrieve the height and width of the device screen.
 Access the height of the device's top safe area (notch, if applicable) and the bottom safe area of device
 `self.topSafeAreaHeight` -top safe area (notch, if applicable)
 `self.bottomSafeAreaHeight` - bottom safe area
+
 ```sh
-  VStack{
+ VStack{
       Spacer()
          .frame(height : self.topSafeAreaHeight)
          
@@ -109,7 +110,9 @@ Access the height of the device's top safe area (notch, if applicable) and the b
          .frame(height : self.bottomSafeAreaHeight)
   }
 ```
+
 </details>
+
 
 
 
