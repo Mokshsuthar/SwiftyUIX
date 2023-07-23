@@ -1,6 +1,7 @@
 # SwiftyUIX
 
 SwiftyUIX is a powerful and versatile library for iOS and macOS developers that provides a collection of useful extensions and pre-defined views. With SwiftyUIX, you can enhance your development workflow, improve code readability, and accelerate app development by leveraging its handy utilities.
+[Click here to scroll down](#frame)
 ## Installation
 ### CocoaPods
 To integrate SwiftyUIX into your Xcode project using CocoaPods, add the following line to your Podfile:
@@ -34,7 +35,7 @@ ZStack{
     Text("Hello")
 }.fullframe(alignment : .leading)
 ```
-###### 2. full width (.fullwidth())
+###### 2. full width (.fullwidth()){#frame}
 The `fullWidth()` function is a concise SwiftUI extension that allows for full-width viewing with optional height and customizable alignment.
 
 If no height is provided, the function sets the width to fill the entire screen width without any constraints on the height, resulting in a full-width view with dynamic height based on its content.
