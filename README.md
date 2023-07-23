@@ -51,7 +51,8 @@ struct ContentView: View {
 ```
 ### Requirements
 
-- iOS 13.0 or later 
+- iOS 13.0 or later
+- 
 </details>
 
 <details>
@@ -87,6 +88,8 @@ struct ContentView: View {
 
 - iOS 13.0 or later for `HTMLWebView` on iOS.
 - macOS 11.0 or later for `HTMLWebView` on macOS.
+</details>
+
 
 ### Extensions
 <details>
