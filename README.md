@@ -68,6 +68,45 @@ Text("Hello World")
 Text("Hello World")
       .fullHight(width : 150,alignment : .leading)
 ```
+##### 4. Square Frame (.squareFrame(size : CGFloat))
+`squareFrame(size : CGFloat)` is a SwiftUI extension that instantly creates perfect square frames for views. Customize the size and alignment effortlessly. Simplify your SwiftUI development with this convenient function.
+
+```sh
+Text("Hello World")
+      squareFrame(size : 100)
+// or
+Text("Hello World")
+       squareFrame(size : 100, alignment : .leading)
+
 </details>
+
+<details>
+<summary>Device Utils</summary>
+###### 1. Get Screen Height and Width 
+Easily retrieve the height and width of the device screen.
+`self.screenWidth` - screen width in CGFloat
+`self.screenHeight` - screen Height in CGFloat
+```sh
+  Text("Hello, World!")
+        .frame(width : self.screenWidth, height : screenHeight)
+```
+###### 2. Top and Bottom Safe Area Height
+Access the height of the device's top safe area (notch, if applicable) and the bottom safe area of device
+`self.topSafeAreaHeight` -top safe area (notch, if applicable)
+`self.bottomSafeAreaHeight` - bottom safe area
+```sh
+  VStack{
+      Spacer()
+         .frame(height : self.topSafeAreaHeight)
+         
+    Rectangle()
+        .fill(.red)
+         
+          Spacer()
+         .frame(height : self.bottomSafeAreaHeight)
+  }
+```
+</details>
+
 
 
