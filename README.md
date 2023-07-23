@@ -85,31 +85,12 @@ Text("Hello World")
 
 <details>
 <summary>Device Utils (iOS only)</summary>
-      
-##### 1. Get Screen Height and Width 
-Easily retrieve the height and width of the device screen.
-`self.screenWidth` - screen width in CGFloat
-`self.screenHeight` - screen Height in CGFloat
-```sh
-  Text("Hello, World!")
-        .frame(width : self.screenWidth, height : screenHeight)
-```
-##### 2. Top and Bottom Safe Area Height
-Access the height of the device's top safe area (notch, if applicable) and the bottom safe area of device
-`self.topSafeAreaHeight` -top safe area (notch, if applicable)
-`self.bottomSafeAreaHeight` - bottom safe area
-```sh
-  VStack{
-    Spacer()
-        .frame(height : self.topSafeAreaHeight)
-         
-    Rectangle()
-        .fill(.red)
-         
-    Spacer()
-         .frame(height : self.bottomSafeAreaHeight)
-  }
-```
+
+1. `self.screenWidth` - screen width in CGFloat
+2. `self.screenHeight` - screen Height in CGFloat
+3. `self.topSafeAreaHeight` - top safe area (notch, if applicable)
+4. `self.bottomSafeAreaHeight` - bottom safe area
+
 Or you can use it is directly as frame 
 ```sh
   VStack{
@@ -123,17 +104,7 @@ Or you can use it is directly as frame
         .bottomSafeArea()
   }
 ```
-##### 3. Screen Corner Radius
-The `screenCornerRadius()` function calculates and returns the corner radius of the device's display. It takes an optional minimum value to cap the result if needed. The corner radius is obtained from the main screen, allowing for consistent UI rendering across different devices.
-```swift
-VStack{
-    Spacer()
-    
-    RoundedRectangle(cornerRadius: self.screenCornerRadius(minimum: 10))
-                .fullWidth(height: 300)
-}
-```
-
+5. `screenCornerRadius()` - function calculates and returns the corner radius of the device's display
 
 </details>
 
