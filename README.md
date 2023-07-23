@@ -374,3 +374,8 @@ if let nsColor = NSColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).toHexCode(
 ```
       
 </details>
+
+
+### License
+
+This project is licensed under the [MIT License](LICENSE). Feel free to use and modify it as per your requirements. However, we advise caution when using the `TransparentBackground` struct due to its potential side effects on the view hierarchy.
