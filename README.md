@@ -21,6 +21,38 @@ https://github.com/Mokshsuthar/SwiftyUIX.git
 Follow the prompts to complete the installation.
 
 ## Usage
+### Views
+<details>
+  <summary>BlurView</summary>
+
+The `BlurView` is a SwiftUI view that creates a visual blur effect, primarily designed for iOS.
+
+### Features
+
+- **Visual Blur Effect**: `BlurView` is a `UIViewRepresentable` that wraps a `UIVisualEffectView` to apply a blur effect to its content based on the specified `UIBlurEffect.Style`.
+- **Customizable Style**: You can customize the blur effect by providing a different `UIBlurEffect.Style` during initialization. The default style is `.systemChromeMaterial`, representing the standard system blur appearance.
+
+### Usage Example
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        ZStack {
+            // Your content here...
+            
+            // Apply a blur effect to the content
+            BlurView(style: .systemUltraThinMaterial)
+        }
+    }
+}
+
+```
+</details>
+
+
+### Extensions
 <details>
       
 <summary>swiftui Views Extensions</summary>
