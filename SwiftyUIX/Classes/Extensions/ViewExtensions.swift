@@ -22,11 +22,16 @@ public extension View {
     // Get the width of the device screen
     static var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
-    }
+    } 
 
     // Get the height of the device's notch (if applicable)
     static var topSafeAreaHeight: CGFloat {
         return UIDevice.current.topSafeArea
+    }
+    
+    // Get the height of the device's notch (if applicable)
+    static var bottomSafeAreaHeight: CGFloat {
+        return UIDevice.current.bottomSafeArea
     }
 
     // Check if the device height is less than the small screen height threshold
@@ -63,6 +68,27 @@ public extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners) )
     }
+    
+    // Adjusts the view's frame to account for the bottom safe area
+    func bottomSafeArea(width: CGFloat = 0, plus: CGFloat = 0, ifZero: CGFloat = 0) -> some View {
+        if UIDevice.current.bottomSafeArea == 0 {
+            // If the bottom safe area size is 0, return the view with the adjusted height
+            return self.frame(width: width, height: ifZero + plus, alignment: .center)
+        } else {
+            // If the bottom safe area size is not 0, return the view with the adjusted height
+            return self.frame(width: width, height: UIDevice.current.bottomSafeArea + plus, alignment: .center)
+        }
+    }
+    
+    // Adjusts the view's frame to account for the notch size on the device
+    func topSafeArea(width: CGFloat = 0, plus: CGFloat = 0) -> some View {
+        // Get the notch size from the current device
+        let notchSize = UIDevice.current.topSafeArea
+        
+        // Return the view with the adjusted height to accommodate the notch
+        return self.frame(width: width, height: notchSize + plus, alignment: .center)
+    }
+    
 #endif
    
     // Ignores the safe area insets of the device on iOS 14 and above
@@ -120,27 +146,7 @@ public extension View {
         return self.mask(RoundedRectangle(cornerRadius: countinuesradius,style: .continuous).fill(Color.white))
     }
     
-#if os(iOS)
-    // Adjusts the view's frame to account for the bottom safe area
-    func bottomSafeArea(width: CGFloat = 0, plus: CGFloat = 0, ifZero: CGFloat = 0) -> some View {
-        if UIDevice.current.bottomSafeArea == 0 {
-            // If the bottom safe area size is 0, return the view with the adjusted height
-            return self.frame(width: width, height: ifZero + plus, alignment: .center)
-        } else {
-            // If the bottom safe area size is not 0, return the view with the adjusted height
-            return self.frame(width: width, height: UIDevice.current.bottomSafeArea + plus, alignment: .center)
-        }
-    }
-    
-    // Adjusts the view's frame to account for the notch size on the device
-    func topSafeArea(width: CGFloat = 0, plus: CGFloat = 0) -> some View {
-        // Get the notch size from the current device
-        let notchSize = UIDevice.current.topSafeArea
-        
-        // Return the view with the adjusted height to accommodate the notch
-        return self.frame(width: width, height: notchSize + plus, alignment: .center)
-    }
-#endif
+
     
     //scroll position Detection
     func getScrollPosition(key : String,handler : @escaping (CGFloat) -> Void) -> some View {

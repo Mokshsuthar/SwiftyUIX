@@ -12,6 +12,8 @@ struct ContentView: View {
 
     var body: some View {
         VStack{
+          
+            
             NavigationView {
                 List {
                     Section {
