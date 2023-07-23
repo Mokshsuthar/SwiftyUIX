@@ -49,8 +49,44 @@ struct ContentView: View {
 }
 
 ```
+### Requirements
+
+- iOS 13.0 or later 
 </details>
 
+<details>
+  <summary>HTMLWebView</summary>
+  
+The `HTMLWebView` is a SwiftUI view that displays a `WKWebView` with HTML content from a specified file path.
+
+### Features
+
+- **Load HTML Content**: `HTMLWebView` is a `UIViewRepresentable` that loads and displays HTML content from a given file path in a `WKWebView`.
+- **Transparent Background**: The `WKWebView` and its scroll view have a transparent background, allowing seamless integration with other SwiftUI views.
+- **Optional Scroll Event Handling**: You can optionally receive scroll events from the web view's scroll view through the `scrollViewDidScroll` closure parameter.
+
+### Usage Example
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            // Your other SwiftUI views here...
+            
+            // Display the HTML content from a specified file path
+            HTMLWebView(filePath: Bundle.main.path(forResource: "sample", ofType: "html"))
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        }
+    }
+}
+```
+
+### Requirements
+
+- iOS 13.0 or later for `HTMLWebView` on iOS.
+- macOS 11.0 or later for `HTMLWebView` on macOS.
 
 ### Extensions
 <details>
