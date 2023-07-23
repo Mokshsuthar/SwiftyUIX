@@ -85,6 +85,7 @@ Text("Hello World")
 
 <details>
 <summary>Device Utils</summary>
+      
 ###### 1. Get Screen Height and Width 
 Easily retrieve the height and width of the device screen.
 `self.screenWidth` - screen width in CGFloat
