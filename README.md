@@ -210,4 +210,24 @@ print("Year: \(year)")
 
 </details>
 
+<details>
+       <summary> Data Extension</summary> 
 
+A convenient extension for working with Data objects in Swift.
+
+### Features
+
+1. **Readable Data Size**
+   - `getReadableDataSize()`: Converts the size of a Data object into a human-readable format, displaying units like KB, MB, GB, etc.
+
+### Usage Example
+
+```swift
+import Foundation
+
+let testData = Data(repeating: 0, count: 1024) // 1 KB
+let readableSize = testData.getReadableDataSize()
+print("Readable Size: \(readableSize)") // Output: "1 KB"
+```
+
+</details>
