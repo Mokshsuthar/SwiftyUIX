@@ -89,7 +89,44 @@ struct ContentView: View {
 - iOS 13.0 or later for `HTMLWebView` on iOS.
 - macOS 11.0 or later for `HTMLWebView` on macOS.
 </details>
+<details>
+  <summary>TransparentBackground</summary>
+  
 
+The `TransparentBackground` is a SwiftUI `UIViewRepresentable` that makes the background transparent for a presented sheet or fullscreen cover, primarily designed for iOS.
+
+### Usage Caution
+
+Setting the background color of the superview's superview directly (as done in this struct) might have unintended side effects and may not be reliable across all SwiftUI versions or implementations. It's essential to thoroughly test this code and consider potential edge cases before using it in production.
+
+### Usage Example
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var isSheetPresented = false
+    
+    var body: some View {
+        Button("Present Sheet") {
+            isSheetPresented.toggle()
+        }
+        .sheet(isPresented: $isSheetPresented, content: {
+            // Your sheet content here...
+            YourView()
+                  .background(TransparentBackground())   // Apply the transparent background to the presented sheet
+          
+           
+        })
+    }
+}
+```
+
+### Requirements
+
+- iOS 13.0 or later
+
+</details>
 
 ### Extensions
 <details>
