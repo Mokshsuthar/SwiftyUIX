@@ -86,7 +86,7 @@ Text("Hello World")
 <details>
 <summary>Device Utils</summary>
       
-###### 1. Get Screen Height and Width 
+##### 1. Get Screen Height and Width 
 Easily retrieve the height and width of the device screen.
 `self.screenWidth` - screen width in CGFloat
 `self.screenHeight` - screen Height in CGFloat
@@ -94,7 +94,7 @@ Easily retrieve the height and width of the device screen.
   Text("Hello, World!")
         .frame(width : self.screenWidth, height : screenHeight)
 ```
-###### 2. Top and Bottom Safe Area Height
+##### 2. Top and Bottom Safe Area Height
 Access the height of the device's top safe area (notch, if applicable) and the bottom safe area of device
 `self.topSafeAreaHeight` -top safe area (notch, if applicable)
 `self.bottomSafeAreaHeight` - bottom safe area
