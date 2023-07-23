@@ -19,4 +19,17 @@ https://github.com/Mokshsuthar/SwiftyUIX.git
 ```
 Follow the prompts to complete the installation.
 
-
+## Usage
+### Extensions
+##### Frame Extensions : -
+full frame (.fullframe())
+```sh
+Text("Hello World")
+      .fullframe()
+```
+or
+```sh
+ZStack{
+    Text("Hello")
+}.fullframe(alignment : .leading)
+```
