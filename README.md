@@ -231,3 +231,39 @@ print("Readable Size: \(readableSize)") // Output: "1 KB"
 ```
 
 </details>
+
+<details>
+       <summary> Color Extensions</summary> 
+
+### Features
+
+1. **Initialization from Hex String**
+   - `init(hexString:)`: Initializes a Color object from a valid hex color string (e.g., "#RRGGBB" or "#AARRGGBB").
+
+2. **Conversion to Hex String**
+   - `toHex()`: Converts the Color object to its hex representation. For macOS, this function is only available on macOS 11.0 and later, and for iOS, it requires iOS 14.0 and later.
+
+3. **Conversion from `UIColor` (iOS) or `NSColor` (macOS) to Hex Code**
+   - `toHexCode()`: Converts a `UIColor` object (iOS) or `NSColor` object (macOS) to its hex representation.
+
+### Usage Example
+
+```swift
+import SwiftUI
+
+let redColor = Color(hexString: "#FF0000")
+let hexCode = redColor.toHex()
+print("Hex Code: \(hexCode ?? "Unknown")") // Output: "Hex Code: #FF0000"
+
+#if os(iOS)
+if let uiColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).toHexCode() {
+    print("UI Color Hex Code: \(uiColor)") // Output: "UI Color Hex Code: #7F7F7F"
+}
+#elseif os(macOS)
+if let nsColor = NSColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).toHexCode() {
+    print("NS Color Hex Code: \(nsColor)") // Output: "NS Color Hex Code: #7F7F7F"
+}
+#endif
+```
+      
+</details>
