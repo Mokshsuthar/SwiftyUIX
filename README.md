@@ -50,3 +50,12 @@ Text("Hello World")
 Text("Hello World")
       .fullWidth(height : 50,alignment : .leading)
 ```
+
+<details>
+<summary>Click to expand the dropdown</summary>
+
+This is the hidden content that will be revealed when the dropdown is expanded.
+
+You can add any content here, such as text, images, lists, and more.
+
+</details>
