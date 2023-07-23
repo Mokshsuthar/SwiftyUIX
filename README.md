@@ -110,7 +110,7 @@ Access the height of the device's top safe area (notch, if applicable) and the b
          .frame(height : self.bottomSafeAreaHeight)
   }
 ```
-Or you can use is directly as frame 
+Or you can use it is directly as frame 
 ```sh
   VStack{
     Spacer()
