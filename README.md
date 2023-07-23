@@ -34,3 +34,19 @@ ZStack{
     Text("Hello")
 }.fullframe(alignment : .leading)
 ```
+###### 2. full width (.fullwidth())
+The `fullWidth()` function is a concise SwiftUI extension that allows for full-width viewing with optional height and customizable alignment.
+
+If no height is provided, the function sets the width to fill the entire screen width without any constraints on the height, resulting in a full-width view with dynamic height based on its content.
+
+With "fullWidth()", you can easily achieve immersive, distraction-free full-width layouts in SwiftUI.
+```sh
+Text("Hello World")
+      .fullWidth()
+// or
+Text("Hello World")
+      .fullWidth(alignment : .leading)
+// or
+Text("Hello World")
+      .fullWidth(height : 50,alignment : .leading)
+```
