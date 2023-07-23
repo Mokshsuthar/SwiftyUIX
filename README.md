@@ -123,6 +123,17 @@ Or you can use it is directly as frame
         .bottomSafeArea()
   }
 ```
+##### 3. Screen Corner Radius
+The `screenCornerRadius()` function calculates and returns the corner radius of the device's display. It takes an optional minimum value to cap the result if needed. The corner radius is obtained from the main screen, allowing for consistent UI rendering across different devices.
+```swift
+VStack{
+    Spacer()
+    
+    RoundedRectangle(cornerRadius: self.screenCornerRadius(minimum: 10))
+                .fullWidth(height: 300)
+}
+```
+
 
 </details>
 
