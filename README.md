@@ -139,5 +139,75 @@ Thread.startNewThread(name: "CustomThread", qos: .userInitiated) {
 
 </details>
 
+<details>
+  <summary>Date Extensions</summary> 
+
+A set of useful extensions for working with Date objects in Swift.
+
+### Features
+
+1. **Readable Time**
+   - `getReadableTime()`: Formats a Date object into a human-readable time string in a 12-hour format with AM/PM indicator. Example output: "03:30 PM" or "11:45 AM".
+
+2. **Readable Date**
+   - `getReadableDate()`: Formats a Date object into a human-readable date string in the format "MM/DD/YYYY". Example output: "07/22/2023" or "01/05/2024".
+
+3. **Readable Date and Time**
+   - `getReadableDateTime()`: Formats a Date object into a human-readable date and time string. Example output: "07/22/2023 03:30 PM" or "01/05/2024 11:45 AM".
+
+4. **Timestamp Generation**
+   - `TimeStemp(format:)`: Provides a unique timestamp according to the given format. The default format is "yyyyMMdd'T'HHmmssSSS".
+
+5. **Month and Day Names**
+   - `getMonthName()`: Gets the full month name from the date, like "January," "February," etc.
+   - `getShortMonthName()`: Gets the short month name from the date, like "Jan," "Feb," etc.
+   - `getDayName()`: Gets the full day name from the date, like "Sunday," "Monday," etc.
+   - `getShortDayName()`: Gets the short day name from the date, like "Sun," "Mon," etc.
+
+6. **Date Component Retrieval**
+   - `getDateComponent(_:calendar:)`: Returns the value of a specific component (e.g., day, month, year, hour, minute) from the Date object using the provided Calendar. If no Calendar is provided, it defaults to the current calendar.
+
+### Usage Example
+
+```swift
+import Foundation
+
+let currentDate = Date()
+
+let readableTime = currentDate.getReadableTime()
+print("Readable Time: \(readableTime)")
+
+let readableDate = currentDate.getReadableDate()
+print("Readable Date: \(readableDate)")
+
+let readableDateTime = currentDate.getReadableDateTime()
+print("Readable Date and Time: \(readableDateTime)")
+
+let timestamp = currentDate.TimeStemp()
+print("Timestamp: \(timestamp)")
+
+let monthName = currentDate.getMonthName()
+print("Month Name: \(monthName)")
+
+let shortMonthName = currentDate.getShortMonthName()
+print("Short Month Name: \(shortMonthName)")
+
+let dayName = currentDate.getDayName()
+print("Day Name: \(dayName)")
+
+let shortDayName = currentDate.getShortDayName()
+print("Short Day Name: \(shortDayName)")
+
+let day = currentDate.getDateComponent(.day)
+print("Day: \(day)")
+
+let month = currentDate.getDateComponent(.month)
+print("Month: \(month)")
+
+let year = currentDate.getDateComponent(.year)
+print("Year: \(year)")
+```
+
+</details>
 
 
