@@ -1,7 +1,6 @@
 # SwiftyUIX
 
 SwiftyUIX is a powerful and versatile library for iOS and macOS developers that provides a collection of useful extensions and pre-defined views. With SwiftyUIX, you can enhance your development workflow, improve code readability, and accelerate app development by leveraging its handy utilities.
-[Click here to scroll down](#frame)
 ## Installation
 ### CocoaPods
 To integrate SwiftyUIX into your Xcode project using CocoaPods, add the following line to your Podfile:
