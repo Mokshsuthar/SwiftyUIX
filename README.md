@@ -26,7 +26,7 @@ Follow the prompts to complete the installation.
       
 <summary>Frame Extensions</summary>
       
-###### 1. full frame (.fullframe())
+##### 1. full frame (.fullframe())
 
 `fullframe()` is a concise SwiftUI extension that enables seamless full-frame viewing with customizable alignment options. Enjoy immersive content without distractions.
 ```sh
@@ -39,7 +39,7 @@ ZStack{
     Text("Hello")
 }.fullframe(alignment : .leading)
 ```
-###### 2. full width (.fullwidth())
+##### 2. full width (.fullwidth())
 The `fullWidth()` function is a concise SwiftUI extension that allows for full-width viewing with optional height and customizable alignment.
 
 If no height is provided, the function sets the width to fill the entire screen width without any constraints on the height, resulting in a full-width view with dynamic height based on its content.
@@ -54,6 +54,19 @@ Text("Hello World")
 // or
 Text("Hello World")
       .fullWidth(height : 50,alignment : .leading)
+```
+##### 3. full hight (.fullHeight())
+The `fullHeight()` function is a concise SwiftUI extension designed to effortlessly achieve full-height views with customizable alignment options. You can easily set a specific width, and the view will adjust accordingly, maintaining a fixed width. Alternatively, when no width is specified, the view will expand to fill the entire available width while occupying the entire screen height. This simplifies the process of creating immersive, distraction-free layouts in SwiftUI.
+
+```sh
+Text("Hello World")
+      .fullHight()
+// or
+Text("Hello World")
+      .fullHight(alignment : .leading)
+// or
+Text("Hello World")
+      .fullHight(width : 150,alignment : .leading)
 ```
 </details>
 
