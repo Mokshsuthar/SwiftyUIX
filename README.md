@@ -84,7 +84,7 @@ Text("Hello World")
 </details>
 
 <details>
-<summary>Device Utils</summary>
+<summary>Device Utils (iOS only)</summary>
       
 ##### 1. Get Screen Height and Width 
 Easily retrieve the height and width of the device screen.
