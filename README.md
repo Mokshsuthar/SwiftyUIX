@@ -21,90 +21,45 @@ https://github.com/Mokshsuthar/SwiftyUIX.git
 Follow the prompts to complete the installation.
 
 ## Usage
-### Extensions
 <details>
       
-<summary>Frame Extensions</summary>
-      
-##### 1. full frame (.fullframe())
+<summary>swiftui Views Extensions</summary>
 
-`fullframe()` is a concise SwiftUI extension that enables seamless full-frame viewing with customizable alignment options. Enjoy immersive content without distractions.
-```sh
-Text("Hello World")
-      .fullframe()
-```
-or
-```sh
-ZStack{
-    Text("Hello")
-}.fullframe(alignment : .leading)
-```
-##### 2. full width (.fullwidth())
-The `fullWidth()` function is a concise SwiftUI extension that allows for full-width viewing with optional height and customizable alignment.
+      1. **Device Dimensions**
+   - `screenWidth`: Retrieves the width of the device screen in `CGFloat`.
+   - `screenHeight`: Retrieves the height of the device screen in `CGFloat`.
+   - `topSafeAreaHeight`: Retrieves the height of the top safe area (notch, if applicable) in `CGFloat`.
+   - `bottomSafeAreaHeight`: Retrieves the height of the bottom safe area in `CGFloat`.
 
-If no height is provided, the function sets the width to fill the entire screen width without any constraints on the height, resulting in a full-width view with dynamic height based on its content.
+2. **Screen Corner Radius**
+   - `screenCornerRadius(minimum:)`: Calculates and returns the corner radius of the device's display. Optional minimum value can be set.
 
-With "fullWidth()", you can easily achieve immersive, distraction-free full-width layouts in SwiftUI.
-```sh
-Text("Hello World")
-      .fullWidth()
-// or
-Text("Hello World")
-      .fullWidth(alignment : .leading)
-// or
-Text("Hello World")
-      .fullWidth(height : 50,alignment : .leading)
-```
-##### 3. full hight (.fullHeight())
-The `fullHeight()` function is a concise SwiftUI extension designed to effortlessly achieve full-height views with customizable alignment options. You can easily set a specific width, and the view will adjust accordingly, maintaining a fixed width. Alternatively, when no width is specified, the view will expand to fill the entire available width while occupying the entire screen height. This simplifies the process of creating immersive, distraction-free layouts in SwiftUI.
+3. **Home Indicator**
+   - `hideHomeIndicator()`: Hides the home indicator on devices running iOS 16.0 or later. Compatibility handled for earlier iOS versions.
 
-```sh
-Text("Hello World")
-      .fullHight()
-// or
-Text("Hello World")
-      .fullHight(alignment : .leading)
-// or
-Text("Hello World")
-      .fullHight(width : 150,alignment : .leading)
-```
-##### 4. Square Frame (.squareFrame(size : CGFloat))
-`squareFrame(size : CGFloat)` is a SwiftUI extension that instantly creates perfect square frames for views. Customize the size and alignment effortlessly. Simplify your SwiftUI development with this convenient function.
+4. **Haptic Feedback**
+   - `playHapticFeedback(_:)`: Plays haptic feedback using the specified `feedbackType`.
 
-```sh
-Text("Hello World")
-      squareFrame(size : 100)
-// or
-Text("Hello World")
-       squareFrame(size : 100, alignment : .leading)
-```
-</details>
+5. **View Frame Manipulation**
+   - `fullframe(alignment:)`: Makes a view occupy the full parent's space with optional alignment.
+   - `fullWidth(height:alignment:)`: Sets the frame with full available width and optional height.
+   - `fullHeight(width:alignment:)`: Sets the frame with full available height and optional width.
+   - `squareFrame(size:alignment:)`: Creates a square frame for views with a specified size and alignment.
 
+6. **Safe Area Ignoring**
+   - `ignoreSafeArea_C()`: Ignores the safe area insets of the device on iOS 14 and above.
 
-</details>
+7. **View Masking**
+   - `cornerRadius(_:)`: Adds a continuous corner radius to the view.
 
-<details>
-<summary>Device Utils (iOS only)</summary>
+8. **Scroll Position Detection**
+   - `getScrollPosition(key:handler:)`: Detects the scroll position of a view and calls the handler with the offset.
 
-1. `self.screenWidth` - screen width in CGFloat
-2. `self.screenHeight` - screen Height in CGFloat
-3. `self.topSafeAreaHeight` - top safe area (notch, if applicable)
-4. `self.bottomSafeAreaHeight` - bottom safe area
+9. **System Icon Image View**
+   - `systemImage(_:)`: Creates an image view with a system icon.
 
-Or you can use it is directly as frame 
-```sh
-  VStack{
-    Spacer()
-        .topSafeArea()
-         
-    Rectangle()
-        .fill(.red)
-         
-    Spacer()
-        .bottomSafeArea()
-  }
-```
-5. `screenCornerRadius()` - function calculates and returns the corner radius of the device's display
+10. **View Border**
+    - `border(lineWidth:cornerRadius:color:)`: Adds a border to the view with specified line width, corner radius, and color.
 
 </details>
 
