@@ -13,20 +13,20 @@ import SwiftUI
 // The default style is .systemChromeMaterial, representing the standard system blur appearance.
 // It can be initialized with a different style to customize the blur effect.
 
-struct BlurView: UIViewRepresentable {
-    typealias UIViewType = UIVisualEffectView
+public struct BlurView: UIViewRepresentable {
+    public typealias UIViewType = UIVisualEffectView
     
-    let style: UIBlurEffect.Style
+    public let style: UIBlurEffect.Style
     
-    init(style: UIBlurEffect.Style = .systemChromeMaterial) {
+    public init(style: UIBlurEffect.Style = .systemChromeMaterial) {
         self.style = style
     }
     
-    func makeUIView(context: Context) -> UIVisualEffectView {
+    public func makeUIView(context: Context) -> UIVisualEffectView {
         return UIVisualEffectView(effect: UIBlurEffect(style: self.style))
     }
     
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+    public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
         uiView.effect = UIBlurEffect(style: self.style)
     }
 }

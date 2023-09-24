@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct BorderView: View {
+public struct BorderView: View {
     var radius : CGFloat
     var lineWidth : CGFloat
     var color : Color
-    var body: some View {
+    public var body: some View {
         RoundedRectangle(cornerRadius: radius)
             .strokeBorder(color,lineWidth: lineWidth)
     }

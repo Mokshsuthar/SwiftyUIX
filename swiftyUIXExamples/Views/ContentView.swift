@@ -23,13 +23,32 @@ struct ContentView: View {
                         NavigationLink("Safe Area", destination: SafeAreaExample())
                         NavigationLink("screen Corner Radius", destination: ScreenCornerRadiusExample())
                         #if os(iOS)
-                        Text(Date().getShortMonthName())
-                        #endif
+                        Button {
+                            self.showDrop(title: "This is Drop", subtitle: "drop is Showing", icon: UIImage(systemName: "hand.thumbsup.fill"), action: nil, accessibility: nil)
+                        } label: {
+                            Text("Show Drop ")
+                        }
+                        
+                        Button {
+                            self.showAlert(title: "Hello", message: "I'm your alert", actions: [
+                                .init(title: "Okay", style: .default, handler: { _ in
+                                    print("Done")
+                                })
+                                ], preferredStyle: .alert)
+                        } label: {
+                            Text("Open Alert view")
+                        }
+                        
+                        Button {
+                            self.ShareSheet(activityItems: ["hello world"])
+                        } label: {
+                            Text("Open Share sheet")
+                        }
+                        
+                      #endif
 
                     } header: {
-                        Text("Use of Extention")
-                    } footer: {
-                        Text("Use of Extention")
+                        Text("Use of Extension")
                     }
 
                     

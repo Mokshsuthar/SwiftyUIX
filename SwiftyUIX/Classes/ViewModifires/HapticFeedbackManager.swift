@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 import SwiftUI
-class HapticFeedbackManager {
-    static var shared = HapticFeedbackManager()
+public class HapticFeedbackManager {
+    static public var shared = HapticFeedbackManager()
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     
-    func hapticFeedback(type :feedbackType){
+    public func hapticFeedback(type :feedbackType){
        switch type {
         case .error:
             let generator = UINotificationFeedbackGenerator()
