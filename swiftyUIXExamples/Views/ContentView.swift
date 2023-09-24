@@ -7,9 +7,9 @@
 
 import SwiftUI
 import SwiftyUIX
-
+//example views
 struct ContentView: View {
-
+ 
     var body: some View {
         VStack{
           
