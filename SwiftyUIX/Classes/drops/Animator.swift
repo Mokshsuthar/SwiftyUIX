@@ -21,6 +21,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+#if canImport(UIKit)
 import UIKit
 
 internal protocol AnimatorDelegate: AnyObject {
@@ -235,3 +236,4 @@ internal final class Animator {
     return .init()
   }
 }
+#endif
