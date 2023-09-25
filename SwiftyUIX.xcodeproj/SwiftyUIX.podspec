@@ -16,8 +16,8 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "SwiftyUIX"
-  spec.version      = "1.0.3"
-  spec.summary      = "SwiftyUIX is a time-saving CocoaPod library, offering useful extensions and custom views to simplify development."
+  spec.version      = "0.0.1"
+  spec.summary      = "A short description of SwiftyUIX."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,10 +25,9 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-  SwiftyUIX is a game-changing CocoaPod library designed to revolutionize Mac and iOS development! With a comprehensive range of highly practical extensions and meticulously crafted custom views, this powerful toolset empowers developers to supercharge their UI development process. Say goodbye to manual and repetitive tasks – SwiftyUIX simplifies complex operations, minimizes code bloat, and enhances productivity. Whether you're a seasoned developer or a beginner, this versatile library will elevate your app creation journey, enabling you to create captivating and polished interfaces in record time. Embrace the future of app development with SwiftyUIX and unlock a whole new world of possibilities!
                    DESC
 
-  spec.homepage     = "https://github.com/Mokshsuthar/SwiftyUIX"
+  spec.homepage     = "http://EXAMPLE/SwiftyUIX"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -39,7 +38,7 @@ Pod::Spec.new do |spec|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  spec.license      = { :type => "MIT", :file => "LICENSE" }
+  spec.license      = "MIT (example)"
   # spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 
 
@@ -54,10 +53,9 @@ Pod::Spec.new do |spec|
   #
 
   spec.author             = { "Moksh" => "suthermukesh@gmail.com" }
-  spec.social_media_url   = "https://www.linkedin.com/in/moksh-suthar-5253841b5/"
   # Or just: spec.author    = "Moksh"
   # spec.authors            = { "Moksh" => "suthermukesh@gmail.com" }
-  
+  # spec.social_media_url   = "https://twitter.com/Moksh"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -65,17 +63,14 @@ Pod::Spec.new do |spec|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
- 
-
-  spec.ios.deployment_target = "13.0"
-  spec.osx.deployment_target = "12.0"
-  spec.swift_version = "4.2"
   # spec.platform     = :ios
   # spec.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  # spec.ios.deployment_target = "13.0"
-  # spec.osx.deployment_target = "12.0"
+  # spec.ios.deployment_target = "5.0"
+  # spec.osx.deployment_target = "10.7"
+  # spec.watchos.deployment_target = "2.0"
+  # spec.tvos.deployment_target = "9.0"
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -84,7 +79,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source = { :git => "https://github.com/Mokshsuthar/SwiftyUIX.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "http://EXAMPLE/SwiftyUIX.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -95,9 +90,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "SwiftyUIX", "SwiftyUIX/**/*.{h,m,swift}"
-  #spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-  #spec.exclude_files = "Classes/Exclude"
+  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
+  spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
 
