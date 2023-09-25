@@ -5,6 +5,7 @@
 //  Created by Moksh Suthar on 24/09/23.
 //
 
+#if canImport(UIKit)
 import Foundation
 import UIKit
 
@@ -61,3 +62,5 @@ public extension UIViewController {
         HapticFeedbackManager.shared.hapticFeedback(type: type)
     }
 }
+#endif
+

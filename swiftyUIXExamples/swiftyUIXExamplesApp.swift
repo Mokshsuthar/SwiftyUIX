@@ -10,6 +10,7 @@ import SwiftUI
 @main
     struct WeatherProAppWrapper {
         static func main() {
+            
             if #available(iOS 14.0, *) {
                 swiftyUIXExamplesApp.main()
             }

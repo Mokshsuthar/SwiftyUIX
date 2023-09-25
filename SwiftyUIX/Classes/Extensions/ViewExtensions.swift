@@ -163,7 +163,9 @@ public extension View {
         return self.overlay(BorderView(radius: cornerRadius, lineWidth: lineWidth, color: color))
     }
     
-    //show apple like feedback drop 
+   #if os(iOS)
+    
+    //show apple like feedback drop
     // example when you toggle between mute and ring mode by side switch and you get small drop at the top
     func showDrop(title : String,subtitle : String?,icon : UIImage?,action : Drop.Action?,position : Drop.Position = .top,duration : Drop.Duration = .seconds(2),accessibility : Drop.Accessibility?,haptic : feedbackType? = nil)
     {
@@ -214,6 +216,9 @@ public extension View {
     func playHapticFeedback(type : feedbackType) {
         HapticFeedbackManager.shared.hapticFeedback(type: type)
     }
+    #endif
+    
+   
     
     
 }

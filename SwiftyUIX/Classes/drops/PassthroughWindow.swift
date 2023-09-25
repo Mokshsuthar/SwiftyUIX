@@ -21,6 +21,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+
+#if canImport(UIKit)
 import UIKit
 
 internal final class PassthroughWindow: UIWindow {
@@ -43,3 +45,7 @@ internal final class PassthroughWindow: UIWindow {
 
   private weak var hitTestView: UIView?
 }
+
+
+#endif
+

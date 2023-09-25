@@ -5,6 +5,7 @@
 //  Created by Moksh Suthar on 20/07/23.
 //
 
+#if canImport(UIKit)
 import Foundation
 import SwiftUI
 import UIKit
@@ -25,3 +26,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 }
+
+#endif

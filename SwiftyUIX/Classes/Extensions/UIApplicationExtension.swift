@@ -5,6 +5,7 @@
 //  Created by Moksh Suthar on 24/09/23.
 //
 
+#if canImport(UIKit)
 import UIKit
 import SwiftUI
 
@@ -31,6 +32,7 @@ public extension UIApplication {
     }
     
 }
+#endif
 
 
 
