@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "SwiftyUIX"
   spec.version      = "1.0.4"
-  spec.summary = 'SwiftyUIX is a library providing useful extensions and custom views to simplify iOS development.'
+  spec.summary = 'SwiftyUIX is a library providing useful extensions and custom views to simplify iOS development. '
 
 
   # This description is used to generate tags and improve search results.
@@ -75,8 +75,8 @@ Pod::Spec.new do |spec|
   # spec.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  # spec.ios.deployment_target = "13.0"
-  # spec.osx.deployment_target = "12.0"
+  spec.ios.deployment_target = "13.0"
+  spec.osx.deployment_target = "12.0"
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
