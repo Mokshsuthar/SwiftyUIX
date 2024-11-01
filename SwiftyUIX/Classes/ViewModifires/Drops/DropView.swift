@@ -20,7 +20,8 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-#if canImport(UIKit)
+
+#if os(iOS) || os(visionOS)
 import UIKit
 
 internal final class DropView: UIView {
@@ -28,11 +29,7 @@ internal final class DropView: UIView {
     self.drop = drop
     super.init(frame: .zero)
 
-    if #available(iOS 13.0, *) {
-      backgroundColor = .secondarySystemBackground
-    } else {
-      backgroundColor = .white
-    }
+    backgroundColor = .secondarySystemBackground
 
     addSubview(stackView)
 
@@ -60,12 +57,12 @@ internal final class DropView: UIView {
 
     constraints += [
       imageView.heightAnchor.constraint(equalToConstant: 25),
-      imageView.widthAnchor.constraint(equalToConstant: 25),
+      imageView.widthAnchor.constraint(equalToConstant: 25)
     ]
 
     constraints += [
       button.heightAnchor.constraint(equalToConstant: 35),
-      button.widthAnchor.constraint(equalToConstant: 35),
+      button.widthAnchor.constraint(equalToConstant: 35)
     ]
 
     var insets = UIEdgeInsets(top: 7.5, left: 12.5, bottom: 7.5, right: 12.5)
@@ -95,9 +92,9 @@ internal final class DropView: UIView {
 
     constraints += [
       stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insets.left),
-      stackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: insets.top),
+      stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: insets.top),
       stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insets.right),
-      stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom),
+      stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insets.bottom)
     ]
 
     return constraints
@@ -127,9 +124,11 @@ internal final class DropView: UIView {
     layer.shadowColor = UIColor.black.cgColor
     layer.shadowOffset = .zero
     layer.shadowRadius = 25
-    layer.shadowOpacity = 0.4
+    layer.shadowOpacity = 0.15
     layer.shouldRasterize = true
+      #if os(iOS)
     layer.rasterizationScale = UIScreen.main.scale
+      #endif
     layer.masksToBounds = false
   }
 
@@ -142,12 +141,8 @@ internal final class DropView: UIView {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textAlignment = .center
-    if #available(iOS 13.0, *) {
-      label.textColor = .label
-    } else {
-      label.textColor = .black
-    }
-    label.font = UIFont.preferredFont(forTextStyle: .subheadline).bold2
+    label.textColor = .label
+    label.font = UIFont.preferredFont(forTextStyle: .subheadline).bold
     label.adjustsFontForContentSizeCategory = true
     label.adjustsFontSizeToFitWidth = true
     return label
@@ -157,11 +152,7 @@ internal final class DropView: UIView {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textAlignment = .center
-    if #available(iOS 13.0, *) {
-      label.textColor = UIAccessibility.isDarkerSystemColorsEnabled ? .label : .secondaryLabel
-    } else {
-      label.textColor = UIAccessibility.isDarkerSystemColorsEnabled ? .black : .darkGray
-    }
+    label.textColor = UIAccessibility.isDarkerSystemColorsEnabled ? .label : .secondaryLabel
     label.font = UIFont.preferredFont(forTextStyle: .subheadline)
     label.adjustsFontForContentSizeCategory = true
     label.adjustsFontSizeToFitWidth = true
@@ -173,11 +164,7 @@ internal final class DropView: UIView {
     view.translatesAutoresizingMaskIntoConstraints = false
     view.contentMode = .scaleAspectFit
     view.clipsToBounds = true
-    if #available(iOS 13.0, *) {
-      view.tintColor = UIAccessibility.isDarkerSystemColorsEnabled ? .label : .secondaryLabel
-    } else {
-      view.tintColor = UIAccessibility.isDarkerSystemColorsEnabled ? .black : .darkGray
-    }
+    view.tintColor = UIAccessibility.isDarkerSystemColorsEnabled ? .label : .secondaryLabel
     return view
   }()
 
@@ -186,11 +173,7 @@ internal final class DropView: UIView {
     button.translatesAutoresizingMaskIntoConstraints = false
     button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     button.clipsToBounds = true
-    if #available(iOS 13.0, *) {
-      button.backgroundColor = .link
-    } else {
-      button.backgroundColor = .blue
-    }
+    button.backgroundColor = .link
     button.tintColor = .white
     button.imageView?.contentMode = .scaleAspectFit
     button.contentEdgeInsets = .init(top: 7.5, left: 7.5, bottom: 7.5, right: 7.5)
@@ -235,7 +218,7 @@ final class RoundImageView: UIImageView {
 }
 
 extension UIFont {
-  var bold2: UIFont {
+  var bold: UIFont {
     guard let descriptor = fontDescriptor.withSymbolicTraits(.traitBold) else { return self }
     return UIFont(descriptor: descriptor, size: pointSize)
   }

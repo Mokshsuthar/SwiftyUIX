@@ -20,7 +20,8 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-#if canImport(UIKit)
+
+#if os(iOS) || os(visionOS)
 import UIKit
 
 internal typealias AnimationCompletion = (_ completed: Bool) -> Void
@@ -33,7 +34,7 @@ public final class Drops {
 
   // MARK: - Static
 
-  static let shared = Drops()
+  static var shared = Drops()
 
   /// Show a drop.
   /// - Parameter drop: `Drop` to show.

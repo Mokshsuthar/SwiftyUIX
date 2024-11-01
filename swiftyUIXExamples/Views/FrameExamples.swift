@@ -18,7 +18,7 @@ struct FrameExamples: View {
                 switch selectedFrameCase {
                 case .fullframe:
                     Text(selectedFrameCase.rawValue)
-                        .fullframe()
+                        .fullFrame()
                         .background(Color.red)
                 case .fullWidth:
                     Text("\(selectedFrameCase.rawValue)\n fullWidth X \(String(format: "%.0f", sizeValue))")
@@ -37,7 +37,7 @@ struct FrameExamples: View {
                 }
                 
             }
-            .fullframe()
+            .fullFrame()
             .background(Color.blackWhite.opacity(0.1))
             
             VStack{

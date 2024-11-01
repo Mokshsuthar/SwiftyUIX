@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftyUIX
 
+#if os(iOS)
 struct SafeAreaExample: View {
     
     @State var topSafeAreaShow : Bool = false
@@ -22,7 +23,7 @@ struct SafeAreaExample: View {
             ZStack{
                 Image("semple")
                     .resizable().aspectRatio(contentMode: .fill)
-                    .fullframe()
+                    .fullFrame()
                 
                 VStack{
                     
@@ -55,7 +56,7 @@ struct SafeAreaExample: View {
                 .cornerRadius(20)
                 .padding()
             }
-            .fullframe()
+            .fullFrame()
             .clipped()
             
             
@@ -63,7 +64,7 @@ struct SafeAreaExample: View {
                 Spacer()
                     .bottomSafeArea()
             }
-        }.fullframe()
+        }.fullFrame()
         .ignoreSafeArea_C()
     }
 }
@@ -73,3 +74,5 @@ struct SafeAreaExample_Previews: PreviewProvider {
         SafeAreaExample()
     }
 }
+
+#endif

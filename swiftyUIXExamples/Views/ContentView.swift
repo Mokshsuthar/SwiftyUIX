@@ -17,14 +17,17 @@ struct ContentView: View {
             NavigationView {
                 List {
                     Section {
+                        
                         NavigationLink("Frame extesions", destination: FrameExamples())
                         NavigationLink("Color Hex Code", destination: ColorHexCodeExample())
-                        
+#if os(iOS)
                         NavigationLink("Safe Area", destination: SafeAreaExample())
                         NavigationLink("screen Corner Radius", destination: ScreenCornerRadiusExample())
+#endif
+                        
                         #if os(iOS)
                         Button {
-                            self.showDrop(title: "This is Drop", subtitle: "drop is Showing", icon: UIImage(systemName: "hand.thumbsup.fill"), action: nil, accessibility: nil)
+                            self.showDrop(title: "This is Drop", subtitle: "drop is Showing", icon: UIImage(systemName: "hand.thumbsup.fill"), action: nil, position : .top, accessibility: nil)
                         } label: {
                             Text("Show Drop ")
                         }
@@ -46,7 +49,7 @@ struct ContentView: View {
                         }
                         
                       #endif
-
+                        
                     } header: {
                         Text("Use of Extension")
                     }
@@ -56,10 +59,13 @@ struct ContentView: View {
                   
                 }
                 
+              
+                
                
             }
             .navigationTitle("SwiftyUIX")
         }
+        .background(Color.red)
         .ignoresSafeArea()
     }
 }

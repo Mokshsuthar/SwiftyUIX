@@ -21,16 +21,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(UIKit)
+#if os(iOS) || os(visionOS)
 import UIKit
 
-internal extension UIView {
-  var safeArea: UILayoutGuide {
-    if #available(iOS 11.0, *) {
-      return safeAreaLayoutGuide
-    } else {
-      return layoutMarginsGuide
-    }
-  }
+internal struct AnimationContext {
+  let view: UIView
+  let container: UIView
 }
 #endif

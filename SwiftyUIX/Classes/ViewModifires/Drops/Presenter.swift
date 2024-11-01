@@ -20,7 +20,8 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
-#if canImport(UIKit)
+
+#if os(iOS) || os(visionOS)
 import UIKit
 
 internal final class Presenter: NSObject {
@@ -80,7 +81,7 @@ internal final class Presenter: NSObject {
       maskingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
       maskingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
       maskingView.topAnchor.constraint(equalTo: containerView.topAnchor),
-      maskingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+      maskingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
     ])
 
     containerView.layoutIfNeeded()
@@ -93,5 +94,4 @@ internal final class Presenter: NSObject {
     )
   }
 }
-
 #endif

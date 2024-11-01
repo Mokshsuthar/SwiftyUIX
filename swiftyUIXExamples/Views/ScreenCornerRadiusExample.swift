@@ -5,9 +5,10 @@
 //  Created by Moksh Suthar on 21/07/23.
 //
 
+
+#if os(iOS)
 import SwiftUI
 import SwiftyUIX
-
 struct ScreenCornerRadiusExample: View {
     
     @State var padding : CGFloat = 10
@@ -58,7 +59,7 @@ struct ScreenCornerRadiusExample: View {
             .cornerRadius(self.screenCornerRadius() - padding)
             .padding(padding)
         }
-        .fullframe()
+        .fullFrame()
         .background(Color.black.opacity(0.2))
         .ignoreSafeArea_C()
         .preferredColorScheme(.light)
@@ -70,3 +71,4 @@ struct ScreenCornerRadiusExample_Previews: PreviewProvider {
         ScreenCornerRadiusExample()
     }
 }
+#endif

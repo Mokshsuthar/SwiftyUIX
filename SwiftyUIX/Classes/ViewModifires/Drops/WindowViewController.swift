@@ -21,7 +21,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if canImport(UIKit)
+#if os(iOS) || os(visionOS)
 import UIKit
 
 internal final class WindowViewController: UIViewController {
@@ -41,20 +41,22 @@ internal final class WindowViewController: UIViewController {
   override var preferredStatusBarStyle: UIStatusBarStyle {
     // Workaround for https://github.com/omaralbeik/Drops/pull/22
     let app = UIApplication.shared
-    let topViewController = app.keyWindow?.rootViewController?.top
-    return topViewController?.preferredStatusBarStyle ?? app.statusBarStyle
+    let windowScene = app.activeWindowScene
+    let topViewController = windowScene?.windows.first(where: \.isKeyWindow)?.rootViewController?.top
+    if let controller = topViewController, controller === self {
+      return .default
+    }
+    return topViewController?.preferredStatusBarStyle
+      ?? windowScene?.statusBarManager?.statusBarStyle
+      ?? .default
   }
 
   func install() {
+      #if os(iOS)
     window?.frame = UIScreen.main.bounds
+      #endif
     window?.isHidden = false
-    if
-      let window = window,
-      #available(iOS 13, *),
-      let activeScene = UIApplication.shared.connectedScenes
-        .compactMap({ $0 as? UIWindowScene })
-        .first(where: { $0.activationState == .foregroundActive })
-    {
+    if let window = window, let activeScene = UIApplication.shared.activeWindowScene {
       window.windowScene = activeScene
       window.frame = activeScene.coordinateSpace.bounds
     }
@@ -62,16 +64,22 @@ internal final class WindowViewController: UIViewController {
 
   func uninstall() {
     window?.isHidden = true
-    if #available(iOS 13, *) {
-      window?.windowScene = nil
-    }
+    window?.windowScene = nil
     window = nil
   }
 
   var window: UIWindow?
 }
 
-private extension UIViewController {
+internal extension UIApplication {
+  var activeWindowScene: UIWindowScene? {
+    return connectedScenes
+      .compactMap { $0 as? UIWindowScene }
+      .first { $0.activationState == .foregroundActive }
+  }
+}
+
+internal extension UIViewController {
   var top: UIViewController? {
     if let controller = self as? UINavigationController {
       return controller.topViewController?.top
@@ -89,5 +97,3 @@ private extension UIViewController {
   }
 }
 #endif
-
-
