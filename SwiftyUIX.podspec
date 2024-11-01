@@ -17,7 +17,8 @@ Pod::Spec.new do |spec|
 
   spec.name         = "SwiftyUIX"
   spec.version      = "1.0.4"
-  spec.summary      = "SwiftyUIX is a time-saving CocoaPod library, offering useful extensions and custom views to simplify development."
+  spec.summary = 'SwiftyUIX is a library providing useful extensions and custom views to simplify iOS development.'
+
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,10 +26,12 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-  SwiftyUIX is a game-changing CocoaPod library designed to revolutionize Mac and iOS development! With a comprehensive range of highly practical extensions and meticulously crafted custom views, this powerful toolset empowers developers to supercharge their UI development process. Say goodbye to manual and repetitive tasks – SwiftyUIX simplifies complex operations, minimizes code bloat, and enhances productivity. Whether you're a seasoned developer or a beginner, this versatile library will elevate your app creation journey, enabling you to create captivating and polished interfaces in record time. Embrace the future of app development with SwiftyUIX and unlock a whole new world of possibilities!
-                   DESC
+  spec.description = <<-DESC
+   SwiftyUIX is a comprehensive library offering practical extensions and custom views for streamlined development on iOS and macOS.
+  DESC
 
-  spec.homepage     = "https://github.com/Mokshsuthar/SwiftyUIX.git"
+
+  spec.homepage     = "https://github.com/Mokshsuthar/SwiftyUIX"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
