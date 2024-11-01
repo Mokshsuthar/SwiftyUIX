@@ -28,8 +28,7 @@ Pod::Spec.new do |spec|
   SwiftyUIX is a game-changing CocoaPod library designed to revolutionize Mac and iOS development! With a comprehensive range of highly practical extensions and meticulously crafted custom views, this powerful toolset empowers developers to supercharge their UI development process. Say goodbye to manual and repetitive tasks – SwiftyUIX simplifies complex operations, minimizes code bloat, and enhances productivity. Whether you're a seasoned developer or a beginner, this versatile library will elevate your app creation journey, enabling you to create captivating and polished interfaces in record time. Embrace the future of app development with SwiftyUIX and unlock a whole new world of possibilities!
                    DESC
 
-  spec.homepage     = "https://github.com/Mokshsuthar/SwiftyUIX"
-  # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  spec.homepage     = "https://github.com/Mokshsuthar/SwiftyUIX.git"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
