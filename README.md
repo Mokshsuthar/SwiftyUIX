@@ -46,9 +46,9 @@ Log.error("Error")        // For logging errors
 <img width="1150" alt="Screenshot 2024-11-01 at 10 45 50 PM" src="https://github.com/user-attachments/assets/0b29992f-9fdf-4358-8dae-365eae0598bf">
 </details>
 
-<details>
-  
+
 ### Views
+<details>
   <summary>BlurView</summary>
 
 The `BlurView` is a SwiftUI view that creates a visual blur effect, primarily designed for iOS.
