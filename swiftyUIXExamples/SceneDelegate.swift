@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import UIKit
+import SwiftyUIX
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -24,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+        
+       
     }
 }
 

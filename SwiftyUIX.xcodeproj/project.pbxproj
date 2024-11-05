@@ -43,6 +43,9 @@
 		9C0B2FBF2CD5411D00FD5C1C /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FBE2CD5411A00FD5C1C /* Logs.swift */; };
 		9C0B2FC12CD5453200FD5C1C /* BlurBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FC02CD5453200FD5C1C /* BlurBackgroundView.swift */; };
 		9C0B2FC32CD5473200FD5C1C /* windowNavigationButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FC22CD5473200FD5C1C /* windowNavigationButtons.swift */; };
+		9C6302C92CD8F5230052A2E7 /* forceUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6302C82CD8F4C90052A2E7 /* forceUpdateModel.swift */; };
+		9C6302CB2CD9E6D50052A2E7 /* ForceUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6302CA2CD9E6D50052A2E7 /* ForceUpdateViewController.swift */; };
+		9C6302CD2CD9E6F20052A2E7 /* ForceUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6302CC2CD9E6F20052A2E7 /* ForceUpdateView.swift */; };
 		9C6A47342CD251BE00C503FC /* AppConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6A47332CD251B800C503FC /* AppConfigure.swift */; };
 		9C6A47362CD2564400C503FC /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6A47352CD2563B00C503FC /* ButtonExtension.swift */; };
 		9C6A47732CD3816A00C503FC /* SwiftyUIX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 662950402A69A311004EE91B /* SwiftyUIX.framework */; };
@@ -138,6 +141,9 @@
 		9C0B2FBE2CD5411A00FD5C1C /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		9C0B2FC02CD5453200FD5C1C /* BlurBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurBackgroundView.swift; sourceTree = "<group>"; };
 		9C0B2FC22CD5473200FD5C1C /* windowNavigationButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = windowNavigationButtons.swift; sourceTree = "<group>"; };
+		9C6302C82CD8F4C90052A2E7 /* forceUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forceUpdateModel.swift; sourceTree = "<group>"; };
+		9C6302CA2CD9E6D50052A2E7 /* ForceUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateViewController.swift; sourceTree = "<group>"; };
+		9C6302CC2CD9E6F20052A2E7 /* ForceUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateView.swift; sourceTree = "<group>"; };
 		9C6A47332CD251B800C503FC /* AppConfigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigure.swift; sourceTree = "<group>"; };
 		9C6A47352CD2563B00C503FC /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		9C6A47782CD38F8B00C503FC /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
@@ -257,9 +263,9 @@
 		662950882A6C2299004EE91B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				666399862ABF0E680026F4B1 /* ExtraExtensions */,
 				9C6A478F2CD3A32800C503FC /* WindowExtensions.swift */,
 				9C6A47352CD2563B00C503FC /* ButtonExtension.swift */,
-				666399862ABF0E680026F4B1 /* ExtraExtensions */,
 				6629507A2A69BA6D004EE91B /* UIdeviceExtensions.swift */,
 				6629507C2A69BACA004EE91B /* UIscreenExtensions.swift */,
 				6629507E2A69BBB2004EE91B /* ColorsExtensions.swift */,
@@ -291,6 +297,7 @@
 		6629508A2A6C2308004EE91B /* ViewModifires */ = {
 			isa = PBXGroup;
 			children = (
+				9C6302C72CD8F4C00052A2E7 /* ForceUpdate */,
 				9C6A47832CD38F8B00C503FC /* Drops */,
 				9C6A47332CD251B800C503FC /* AppConfigure.swift */,
 				662950972A6C3187004EE91B /* HapticFeedbackManager.swift */,
@@ -324,6 +331,16 @@
 				9C0B2FBE2CD5411A00FD5C1C /* Logs.swift */,
 			);
 			path = Logs;
+			sourceTree = "<group>";
+		};
+		9C6302C72CD8F4C00052A2E7 /* ForceUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				9C6302C82CD8F4C90052A2E7 /* forceUpdateModel.swift */,
+				9C6302CA2CD9E6D50052A2E7 /* ForceUpdateViewController.swift */,
+				9C6302CC2CD9E6F20052A2E7 /* ForceUpdateView.swift */,
+			);
+			path = ForceUpdate;
 			sourceTree = "<group>";
 		};
 		9C6A47722CD3816A00C503FC /* Frameworks */ = {
@@ -494,11 +511,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				662950452A69A311004EE91B /* SwiftyUIX.docc in Sources */,
+				9C6302CD2CD9E6F20052A2E7 /* ForceUpdateView.swift in Sources */,
 				662950872A6C2199004EE91B /* TransprantBackgroud.swift in Sources */,
+				9C6302C92CD8F5230052A2E7 /* forceUpdateModel.swift in Sources */,
 				666399A92AC09A990026F4B1 /* UIViewControllerExtension.swift in Sources */,
 				666399A32AC027A00026F4B1 /* NotificationExtension.swift in Sources */,
 				6629509E2A6C34D4004EE91B /* HTMLWebView.swift in Sources */,
 				6629506D2A69A655004EE91B /* ViewExtensions.swift in Sources */,
+				9C6302CB2CD9E6D50052A2E7 /* ForceUpdateViewController.swift in Sources */,
 				662950942A6C30A0004EE91B /* DataExtensions.swift in Sources */,
 				6629507F2A69BBB2004EE91B /* ColorsExtensions.swift in Sources */,
 				9C6A47362CD2564400C503FC /* ButtonExtension.swift in Sources */,

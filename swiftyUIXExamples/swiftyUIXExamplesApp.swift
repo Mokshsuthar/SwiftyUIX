@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftyUIX
 
 @main
     struct WeatherProAppWrapper {
@@ -13,8 +14,8 @@ import SwiftUI
 #if os(iOS)
             if #available(iOS 14.0, *) {
                 swiftyUIXExamplesApp.main()
-            }
-            else {
+                    
+            } else {
                 UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, NSStringFromClass(SceneDelegate.self))
             }
 #elseif os(macOS)
@@ -28,6 +29,11 @@ struct swiftyUIXExamplesApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear{
+                    
+                    forceUpdateModel.shared.checkVersion(appID: "1599080641",showCloseButton: false)
+                    
+                }
         }
     }
 }

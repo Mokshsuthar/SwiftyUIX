@@ -8,6 +8,7 @@
 #if canImport(UIKit)
 import Foundation
 import UIKit
+import SwiftUI
 
 public extension UIViewController {
     //show UIAlert View
@@ -61,6 +62,55 @@ public extension UIViewController {
     func playHapticFeedback(type : feedbackType) {
         HapticFeedbackManager.shared.hapticFeedback(type: type)
     }
+    
+    
+    func addSwiftUIChildView<V: View>(_ view: V) {
+        let childView = UIHostingController(rootView: view)
+        childView.view.backgroundColor = .clear
+        addChild(childView)
+        
+        // Set the frame to match the view controller's view bounds
+        childView.view.frame = self.view.bounds
+        self.view.addSubview(childView.view)
+        
+        childView.didMove(toParent: self)
+    }
+    
+
+    func addSwiftUIChildView<V: View>(_ swiftUIView: V, to containerView: UIView) {
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        hostingController.view.backgroundColor = .clear
+        
+        // Add the hosting controller as a child to the view's view controller
+        if let viewController = containerView.findViewController() {
+            viewController.addChild(hostingController)
+        }
+        
+        // Add the SwiftUI view as a subview of the container UIView
+        hostingController.view.frame = containerView.bounds
+        containerView.addSubview(hostingController.view)
+        
+        // Notify the hosting controller that it was moved to the new parent
+        hostingController.didMove(toParent: containerView.findViewController())
+    }
+
+
+    
 }
+
+extension UIView {
+    func findViewController() -> UIViewController? {
+        var nextResponder: UIResponder? = self
+        while nextResponder != nil {
+            nextResponder = nextResponder?.next
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+}
+
+
 #endif
 

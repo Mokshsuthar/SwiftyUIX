@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-//get top ViewController
+//get top ViewController 
 public extension UIApplication {
 
     class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
@@ -31,6 +31,21 @@ public extension UIApplication {
         return base
     }
     
+    var appIcon: UIImage? {
+        guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
+              let primaryIcon = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
+              let iconFiles = primaryIcon["CFBundleIconFiles"] as? [String],
+              let lastIcon = iconFiles.last else {
+            return nil
+        }
+        
+        return UIImage(named: lastIcon)
+    }
+    
+    var displayName: String? {
+            return Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String
+                ?? Bundle.main.infoDictionary?["CFBundleName"] as? String
+    }
 }
 #endif
 

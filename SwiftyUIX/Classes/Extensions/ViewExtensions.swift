@@ -127,6 +127,14 @@ public extension View {
      SwiftUI extension to set the frame with full available height and optional width.
     */
     
+    func horizontalPadding(_ padding : CGFloat)  -> some View{
+        return self.padding(.horizontal,padding)
+    }
+    
+    func verticalPadding(_ padding : CGFloat)  -> some View{
+        return self.padding(.vertical,padding)
+    }
+    
     func fullHeight(width : CGFloat? = nil,alignment : Alignment = .center) -> some View {
         if let width {
             return self.frame(minWidth: width, idealWidth: width, maxWidth: width, minHeight: 0, idealHeight: 100, maxHeight: .infinity, alignment: alignment)
@@ -136,7 +144,6 @@ public extension View {
         }
     }
     
-    
     func squareFrame(size : CGFloat,alignment : Alignment = .center) -> some View {
         return self.frame(width : size,height: size,alignment: alignment)
     }
@@ -145,8 +152,6 @@ public extension View {
     func cornerRadius(_ continuesRadius : CGFloat) -> some View {
         return self.mask(RoundedRectangle(cornerRadius: continuesRadius,style: .continuous).fill(Color.white))
     }
-    
-
     
     //scroll position Detection
     func getScrollPosition(key : String,handler : @escaping (CGFloat) -> Void) -> some View {
@@ -182,8 +187,6 @@ public extension View {
         clipShape( RoundedCornersShape(radius: radius, corners: corners) )
     }
     #endif
-    
-    
     
    #if os(iOS)
     
