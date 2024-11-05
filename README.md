@@ -140,6 +140,46 @@ struct ContentView: View {
 - iOS 13.0 or later
 - macOS 12.0 or later
 </details>
+<details>
+  <summary>Force Update Alert (iOS)</summary>
+
+### Force Update Alert
+
+Easily ensure users are on the latest version of your app with the `forceUpdateModel`. With just one line of code, you can check if an update is required, displaying a mandatory update screen that prevents further use until the app is updated. Alternatively, you can show a non-blocking alert with a close button, allowing users to continue using the app.
+
+#### Usage
+
+1. **Default Update Alert**
+   ![Simulator Screenshot - iPhone 16 Plus - 2024-11-05 at 23 47 42](https://github.com/user-attachments/assets/dda434c5-7f96-4844-9c81-ed962a1fdf6b)
+   The default update alert displays an app icon (automatically updated to match your app) and an option to enforce the update or allow dismissal with a close button.
+
+   ```swift
+   if isForceUpdateOn {
+       forceUpdateModel.shared.checkVersion(appID: "1599080641", showCloseButton: false)
+   }
+   ```
+
+   - **`isForceUpdateOn`**: A flag to enable or disable the forced update feature.
+   - **`showCloseButton`**: Set to `false` for a mandatory update screen; set to `true` if you want users to have an option to close the alert.
+
+
+2. **Custom Update Alert**
+
+   If you prefer to display a custom update screen, set `showDefaultDisplay` to `false` and handle the `doesAppNeedUpdate` callback to display your custom UI.
+
+   ```swift
+   forceUpdateModel.shared.showDefaultDisplay = false
+   forceUpdateModel.shared.checkVersion(appID: "1599080641", showCloseButton: false)
+   forceUpdateModel.shared.doesAppNeedUpdate = { isUpdateRequired in
+       if isUpdateRequired {
+           // Show your custom update screen here
+       }
+   }
+   ```
+
+With these options, you can control whether to enforce or simply recommend an update, with either a default or custom user interface.
+
+</details>
 
 <details>
   <summary>HTMLWebView</summary>
