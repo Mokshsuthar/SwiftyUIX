@@ -1,4 +1,9 @@
-![Static Badge](https://img.shields.io/badge/iOS-13.0-red)
+![Static Badge](https://img.shields.io/badge/iOS-13.0%2B-red)
+![Static Badge](https://img.shields.io/badge/macOS-12.0%2B-red)
+![Static Badge](https://img.shields.io/badge/swift_package_manager-compatible-green)
+![Static Badge](https://img.shields.io/badge/swift_version-4.2%2B-blue)
+![Static Badge](https://img.shields.io/badge/License-MIT-yellow)
+
 
 # SwiftyUIX
 
