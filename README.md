@@ -4,8 +4,6 @@
 ![Static Badge](https://img.shields.io/badge/swift_version-4.2%2B-blue)
 ![Static Badge](https://img.shields.io/badge/License-MIT-yellow)
 
-<img width="1150" alt="Screenshot 2024-11-01 at 10 45 50 PM" src="https://github.com/user-attachments/assets/a1433a01-7cc6-4fdf-a10b-3f151ef3990f">
-
 # SwiftyUIX
 
 SwiftyUIX is a powerful and versatile library for iOS and macOS developers that provides a collection of useful extensions and pre-defined views. With SwiftyUIX, you can enhance your development workflow, improve code readability, and accelerate app development by leveraging its handy utilities.
@@ -29,6 +27,10 @@ Follow the prompts to complete the installation.
 
 ## Usage
 ### Views
+<details>
+  <summary>Logs</summary>
+</details>
+
 <details>
   <summary>BlurView</summary>
 
