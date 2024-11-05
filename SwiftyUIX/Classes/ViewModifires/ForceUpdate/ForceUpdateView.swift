@@ -8,7 +8,8 @@
 #if os(iOS)
 
 import SwiftUI
-
+import UIKit  
+ 
 struct ForceUpdateView: View {
     @ObservedObject var model : ForceUpdateViewController
      var body: some View {

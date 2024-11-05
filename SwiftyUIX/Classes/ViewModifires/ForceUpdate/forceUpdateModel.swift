@@ -7,6 +7,7 @@
 #if os(iOS)
 import Foundation
 import UIKit
+ 
 
 enum VersionError: Error {
     case invalidBundleInfo, invalidResponse
