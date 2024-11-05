@@ -150,7 +150,9 @@ Easily ensure users are on the latest version of your app with the `forceUpdateM
 #### Usage
 
 1. **Default Update Alert**
-    <img width="300" alt="Force Update alert" src="https://github.com/user-attachments/assets/dda434c5-7f96-4844-9c81-ed962a1fdf6b">
+   <img width="300" alt="Force Update alert" src="https://github.com/user-attachments/assets/dda434c5-7f96-4844-9c81-ed962a1fdf6b">
+
+
    The default update alert displays an app icon (automatically updated to match your app) and an option to enforce the update or allow dismissal with a close button.
 
    ```swift
@@ -163,7 +165,7 @@ Easily ensure users are on the latest version of your app with the `forceUpdateM
    - **`showCloseButton`**: Set to `false` for a mandatory update screen; set to `true` if you want users to have an option to close the alert.
 
 
-2. **Custom Update Alert**
+1. **Custom Update Alert**
 
    If you prefer to display a custom update screen, set `showDefaultDisplay` to `false` and handle the `doesAppNeedUpdate` callback to display your custom UI.
 
