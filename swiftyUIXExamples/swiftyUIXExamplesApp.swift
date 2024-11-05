@@ -30,8 +30,9 @@ struct swiftyUIXExamplesApp: App {
         WindowGroup {
             ContentView()
                 .onAppear{
-                    
+#if os(iOS)
                     forceUpdateModel.shared.checkVersion(appID: "1599080641",showCloseButton: false)
+#endif
                     
                 }
         }

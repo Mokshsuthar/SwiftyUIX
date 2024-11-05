@@ -5,6 +5,8 @@
 //  Created by Moksh on 05/11/24.
 //
 
+#if os(iOS)
+
 import SwiftUI
 
 struct ForceUpdateView: View {
@@ -123,3 +125,4 @@ struct ForceUpdateView: View {
 }
 
 
+#endif
