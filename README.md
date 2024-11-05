@@ -26,7 +26,7 @@ https://github.com/Mokshsuthar/SwiftyUIX.git
 Follow the prompts to complete the installation.
 
 ## Usage
-### Views
+### classes
 <details>
   <summary>Logs</summary>
   
@@ -47,6 +47,8 @@ Log.error("Error")        // For logging errors
 </details>
 
 <details>
+  
+### Views
   <summary>BlurView</summary>
 
 The `BlurView` is a SwiftUI view that creates a visual blur effect, primarily designed for iOS.
