@@ -150,7 +150,7 @@ Easily ensure users are on the latest version of your app with the `forceUpdateM
 #### Usage
 
 1. **Default Update Alert**
-   ![Simulator Screenshot - iPhone 16 Plus - 2024-11-05 at 23 47 42](https://github.com/user-attachments/assets/dda434c5-7f96-4844-9c81-ed962a1fdf6b)
+    <img width="300" alt="Force Update alert" src="https://github.com/user-attachments/assets/dda434c5-7f96-4844-9c81-ed962a1fdf6b">
    The default update alert displays an app icon (automatically updated to match your app) and an option to enforce the update or allow dismissal with a close button.
 
    ```swift
