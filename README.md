@@ -59,6 +59,8 @@ This custom set of window navigation buttons provides close, minimize, and fulls
 
 The buttons are highly customizable. By default, the minimize and fullscreen buttons are disabled. To enable them, pass a closure (e.g., `{ /* action */ }`) as an argument for the respective button, and you'll gain access to the button's tap action.
 
+<img width="152" alt="Screenshot 2024-11-01 at 11 15 09 PM" src="https://github.com/user-attachments/assets/ebb60b0a-f784-46e2-89b8-b479b46b32e8">
+
 Here’s how you can use each button:
 
 ```swift
@@ -83,7 +85,7 @@ windowButtons(closeHandler: {
     // Fullscreen action
 })
 ```
-<img width="152" alt="Screenshot 2024-11-01 at 11 15 09 PM" src="https://github.com/user-attachments/assets/ebb60b0a-f784-46e2-89b8-b479b46b32e8">
+
 
 
 Each button’s action can be customized to fit your application’s requirements, allowing you to handle close, minimize, and resize events in a way that suits your design.
