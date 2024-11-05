@@ -29,6 +29,22 @@ Follow the prompts to complete the installation.
 ### Views
 <details>
   <summary>Logs</summary>
+### Logging with Xcode-Style Debugging
+
+The `Log` class provides an easy way to print log messages in the Xcode debugger, with a style that closely matches Xcode's original logging format. This class is especially useful for macOS applications where protecting sensitive information is crucial; all logs are limited to debug mode and won’t appear in production, ensuring secure logging practices.
+
+#### Usage
+
+With simple functions, developers can categorize log messages by their type. Here’s how to use each logging method:
+
+```swift
+Log.info("info")          // Use for informational messages
+Log.debug("debug")        // Use for debug-specific messages
+Log.defaultLog("default") // General-purpose logging
+Log.fault("fault")        // Indicates a significant fault
+Log.error("Error")        // For logging errors
+```
+<img width="1150" alt="Screenshot 2024-11-01 at 10 45 50 PM" src="https://github.com/user-attachments/assets/0b29992f-9fdf-4358-8dae-365eae0598bf">
 </details>
 
 <details>
