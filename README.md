@@ -4,6 +4,7 @@
 ![Static Badge](https://img.shields.io/badge/swift_version-4.2%2B-blue)
 ![Static Badge](https://img.shields.io/badge/License-MIT-yellow)
 
+<img width="1150" alt="Screenshot 2024-11-01 at 10 45 50 PM" src="https://github.com/user-attachments/assets/a1433a01-7cc6-4fdf-a10b-3f151ef3990f">
 
 # SwiftyUIX
 
