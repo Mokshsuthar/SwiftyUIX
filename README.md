@@ -39,7 +39,7 @@ The `BlurView` is a SwiftUI view that creates a visual blur effect, primarily de
 - **Customizable Style**: You can customize the blur effect by providing a different `UIBlurEffect.Style` during initialization. The default style is `.systemChromeMaterial`, representing the standard system blur appearance.
 
 ### Usage Example
-
+- iOS
 ```swift
 import SwiftUI
 
@@ -55,10 +55,26 @@ struct ContentView: View {
 }
 
 ```
+- macOS
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        ZStack {
+            // Your content here...
+            
+            // Apply a blur effect to the content
+            BlurView(material: .hudWindow, blendingMode: .behindWindow, overlayColor: .clear)
+        }
+    }
+}
+
+```
 ### Requirements
 
 - iOS 13.0 or later
-- 
+- macOS 12.0 or later
 </details>
 
 <details>
