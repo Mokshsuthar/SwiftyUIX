@@ -85,6 +85,7 @@ windowButtons(closeHandler: {
 ```
 
 Each button’s action can be customized to fit your application’s requirements, allowing you to handle close, minimize, and resize events in a way that suits your design.
+<img width="152" alt="Screenshot 2024-11-01 at 11 15 09 PM" src="https://github.com/user-attachments/assets/ebb60b0a-f784-46e2-89b8-b479b46b32e8">
 
 </details>
 
