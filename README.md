@@ -26,7 +26,7 @@ https://github.com/Mokshsuthar/SwiftyUIX.git
 Follow the prompts to complete the installation.
 
 ## Usage
-### classes
+### Classes
 <details>
   <summary>Logs</summary>
   
@@ -48,6 +48,46 @@ Log.error("Error")        // For logging errors
 
 
 ### Views
+<details>
+  <summary>Window buttons (macOS)</summary>
+
+### Custom Window Navigation Buttons
+
+This custom set of window navigation buttons provides close, minimize, and fullscreen functionality to replace the default macOS window buttons. This feature is ideal for designs that require a modified or customized appearance for window controls. After hiding the default buttons on the window, these custom buttons can be used as follows:
+
+#### Usage
+
+The buttons are highly customizable. By default, the minimize and fullscreen buttons are disabled. To enable them, pass a closure (e.g., `{ /* action */ }`) as an argument for the respective button, and you'll gain access to the button's tap action.
+
+Here’s how you can use each button:
+
+```swift
+// Close button only
+windowButtons(closeHandler: {
+    // Close action
+})
+
+// Close and Minimize buttons
+windowButtons(closeHandler: {
+    // Close action
+}, miniaturizeHandler: {
+    // Minimize action
+})
+
+// Close, Minimize, and Fullscreen buttons
+windowButtons(closeHandler: {
+    // Close action
+}, miniaturizeHandler: {
+    // Minimize action
+}, resizeHandler: {
+    // Fullscreen action
+})
+```
+
+Each button’s action can be customized to fit your application’s requirements, allowing you to handle close, minimize, and resize events in a way that suits your design.
+
+</details>
+
 <details>
   <summary>BlurView</summary>
 
