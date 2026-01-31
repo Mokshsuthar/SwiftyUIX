@@ -331,7 +331,6 @@
 			children = (
 				9C6302C72CD8F4C00052A2E7 /* ForceUpdate */,
 				9C6A47832CD38F8B00C503FC /* Drops */,
-				9C6A47332CD251B800C503FC /* AppConfigure.swift */,
 				662950972A6C3187004EE91B /* HapticFeedbackManager.swift */,
 			);
 			path = ViewModifires;
@@ -340,6 +339,7 @@
 		662950A12A6C3DB7004EE91B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9C6A47332CD251B800C503FC /* AppConfigure.swift */,
 				9C4E5DA02EBD26210080117A /* Userdefaults.swift */,
 				9C0B2FBD2CD5411100FD5C1C /* Logs */,
 				662950892A6C2302004EE91B /* Views */,
