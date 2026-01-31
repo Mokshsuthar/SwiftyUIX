@@ -5,8 +5,7 @@
 //  Created by Moksh on 30/10/24.
 //
 
-#if canImport(UIKit)
-import UIKit
+
 import Foundation
  
 public enum AppConfiguration : String {
@@ -37,4 +36,4 @@ struct Config {
     }
 }
 
-#endif
+
