@@ -22,12 +22,16 @@ public extension Thread{
     }
     
     /* Executes the given completion closure on a background thread using a global background queue. */
+    @available(*, deprecated, renamed: "OnBackgroundThread")
     static func OnBackGroudThread(_ completion:@escaping () -> ()){
+        OnBackgroundThread(completion)
+    }
+    
+    static func OnBackgroundThread(_ completion:@escaping () -> ()){
         DispatchQueue.global(qos: .background).async {
             completion()
         }
     }
-    
     
     /* Schedules the given completion closure to run after a specified delay (in seconds) on the main thread using DispatchQueue.main.asyncAfter.*/
     static func runAfter(_ seconds: Double, completion: @escaping () -> ()) {

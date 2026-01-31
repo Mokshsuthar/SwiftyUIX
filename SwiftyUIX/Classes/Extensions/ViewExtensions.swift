@@ -9,6 +9,11 @@ import Foundation
 import SwiftUI
 
 
+public enum GlassEffectProperties {
+    case clear
+    case regular
+}
+
 public extension View {
     
     //MARK: - Frame related Extentions
@@ -25,13 +30,23 @@ public extension View {
     } 
 
     // Get the height of the device's notch (if applicable)
+    
     var topSafeAreaHeight: CGFloat {
-        return UIDevice.current.topSafeArea
+        return self.topSafeAreaHeight()
+    }
+    
+    func topSafeAreaHeight(plus: CGFloat = 0) -> CGFloat {
+        return UIDevice.current.topSafeArea + plus
     }
     
     // Get the height of the device's notch (if applicable)
     var bottomSafeAreaHeight: CGFloat {
-        return UIDevice.current.bottomSafeArea
+        return self.bottomSafeAreaHeight()
+    }
+    
+    func bottomSafeAreaHeight(ifZero: CGFloat = 0 ,plus: CGFloat = 0) -> CGFloat {
+        let bottomSafeAreaSize = UIDevice.current.bottomSafeArea
+        return (bottomSafeAreaSize == 0 ? ifZero : bottomSafeAreaSize) + plus
     }
 
     // Check if the device height is less than the small screen height threshold
@@ -56,6 +71,42 @@ public extension View {
             return self
         }
     }
+    
+    
+    @available(iOS 15.0, *)
+    @ViewBuilder
+    func safe_glassEffect(_ type : GlassEffectProperties, _ fallBackMaterial: Material,isintractive: Bool = false, clipShape: some Shape = .capsule, tintColor: Color? = nil, glassEffectID: String? = nil) -> some View {
+        if #available(iOS 26.0, *){
+            switch type {
+            case .clear:
+                self.glassEffect(.clear.tint(tintColor).interactive(isintractive),in: clipShape)
+                    
+            case .regular:
+                self.glassEffect(.regular.tint(tintColor).interactive(isintractive),in: clipShape)
+            }
+           
+        } else {
+            self.background(fallBackMaterial).clipShape(clipShape)
+        }
+    }
+    
+    @ViewBuilder
+    func safe_glassEffectWithFallBackColor(_ type : GlassEffectProperties, _ fallBackColor: Color,isintractive: Bool = false, clipShape: some Shape = .capsule, tintColor: Color? = nil, glassEffectID: String? = nil) -> some View {
+        if #available(iOS 26.0, *){
+            switch type {
+            case .clear:
+                self.glassEffect(.clear.tint(tintColor).interactive(isintractive),in: clipShape)
+                    
+            case .regular:
+                self.glassEffect(.regular.tint(tintColor).interactive(isintractive),in: clipShape)
+            }
+           
+        } else {
+            self.background(fallBackColor).clipShape(clipShape)
+        }
+    }
+   
+    
     
     //to play HapticFeedback
     func playHapticFeedback(_ type : feedbackType) {
@@ -100,6 +151,11 @@ public extension View {
         }
     }
 
+    func frame(size: CGSize,alignment : Alignment = .center) -> some View {
+        return self.frame(width: size.width, height: size.height, alignment: alignment)
+    }
+    
+    
     /**
      * SwiftUI extension to make a view fill its parent's space.
      * Use `fullFrame()` or `fullFrame(alignment:)` with optional alignment to align the view.
@@ -182,9 +238,20 @@ public extension View {
         }
     
     
+    func variableBlurViewWithBackground(maxBlurRadius: CGFloat,direction: VariableBlurDirection,startOffset: CGFloat = .zero, linearGradientColors: [Color]) -> some View {
+        return VariableBlurView(maxBlurRadius: maxBlurRadius, direction: direction, startOffset: startOffset)
+                .fullFrame()
+              .background(LinearGradient(colors: linearGradientColors, startPoint: direction == .blurredBottomClearTop ? .bottom : .top, endPoint:  direction == .blurredBottomClearTop ? .top : .bottom))
+    }
+    
+    
     #if os(macOS)
     func roundedCorners(radius: CGFloat, corners: RectCorner) -> some View {
         clipShape( RoundedCornersShape(radius: radius, corners: corners) )
+    }
+    
+    func playHapticFeedback(_ pattern: NSHapticFeedbackManager.FeedbackPattern, performTime : NSHapticFeedbackManager.PerformanceTime = .now) {
+        HapticFeedbackManager.shared.hapticFeedback(pattern, performTime: performTime)
     }
     #endif
     
@@ -192,7 +259,7 @@ public extension View {
     
     //show apple like feedback drop
     // example when you toggle between mute and ring mode by side switch and you get small drop at the top
-    func showDrop(title : String,subtitle : String?,icon : UIImage?,action : Drop.Action?,position : Drop.Position = .top,duration : Drop.Duration = .seconds(2),accessibility : Drop.Accessibility?,haptic : feedbackType? = nil)
+    func showDrop(title : String,subtitle : String? = nil,icon : UIImage? = nil,action : Drop.Action? = nil,position : Drop.Position = .top,duration : Drop.Duration = .seconds(2),accessibility : Drop.Accessibility? = nil,haptic : feedbackType? = nil)
     {
         let drop = Drop(title: title, titleNumberOfLines: 1, subtitle: subtitle, subtitleNumberOfLines: 1, icon: icon, action: action, position: position, duration: duration, accessibility: accessibility)
         
@@ -241,20 +308,41 @@ public extension View {
     func playHapticFeedback(type : feedbackType) {
         HapticFeedbackManager.shared.hapticFeedback(type: type)
     }
+    
+    //Hide keyboard
+    func hideKeyboard() {
+        UIApplication.shared.hideKeyboard()
+    }
+    
+    
     #endif
     
     var appEnvirement : AppConfiguration {
         return Config.appConfiguration
     }
 
-   
+    
+    func getAllFonts() -> [String: [String]] {
+        Dictionary(
+            uniqueKeysWithValues: UIFont.familyNames.map { family in
+                (family, UIFont.fontNames(forFamilyName: family))
+            }
+        )
+    }
+    
     
     
 }
 
 public extension Image {
     //rectsize with aspect retio
+    @available(*, deprecated, renamed: "squareFrameWithAspectRatio")
     func squareFrameWithApectRatio(value : CGFloat,contentMode : ContentMode = .fit) -> some View {
+        return squareFrameWithAspectRatio(value: value, contentMode: contentMode)
+    }
+    
+    //rectsize with aspect retio
+    func squareFrameWithAspectRatio(value : CGFloat,contentMode : ContentMode = .fit) -> some View {
         return self.resizable().aspectRatio( contentMode: contentMode).squareFrame(size: value)
     }
     //imageResize and aspect ratio

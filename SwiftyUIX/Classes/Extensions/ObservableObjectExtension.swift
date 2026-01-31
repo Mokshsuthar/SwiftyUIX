@@ -25,7 +25,7 @@ public extension ObservableObject {
     
     //show apple like feedback drop
     // example when you toggle between mute and ring mode by side switch and you get small drop at the top
-    func showDrop(title : String,subtitle : String?,icon : UIImage?,action : Drop.Action?,position : Drop.Position = .top,duration : Drop.Duration = .seconds(2),accessibility : Drop.Accessibility?,haptic : feedbackType? = nil) {
+    func showDrop(title : String,subtitle : String? = nil,icon : UIImage? = nil,action : Drop.Action? = nil,position : Drop.Position = .top,duration : Drop.Duration = .seconds(2),accessibility : Drop.Accessibility? = nil,haptic : feedbackType? = nil){
         let drop = Drop(title: title, titleNumberOfLines: 1, subtitle: subtitle, subtitleNumberOfLines: 1, icon: icon, action: action, position: position, duration: duration, accessibility: accessibility)
         
         Drops.shared.hideAll()
@@ -59,5 +59,32 @@ public extension ObservableObject {
     func playHapticFeedback(type : feedbackType) {
         HapticFeedbackManager.shared.hapticFeedback(type: type)
     }
+    
+    //Hide keyboard
+    func hideKeyboard() {
+        UIApplication.shared.hideKeyboard()
+    }
+    
+    func getAllFonts() -> [String: [String]] {
+        Dictionary(
+            uniqueKeysWithValues: UIFont.familyNames.map { family in
+                (family, UIFont.fontNames(forFamilyName: family))
+            }
+        )
+    }
+    
+}
+#endif
+
+
+#if canImport(AppKit)
+import AppKit
+import Foundation
+
+public extension ObservableObject {
+    func generateFeedback(_ pattern: NSHapticFeedbackManager.FeedbackPattern, performTime : NSHapticFeedbackManager.PerformanceTime = .now) {
+        NSHapticFeedbackManager.defaultPerformer.perform(pattern, performanceTime: performTime)
+    }
+  
 }
 #endif

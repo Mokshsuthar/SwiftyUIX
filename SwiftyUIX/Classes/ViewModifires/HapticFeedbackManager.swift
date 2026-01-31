@@ -14,6 +14,11 @@ public class HapticFeedbackManager {
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     
     public func hapticFeedback(type :feedbackType){
+        if !UserDefaults.isHapticEnabled {
+            Log.info("Haptic Feedback is disabled")
+            return
+        }
+        
        switch type {
         case .error:
             let generator = UINotificationFeedbackGenerator()
@@ -36,6 +41,9 @@ public class HapticFeedbackManager {
             generator.impactOccurred()
         }
     }
+    
+    
+    
 }
 
 public extension ObservedObject {
@@ -51,3 +59,27 @@ public enum feedbackType {
 
 
 #endif
+#if os(macOS)
+import AppKit
+import Foundation
+
+public class HapticFeedbackManager {
+    static public var shared = HapticFeedbackManager()
+    
+    func hapticFeedback(_ pattern: NSHapticFeedbackManager.FeedbackPattern, performTime : NSHapticFeedbackManager.PerformanceTime = .now) {
+        if !UserDefaults.isHapticEnabled {
+            Log.info("Haptic Feedback is disabled")
+            return
+        }
+        NSHapticFeedbackManager.defaultPerformer.perform(pattern, performanceTime: performTime)
+    }
+   
+}
+
+public extension ObservableObject {
+    func playHapticFeedback(_ pattern: NSHapticFeedbackManager.FeedbackPattern, performTime : NSHapticFeedbackManager.PerformanceTime = .now) {
+        HapticFeedbackManager.shared.hapticFeedback(pattern, performTime: performTime)
+    }
+  
+}
+#endif 

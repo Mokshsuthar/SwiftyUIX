@@ -17,12 +17,17 @@ struct ContentView: View {
             NavigationView {
                 List {
                     Section {
-                        
+                        NavigationLink("Extra check", destination: BouncyButtonExample())
                         NavigationLink("Frame extesions", destination: FrameExamples())
                         NavigationLink("Color Hex Code", destination: ColorHexCodeExample())
 #if os(iOS)
                         NavigationLink("Safe Area", destination: SafeAreaExample())
                         NavigationLink("screen Corner Radius", destination: ScreenCornerRadiusExample())
+                        NavigationLink("Keyboard monitor", destination: KeyboardMonitorTest())
+                        NavigationLink("Safe Glass view", destination: SafeGlassEffect())
+                        NavigationLink("List of all fonts", destination: AllFontsListView())
+                        NavigationLink("Variable blur view", destination: VeriableBlurView())
+                       
 #endif
                         
                         #if os(iOS)

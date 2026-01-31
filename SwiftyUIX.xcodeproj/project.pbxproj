@@ -43,6 +43,11 @@
 		9C0B2FBF2CD5411D00FD5C1C /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FBE2CD5411A00FD5C1C /* Logs.swift */; };
 		9C0B2FC12CD5453200FD5C1C /* BlurBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FC02CD5453200FD5C1C /* BlurBackgroundView.swift */; };
 		9C0B2FC32CD5473200FD5C1C /* windowNavigationButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FC22CD5473200FD5C1C /* windowNavigationButtons.swift */; };
+		9C4E5D212EBD1D5B0080117A /* BounceButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E5D202EBD1D5B0080117A /* BounceButtonStyle.swift */; };
+		9C4E5D232EBD1F370080117A /* BouncyButtonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E5D222EBD1F370080117A /* BouncyButtonExample.swift */; };
+		9C4E5D9F2EBD20B90080117A /* PHAssetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E5D9E2EBD20B90080117A /* PHAssetExtensions.swift */; };
+		9C4E5DA12EBD26210080117A /* Userdefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E5DA02EBD26210080117A /* Userdefaults.swift */; };
+		9C4E5DA32EBD29A50080117A /* SKStoreReviewControllerExtension.swift in Resources */ = {isa = PBXBuildFile; fileRef = 9C4E5DA22EBD29A50080117A /* SKStoreReviewControllerExtension.swift */; };
 		9C6302C92CD8F5230052A2E7 /* forceUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6302C82CD8F4C90052A2E7 /* forceUpdateModel.swift */; };
 		9C6302CB2CD9E6D50052A2E7 /* ForceUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6302CA2CD9E6D50052A2E7 /* ForceUpdateViewController.swift */; };
 		9C6302CD2CD9E6F20052A2E7 /* ForceUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6302CC2CD9E6F20052A2E7 /* ForceUpdateView.swift */; };
@@ -61,6 +66,12 @@
 		9C6A478C2CD38F8B00C503FC /* WindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6A47822CD38F8B00C503FC /* WindowViewController.swift */; };
 		9C6A478D2CD38F8B00C503FC /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6A47812CD38F8B00C503FC /* Weak.swift */; };
 		9C6A47902CD3A33300C503FC /* WindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6A478F2CD3A32800C503FC /* WindowExtensions.swift */; };
+		9CD96A652F2E34940027098E /* KeyboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96A642F2E34940027098E /* KeyboardMonitor.swift */; };
+		9CD96A672F2E34D70027098E /* KeyboardMonitorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96A662F2E34D70027098E /* KeyboardMonitorTest.swift */; };
+		9CD96B222F2E62230027098E /* SafeGlassEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96B212F2E62230027098E /* SafeGlassEffect.swift */; };
+		9CD96B242F2E66000027098E /* AllFontsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96B232F2E66000027098E /* AllFontsListView.swift */; };
+		9CD96B262F2E6B700027098E /* VariableBlurDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96B252F2E6B700027098E /* VariableBlurDirection.swift */; };
+		9CD96B282F2E6B8C0027098E /* VeriableBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96B272F2E6B8C0027098E /* VeriableBlurView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +152,11 @@
 		9C0B2FBE2CD5411A00FD5C1C /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		9C0B2FC02CD5453200FD5C1C /* BlurBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurBackgroundView.swift; sourceTree = "<group>"; };
 		9C0B2FC22CD5473200FD5C1C /* windowNavigationButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = windowNavigationButtons.swift; sourceTree = "<group>"; };
+		9C4E5D202EBD1D5B0080117A /* BounceButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceButtonStyle.swift; sourceTree = "<group>"; };
+		9C4E5D222EBD1F370080117A /* BouncyButtonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyButtonExample.swift; sourceTree = "<group>"; };
+		9C4E5D9E2EBD20B90080117A /* PHAssetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetExtensions.swift; sourceTree = "<group>"; };
+		9C4E5DA02EBD26210080117A /* Userdefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userdefaults.swift; sourceTree = "<group>"; };
+		9C4E5DA22EBD29A50080117A /* SKStoreReviewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKStoreReviewControllerExtension.swift; sourceTree = "<group>"; };
 		9C6302C82CD8F4C90052A2E7 /* forceUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forceUpdateModel.swift; sourceTree = "<group>"; };
 		9C6302CA2CD9E6D50052A2E7 /* ForceUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateViewController.swift; sourceTree = "<group>"; };
 		9C6302CC2CD9E6F20052A2E7 /* ForceUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateView.swift; sourceTree = "<group>"; };
@@ -157,6 +173,12 @@
 		9C6A47812CD38F8B00C503FC /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		9C6A47822CD38F8B00C503FC /* WindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowViewController.swift; sourceTree = "<group>"; };
 		9C6A478F2CD3A32800C503FC /* WindowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowExtensions.swift; sourceTree = "<group>"; };
+		9CD96A642F2E34940027098E /* KeyboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMonitor.swift; sourceTree = "<group>"; };
+		9CD96A662F2E34D70027098E /* KeyboardMonitorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMonitorTest.swift; sourceTree = "<group>"; };
+		9CD96B212F2E62230027098E /* SafeGlassEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeGlassEffect.swift; sourceTree = "<group>"; };
+		9CD96B232F2E66000027098E /* AllFontsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFontsListView.swift; sourceTree = "<group>"; };
+		9CD96B252F2E6B700027098E /* VariableBlurDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableBlurDirection.swift; sourceTree = "<group>"; };
+		9CD96B272F2E6B8C0027098E /* VeriableBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeriableBlurView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +278,11 @@
 				662950802A69BE68004EE91B /* ColorHexCodeExample.swift */,
 				662950782A69B26D004EE91B /* ColorExtention.swift */,
 				662950842A69C5E2004EE91B /* ScreenCornerRadiusExample.swift */,
+				9C4E5D222EBD1F370080117A /* BouncyButtonExample.swift */,
+				9CD96A662F2E34D70027098E /* KeyboardMonitorTest.swift */,
+				9CD96B212F2E62230027098E /* SafeGlassEffect.swift */,
+				9CD96B232F2E66000027098E /* AllFontsListView.swift */,
+				9CD96B272F2E6B8C0027098E /* VeriableBlurView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -263,6 +290,10 @@
 		662950882A6C2299004EE91B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9CD96A642F2E34940027098E /* KeyboardMonitor.swift */,
+				9C4E5DA22EBD29A50080117A /* SKStoreReviewControllerExtension.swift */,
+				9C4E5D9E2EBD20B90080117A /* PHAssetExtensions.swift */,
+				9C4E5D202EBD1D5B0080117A /* BounceButtonStyle.swift */,
 				666399862ABF0E680026F4B1 /* ExtraExtensions */,
 				9C6A478F2CD3A32800C503FC /* WindowExtensions.swift */,
 				9C6A47352CD2563B00C503FC /* ButtonExtension.swift */,
@@ -284,6 +315,7 @@
 		662950892A6C2302004EE91B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9CD96B252F2E6B700027098E /* VariableBlurDirection.swift */,
 				9C0B2FC22CD5473200FD5C1C /* windowNavigationButtons.swift */,
 				662950862A6C2199004EE91B /* TransprantBackgroud.swift */,
 				6629508F2A6C24EC004EE91B /* BorderView.swift */,
@@ -308,6 +340,7 @@
 		662950A12A6C3DB7004EE91B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9C4E5DA02EBD26210080117A /* Userdefaults.swift */,
 				9C0B2FBD2CD5411100FD5C1C /* Logs */,
 				662950892A6C2302004EE91B /* Views */,
 				6629508A2A6C2308004EE91B /* ViewModifires */,
@@ -483,6 +516,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C4E5DA32EBD29A50080117A /* SKStoreReviewControllerExtension.swift in Resources */,
 				666399AB2AC0A1C30026F4B1 /* SwiftyUIX.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +546,7 @@
 			files = (
 				662950452A69A311004EE91B /* SwiftyUIX.docc in Sources */,
 				9C6302CD2CD9E6F20052A2E7 /* ForceUpdateView.swift in Sources */,
+				9C4E5D9F2EBD20B90080117A /* PHAssetExtensions.swift in Sources */,
 				662950872A6C2199004EE91B /* TransprantBackgroud.swift in Sources */,
 				9C6302C92CD8F5230052A2E7 /* forceUpdateModel.swift in Sources */,
 				666399A92AC09A990026F4B1 /* UIViewControllerExtension.swift in Sources */,
@@ -519,6 +554,7 @@
 				6629509E2A6C34D4004EE91B /* HTMLWebView.swift in Sources */,
 				6629506D2A69A655004EE91B /* ViewExtensions.swift in Sources */,
 				9C6302CB2CD9E6D50052A2E7 /* ForceUpdateViewController.swift in Sources */,
+				9C4E5DA12EBD26210080117A /* Userdefaults.swift in Sources */,
 				662950942A6C30A0004EE91B /* DataExtensions.swift in Sources */,
 				6629507F2A69BBB2004EE91B /* ColorsExtensions.swift in Sources */,
 				9C6A47362CD2564400C503FC /* ButtonExtension.swift in Sources */,
@@ -541,8 +577,11 @@
 				9C6A478C2CD38F8B00C503FC /* WindowViewController.swift in Sources */,
 				9C6A478D2CD38F8B00C503FC /* Weak.swift in Sources */,
 				9C0B2FC32CD5473200FD5C1C /* windowNavigationButtons.swift in Sources */,
+				9C4E5D212EBD1D5B0080117A /* BounceButtonStyle.swift in Sources */,
 				9C6A47902CD3A33300C503FC /* WindowExtensions.swift in Sources */,
+				9CD96A652F2E34940027098E /* KeyboardMonitor.swift in Sources */,
 				6629507B2A69BA6D004EE91B /* UIdeviceExtensions.swift in Sources */,
+				9CD96B262F2E6B700027098E /* VariableBlurDirection.swift in Sources */,
 				666399882ABF2B5C0026F4B1 /* firebaseExtensions.swift in Sources */,
 				9C6A47342CD251BE00C503FC /* AppConfigure.swift in Sources */,
 				6663998A2AC01B7C0026F4B1 /* RealmExtensions.swift in Sources */,
@@ -564,13 +603,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				662950772A69AFF4004EE91B /* FrameExamples.swift in Sources */,
+				9CD96B222F2E62230027098E /* SafeGlassEffect.swift in Sources */,
 				662950812A69BE68004EE91B /* ColorHexCodeExample.swift in Sources */,
 				662950632A69A3B4004EE91B /* ContentView.swift in Sources */,
 				662950792A69B26D004EE91B /* ColorExtention.swift in Sources */,
 				662950612A69A3B4004EE91B /* swiftyUIXExamplesApp.swift in Sources */,
+				9CD96A672F2E34D70027098E /* KeyboardMonitorTest.swift in Sources */,
 				662950832A69C307004EE91B /* SafeAreaExample.swift in Sources */,
+				9C4E5D232EBD1F370080117A /* BouncyButtonExample.swift in Sources */,
+				9CD96B282F2E6B8C0027098E /* VeriableBlurView.swift in Sources */,
 				662950712A69AB73004EE91B /* SceneDelegate.swift in Sources */,
 				662950852A69C5E2004EE91B /* ScreenCornerRadiusExample.swift in Sources */,
+				9CD96B242F2E66000027098E /* AllFontsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,7 +894,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"swiftyUIXExamples/Preview Content\"";
-				DEVELOPMENT_TEAM = NG992SYUWX;
+				DEVELOPMENT_TEAM = Q8YKQZH7BZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = swiftyUIXExamples/Info.plist;
@@ -885,7 +929,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"swiftyUIXExamples/Preview Content\"";
-				DEVELOPMENT_TEAM = NG992SYUWX;
+				DEVELOPMENT_TEAM = Q8YKQZH7BZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = swiftyUIXExamples/Info.plist;

@@ -504,6 +504,62 @@ if let nsColor = NSColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).toHexCode(
       
 </details>
 
+<details>
+  <summary>KeyboardMonitor (iOS)</summary>
+
+### ⌨️ KeyboardMonitor
+
+`KeyboardMonitor` is a lightweight utility that observes iOS keyboard frame changes and publishes the current keyboard height. It works seamlessly with **SwiftUI** and **Combine**, making it easy to adjust layouts when the keyboard appears or disappears.
+
+### Features
+
+- Publishes real-time keyboard height
+- Handles keyboard show, hide, and frame changes
+- Automatically subtracts bottom safe area
+- Works in both SwiftUI Views and ViewModels
+- Singleton-based for shared access
+- iOS 13+ compatible
+
+---
+
+### SwiftUI Usage
+
+Use the shared monitor as a `@StateObject` and apply padding:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    
+    @StateObject private var keyboard = KeyboardMonitor.shared
+    
+    var body: some View {
+        VStack {
+            TextField("Message", text: .constant(""))
+        }
+        .padding(.bottom, keyboard.height)
+        .animation(.easeOut(duration: 0.25), value: keyboard.height)
+    }
+}
+```
+### ViewModel (Combine) Usage
+
+```swift
+final class MyViewModel: ObservableObject {
+    
+    @Published var keyboardHeight: CGFloat = 0
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        KeyboardMonitor.shared.heightPublisher
+            .removeDuplicates()
+            .assign(to: \.keyboardHeight, on: self)
+            .store(in: &cancellables)
+    }
+}
+```
+</details>
+
 
 ### License
 
