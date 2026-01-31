@@ -316,14 +316,6 @@ public extension View {
         UIApplication.shared.hideKeyboard()
     }
     
-    
-    #endif
-    
-    var appEnvirement : AppConfiguration {
-        return Config.appConfiguration
-    }
-
-    
     func getAllFonts() -> [String: [String]] {
         Dictionary(
             uniqueKeysWithValues: UIFont.familyNames.map { family in
@@ -332,8 +324,13 @@ public extension View {
         )
     }
     
+    #endif
     
-    
+    var appEnvirement : AppConfiguration {
+        return Config.appConfiguration
+    }
+
+
 }
 
 public extension Image {
