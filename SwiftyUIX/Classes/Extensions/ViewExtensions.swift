@@ -140,6 +140,14 @@ public extension View {
         return self.frame(width: width, height: notchSize + plus, alignment: .center)
     }
     
+    func variableBlurViewWithBackground(maxBlurRadius: CGFloat,direction: VariableBlurDirection,startOffset: CGFloat = .zero, linearGradientColors: [Color]) -> some View {
+        return VariableBlurView(maxBlurRadius: maxBlurRadius, direction: direction, startOffset: startOffset)
+                .fullFrame()
+              .background(LinearGradient(colors: linearGradientColors, startPoint: direction == .blurredBottomClearTop ? .bottom : .top, endPoint:  direction == .blurredBottomClearTop ? .top : .bottom))
+    }
+    
+    
+    
 #endif
    
     // Ignores the safe area insets of the device on iOS 14 and above
@@ -238,13 +246,7 @@ public extension View {
         }
     
     
-    func variableBlurViewWithBackground(maxBlurRadius: CGFloat,direction: VariableBlurDirection,startOffset: CGFloat = .zero, linearGradientColors: [Color]) -> some View {
-        return VariableBlurView(maxBlurRadius: maxBlurRadius, direction: direction, startOffset: startOffset)
-                .fullFrame()
-              .background(LinearGradient(colors: linearGradientColors, startPoint: direction == .blurredBottomClearTop ? .bottom : .top, endPoint:  direction == .blurredBottomClearTop ? .top : .bottom))
-    }
-    
-    
+  
     #if os(macOS)
     func roundedCorners(radius: CGFloat, corners: RectCorner) -> some View {
         clipShape( RoundedCornersShape(radius: radius, corners: corners) )

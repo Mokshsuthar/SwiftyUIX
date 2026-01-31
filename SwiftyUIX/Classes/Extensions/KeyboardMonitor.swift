@@ -4,7 +4,7 @@
 //
 //  Created by Moksh on 31/01/26.
 //
-
+#if canImport(UIKit)
 import SwiftUI
 import Combine
 
@@ -68,3 +68,4 @@ public final class KeyboardMonitor: ObservableObject {
         return max(0, endFrame.height - bottomSafeArea)
     }
 }
+#endif
