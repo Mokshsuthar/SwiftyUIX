@@ -17,8 +17,7 @@ let package = Package(
         .target(
             name: "SwiftyUIX",
             path: "SwiftyUIX",
-            sources: ["Classes"],
-            publicHeadersPath: "."
+            sources: ["Classes"]
         )
     ]
 )
