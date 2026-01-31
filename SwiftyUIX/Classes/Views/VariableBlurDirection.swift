@@ -5,6 +5,7 @@
 //  Created by Moksh on 10/06/25.
 //
 
+#if canImport(UIKit)
 import SwiftUI
 import UIKit
 import CoreImage.CIFilterBuiltins
@@ -109,3 +110,4 @@ public class VariableBlurUIView: UIVisualEffectView {
         return CIContext().createCGImage(ciGradientFilter.outputImage!, from: CGRect(x: 0, y: 0, width: width, height: height))!
     }
 }
+#endif
