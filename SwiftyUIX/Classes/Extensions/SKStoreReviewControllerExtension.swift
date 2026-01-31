@@ -1,5 +1,5 @@
 
-#if canImport(StoreKit)
+#if canImport(UIKit)
 import StoreKit
 import UIKit
 
