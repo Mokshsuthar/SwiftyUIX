@@ -13,5 +13,5 @@ Pod::Spec.new do |spec|
   spec.osx.deployment_target = "12.0"
   spec.swift_version = "4.2"
   spec.source       = { :git => "https://github.com/Mokshsuthar/SwiftyUIX.git", :tag => "#{spec.version}" }
-  spec.source_files = "SwiftyUIX", "SwiftyUIX/**/*.{h,m,swift}"
+  spec.source_files = "SwiftyUIX/**/*.swift"
 end
