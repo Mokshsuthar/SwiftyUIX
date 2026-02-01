@@ -7,6 +7,17 @@
 
 #if canImport(FirebaseAnalytics)
 import FirebaseAnalytics
+import SwiftUI
+import Combine
+
+#if canImport(UIKit)
+import UIKit
+extension UIViewController {
+    func setEvent(_ value : String) {
+        Analytics.logEvent(value, parameters: nil)
+    }
+}
+#endif
 // Code that depends on Foundation framework
 extension View {
     func setEvent(_ value : String) {
@@ -15,12 +26,6 @@ extension View {
 }
 
 extension ObservableObject {
-    func setEvent(_ value : String) {
-        Analytics.logEvent(value, parameters: nil)
-    }
-}
-
-extension UIViewController {
     func setEvent(_ value : String) {
         Analytics.logEvent(value, parameters: nil)
     }
