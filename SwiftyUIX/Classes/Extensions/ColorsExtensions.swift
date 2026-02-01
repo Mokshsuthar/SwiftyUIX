@@ -15,7 +15,7 @@ import AppKit
 
 public extension Color {
     
-    init(hexString: String) {
+    public init(hexString: String) {
            let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
            var int = UInt64()
            Scanner(string: hex).scanHexInt64(&int)
@@ -37,7 +37,7 @@ public extension Color {
    
 #if os(iOS)
     @available(iOS 14.0, *)
-    func toHex() -> String? {
+    public func toHex() -> String? {
             let uic = UIColor(self)
             guard let components = uic.cgColor.components, components.count >= 3 else {
                 return nil
@@ -58,7 +58,7 @@ public extension Color {
             }
     }
     #elseif os(macOS)
-    func toHex() -> String? {
+    public func toHex() -> String? {
             let uic = NSColor(self)
             guard let components = uic.cgColor.components, components.count >= 3 else {
                 return nil
@@ -83,8 +83,8 @@ public extension Color {
 }
 
 #if os(iOS)
-extension UIColor {
-    func toHexCode() -> String? {
+public extension UIColor {
+    public func toHexCode() -> String? {
         guard let components = self.cgColor.components else {
             return nil
         }
@@ -104,8 +104,8 @@ extension UIColor {
 #endif
 
 #if os(macOS)
-extension NSColor {
-    func toHexCode() -> String? {
+public extension NSColor {
+    public func toHexCode() -> String? {
         guard let components = self.cgColor.components else {
             return nil
         }
