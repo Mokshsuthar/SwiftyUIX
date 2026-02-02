@@ -30,8 +30,8 @@ extension UIDevice {
     
     /// Returns the height of the notch area, or 0 if not applicable
     public var topSafeArea: CGFloat {
-        if let topSafrAreaSize = UserDefaults.topSafeArea {
-            return topSafrAreaSize
+        if UserDefaults.topSafeArea != -1  {
+            return UserDefaults.topSafeArea
         }
         
         guard
@@ -45,8 +45,8 @@ extension UIDevice {
     
     /// Returns the height of the bottom safe area, or 0 if not applicable
     public var bottomSafeArea: CGFloat {
-        if let bottomSafeAreaSize = UserDefaults.bottomSafeArea {
-            return bottomSafeAreaSize
+        if UserDefaults.bottomSafeArea != -1  {
+            return UserDefaults.bottomSafeArea
         }
         
         guard

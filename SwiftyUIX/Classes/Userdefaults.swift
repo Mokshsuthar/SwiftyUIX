@@ -20,12 +20,12 @@ public extension UserDefaults {
     
     
     static var bottomSafeArea: CGFloat {
-        get { getOrSetUserDefault(key: #function, defaultValue: 0) }
+        get { getOrSetUserDefault(key: #function, defaultValue: -1) }
         set { standard.set(newValue, forKey: #function) }
     }
     
     static var topSafeArea: CGFloat {
-        get { getOrSetUserDefault(key: #function, defaultValue: 0) }
+        get { getOrSetUserDefault(key: #function, defaultValue: -1) }
         set { standard.set(newValue, forKey: #function) }
     }
     
