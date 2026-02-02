@@ -40,6 +40,7 @@ extension UIDevice {
                 .first(where: { $0.activationState == .foregroundActive }),
             let window = scene.windows.first(where: { $0.isKeyWindow })
         else { return 0 }
+        UserDefaults.topSafeArea = window.safeAreaInsets.top
         return window.safeAreaInsets.top
     }
     
@@ -55,6 +56,7 @@ extension UIDevice {
                 .first(where: { $0.activationState == .foregroundActive }),
             let window = scene.windows.first(where: { $0.isKeyWindow })
         else { return 0 }
+        UserDefaults.bottomSafeArea = window.safeAreaInsets.bottom
         return window.safeAreaInsets.bottom
     }
     
