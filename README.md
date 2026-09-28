@@ -6,61 +6,109 @@
 
 # SwiftyUIX
 
-SwiftyUIX is a powerful and versatile library for iOS and macOS developers that provides a collection of useful extensions and pre-defined views. With SwiftyUIX, you can enhance your development workflow, improve code readability, and accelerate app development by leveraging its handy utilities.
-## Installation
-### CocoaPods
-To integrate SwiftyUIX into your Xcode project using CocoaPods, add the following line to your Podfile:
-```sh
-pod 'SwiftyUIX'
-```
-Then, run the following command:
+SwiftyUIX is a SwiftUI/UIKit/AppKit utility library for iOS and macOS: extensions on the types you already use, drop-in views, and a foldable-aware layout system for placing your own UI around whatever the system reserves — a camera housing, a fold, the home indicator.
 
-```sh
-$ pod install
+This document covers every public API the library ships, grouped by what you're trying to do, with a runnable example for each. Jump to a section with the table of contents below, or read top to bottom.
+
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+  - [Swift Package Manager](#swift-package-manager)
+  - [CocoaPods](#cocoapods)
+- [Foldable & Adaptive Layout](#foldable--adaptive-layout)
+  - [Setup](#setup)
+  - [Reading the layout](#reading-the-layout)
+  - [Placing a tab bar](#placing-a-tab-bar)
+- [Layout & Frame Helpers](#layout--frame-helpers)
+  - [Filling available space](#filling-available-space)
+  - [Screen dimensions & safe area (legacy)](#screen-dimensions--safe-area-legacy)
+  - [Corners & borders](#corners--borders)
+  - [Masking](#masking)
+  - [Scroll position](#scroll-position)
+  - [System images & buttons](#system-images--buttons)
+- [Glass & Blur Effects](#glass--blur-effects)
+  - [Liquid Glass, with a fallback](#liquid-glass-with-a-fallback)
+  - [Blur views](#blur-views)
+  - [Variable blur](#variable-blur)
+  - [Transparent sheet background](#transparent-sheet-background)
+- [Alerts, Share Sheets & Drops](#alerts-share-sheets--drops)
+- [Haptics](#haptics)
+- [Keyboard Handling](#keyboard-handling)
+- [Force-Update Prompt](#force-update-prompt)
+- [App & Bundle Info](#app--bundle-info)
+- [Logging](#logging)
+- [Color Utilities](#color-utilities)
+- [Date Utilities](#date-utilities)
+- [Data & Number Formatting](#data--number-formatting)
+- [Threading Helpers](#threading-helpers)
+- [Notifications](#notifications)
+- [Photos (PHAsset)](#photos-phasset)
+- [Device, Screen & App Store Helpers](#device-screen--app-store-helpers)
+- [Embedding SwiftUI in UIKit](#embedding-swiftui-in-uikit)
+- [macOS Window Chrome](#macos-window-chrome)
+- [Optional Firebase Analytics Bridge](#optional-firebase-analytics-bridge)
+- [Platform & Availability Matrix](#platform--availability-matrix)
+- [Example App](#example-app)
+- [License](#license)
+
+## Requirements
+
+| | |
+|---|---|
+| iOS | 17.0+ |
+| macOS | 12.0+ |
+| Swift | 5.9+ |
+| Xcode | 15+ |
+
+The foldable layout system (`LayoutInspector`, `TabBarArea`) is **iOS-only** — the hinge and reserved-region APIs it builds on don't exist in the macOS SDK. Everything else in this document works on both platforms unless a section says otherwise.
+
+## Installation
+
+### Swift Package Manager
+
+In Xcode: **File → Add Package Dependencies…** and enter:
+
 ```
-### Swift Package Manager (SPM)
-You can also use Swift Package Manager to add SwiftyUIX to your project. In Xcode, go to File -> Swift Packages -> Add Package Dependency... and enter the URL of this repository:
-```sh
 https://github.com/Mokshsuthar/SwiftyUIX.git
 ```
-Follow the prompts to complete the installation.
 
-## Usage
-### Classes
-<details>
-  <summary>Logs</summary>
-  
-The `Log` class provides an easy way to print log messages in the Xcode debugger, with a style that closely matches Xcode's original logging format. This class is especially useful for macOS applications where protecting sensitive information is crucial; all logs are limited to debug mode and won’t appear in production, ensuring secure logging practices.
-
-#### Usage
-
-With simple functions, developers can categorize log messages by their type. Here’s how to use each logging method:
+Or add it to `Package.swift` directly:
 
 ```swift
-Log.info("info")          // Use for informational messages
-Log.debug("debug")        // Use for debug-specific messages
-Log.defaultLog("default") // General-purpose logging
-Log.fault("fault")        // Indicates a significant fault
-Log.error("Error")        // For logging errors
+dependencies: [
+    .package(url: "https://github.com/Mokshsuthar/SwiftyUIX.git", from: "2.0.0")
+]
 ```
-<img width="1150" alt="Screenshot 2024-11-01 at 10 45 50 PM" src="https://github.com/user-attachments/assets/0b29992f-9fdf-4358-8dae-365eae0598bf">
-</details>
 
+### CocoaPods
 
-### Views
-<details>
-  <summary>LayoutInspector &amp; tab bar placement</summary>
+Add to your `Podfile`:
 
-`LayoutInspector` tracks the live layout — bounds, safe area, orientation, device type and,
-on a foldable, the hinge and the regions the system reserves — and turns it into a concrete
-answer to "where can my custom tab bar go?".
+```ruby
+pod 'SwiftyUIX', '~> 2.0'
+```
 
-#### Setup
+Then:
 
-Install `LayoutInspectionView` once at the root. It reads the geometry, observes the hinge and
-writes into `LayoutInspector.shared`; nothing else is needed.
+```sh
+pod install
+```
+
+Every example below assumes `import SwiftyUIX`.
+
+## Foldable & Adaptive Layout
+
+The flagship feature of 2.0. `LayoutInspector` tracks the live layout — window bounds, safe area, orientation, device type and, on a foldable, the hinge angle, fold posture and the regions the system reserves (a camera housing, the fold itself). `TabBarArea` turns that state into a concrete rect: where a custom tab bar or side rail belongs right now, solved around whatever is in the way.
+
+### Setup
+
+Install `LayoutInspectionView` once, at the root of your app. It reads the geometry, observes the hinge, and writes into `LayoutInspector.shared` — nothing else is needed.
 
 ```swift
+import SwiftUI
+import SwiftyUIX
+
 @main
 struct MyApp: App {
     @State private var inspector = LayoutInspector.shared
@@ -68,7 +116,8 @@ struct MyApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                ContentView().environment(inspector)
+                ContentView()
+                    .environment(inspector)
                 LayoutInspectionView()
             }
         }
@@ -76,605 +125,382 @@ struct MyApp: App {
 }
 ```
 
-#### Reading the layout
+`LayoutInspector` is `@Observable`, so any view reading `inspector.orientation` (or any other property) redraws automatically when it changes — no `@Published`, no manual notifications.
+
+### Reading the layout
 
 ```swift
-@Environment(LayoutInspector.self) private var inspector
+struct ContentView: View {
+    @Environment(LayoutInspector.self) private var inspector
 
-inspector.currentLayoutBounds   // CGRect of the window
-inspector.safeAreaInsets        // EdgeInsets
-inspector.orientation           // .portrait / .landscape, from the bounds, so Split View and
-                                // Stage Manager are handled
-inspector.deviceType            // .phone, .foldablePhone, .pad, .mac, .tv, .carPlay, .vision
-inspector.isIPhoneDuo           // true once the system reports a hinge
-inspector.foldPosture           // .closed / .partiallyOpen / .fullyOpen
-inspector.hingeAngle            // Angle?
-inspector.hasActiveDivision     // the fold currently splits the window
+    var body: some View {
+        VStack {
+            Text("Window: \(inspector.currentLayoutBounds.width) × \(inspector.currentLayoutBounds.height)")
+            Text("Orientation: \(inspector.orientation.label)")     // "Portrait" / "Landscape"
+            Text("Device: \(inspector.deviceType.label)")           // "iPhone", "iPad", "iPhone (foldable)"...
+
+            if inspector.isIPhoneDuo {
+                Text("Fold: \(inspector.foldPosture?.label ?? "—")") // "Closed (outer display)" etc.
+                if let angle = inspector.hingeAngle {
+                    Text("Hinge angle: \(angle.degrees, specifier: "%.0f")°")
+                }
+                if inspector.hasActiveDivision {
+                    Text("The crease is currently splitting the window")
+                }
+            }
+        }
+    }
+}
 ```
 
-#### Placing a tab bar
+Full property list:
 
-A foldable reserves a column beside its camera housing and reports it as a side safe-area
-inset — that strip is where the system renders its own tab rail. So `tabBarArea` puts the bar
-**in** that column when the panel has one, and along the bottom when it does not. Non-foldable
-devices always get a bottom bar, in either orientation.
+| Property | Type | Notes |
+|---|---|---|
+| `currentLayoutBounds` | `CGRect` | The window, ignoring the safe area |
+| `safeAreaInsets` | `EdgeInsets` | Also exposed individually as `topSafeArea`, `bottomSafeArea`, `leadingSafeArea`, `trailingSafeArea` |
+| `orientation` | `LayoutOrientation` | `.portrait` / `.landscape`, derived from the bounds — correct in Split View, Slide Over and Stage Manager, unlike `UIDevice.orientation` |
+| `isLandscape` / `isPortrait` | `Bool` | Convenience over `orientation` |
+| `deviceType` | `DeviceType` | `.phone`, `.foldablePhone`, `.pad`, `.mac`, `.tv`, `.carPlay`, `.vision`, `.unknown` |
+| `isPhone` / `isIPad` | `Bool` | Convenience over `deviceType` |
+| `isFoldable` / `isIPhoneDuo` | `Bool` | `true` once the system has reported a hinge |
+| `foldPosture` | `FoldPosture?` | `.closed`, `.partiallyOpen`, `.fullyOpen`; `nil` on devices without a hinge |
+| `isFolded` / `isPartiallyFolded` | `Bool` | Convenience over `foldPosture` |
+| `hingeAngle` | `Angle?` | `nil` on devices without a hinge |
+| `hasActiveDivision` | `Bool` | The fold is currently splitting the window into two panels |
+| `deviceOrientation` | `UIDeviceOrientation` | Raw sensor orientation (includes face up/down) — iOS only |
+| `divisions` / `occlusions` | `[ReservedRegion]` | Raw system data, iOS 27.1+ only (`@available`-gated) |
+| `activeDivisionFrames` / `activeOcclusionFrames` | `[CGRect]` | The active regions above, flattened to plain rects with no availability gate — what `TabBarArea` solves around |
 
-The band runs to the screen edge rather than stopping at the home indicator, the way
-`UITabBar` does — so the bar's background fills the corner and nothing is left over beneath it.
-Pad the bar's *contents* by `safeContentInsets` to keep them off the indicator:
+To attach the hinge observer to a specific view instead of the shared singleton:
+
+```swift
+MyRootView()
+    .trackDeviceHinge(myInspector)
+```
+
+### Placing a tab bar
+
+`inspector.tabBarArea` answers "where does my custom tab bar go right now?" — a bottom bar on ordinary devices, or a rail inside the camera column when a foldable reserves one — solved around every active occlusion and division so it never overlaps something the system is protecting.
+
+```swift
+struct RootView: View {
+    @Environment(LayoutInspector.self) private var inspector
+
+    var body: some View {
+        ContentView()
+            .overlay {
+                MyTabBar()
+                    .placeInTabBarArea(inspector.tabBarArea)
+            }
+    }
+}
+```
+
+`placeInTabBarArea(_:thickness:)` sizes and positions the view for you; pass your own `thickness` or omit it to use `recommendedThickness` (49pt of controls plus whatever safe area the bar has to cover — 83pt over a home indicator, matching `UITabBar`).
+
+Everything `TabBarArea` exposes:
+
+```swift
+let bar = inspector.tabBarArea
+
+bar.edge                 // .bottom, .leading or .trailing
+bar.axis                 // .horizontal for a bar, .vertical for a rail
+bar.isRail                // axis == .vertical
+bar.alignment             // matching Alignment, for a ZStack/overlay
+bar.availableArea         // CGRect of free space, in full-bleed window coordinates
+bar.edgeInsets            // insets from the window to that rect
+bar.recommendedThickness  // 49pt of controls plus the safe area it covers, or the column width
+bar.maxThickness          // ceiling before the bar would hit a reserved region
+bar.maxLength             // how far it can run along the edge
+bar.coverage              // 0...1 — how much of the edge survived
+bar.isReservedColumn      // true when the bar is in a foldable's camera column
+bar.isShortenedByOcclusion
+bar.isSplitByFold
+bar.safeContentInsets     // how far the safe area reaches into the band (pad your content by this)
+bar.summary               // "Trailing column rail · 84 × 515 · 81% of edge"
+```
+
+The band runs to the screen edge rather than stopping at the home indicator — the way `UITabBar` does — so its background fills the corner. Pad the bar's *contents*, not its background, by `safeContentInsets`:
 
 ```swift
 MyTabBar()
     .padding(bar.safeContentInsets)
     .background(.bar)
-    .placeInTabBarArea(bar)   // or pass your own thickness
+    .placeInTabBarArea(bar)
 ```
 
-Either way the rect is solved against the reserved regions: the largest run on that edge that
-clears every active occlusion (camera housing, home indicator) and every active division (the
-crease). A region eating into the run shortens it and is reported through `coverage` rather
-than moving the bar somewhere else.
+Trim to a size you already know, or compute a content inset for whatever is scrolling behind the bar:
 
 ```swift
-let bar = inspector.tabBarArea
-
-bar.edge            // .bottom / .leading / .trailing
-bar.axis            // .horizontal for a bar, .vertical for a rail
-bar.isRail          // axis == .vertical
-bar.alignment       // matching Alignment for a ZStack or overlay
-bar.availableArea   // CGRect of free space, in full-bleed window coordinates
-bar.edgeInsets      // insets from the window to that rect
-bar.safeContentInsets  // how far the safe area reaches into the band
-bar.recommendedThickness  // 49pt of controls plus the safe area it covers, or the column width
-bar.maxThickness    // how tall (or wide) the bar can be before it hits a reserved region
-bar.maxLength       // how far it can run along the edge
-bar.coverage        // 0...1 — how much of the edge survived
-bar.isReservedColumn   // the bar is in the foldable's camera column
-bar.isShortenedByOcclusion
-bar.isSplitByFold
-bar.summary         // "Trailing column rail · 84 × 515 · 81% of edge"
-```
-
-Place a view in it with `placeInTabBarArea(_:thickness:)`, applied inside a container that
-ignores the safe area:
-
-```swift
-ContentView()
-    .overlay {
-        MyTabBar()
-            .placeInTabBarArea(inspector.tabBarArea, thickness: 64)
-    }
-```
-
-Or lay it out yourself — the numbers are all there:
-
-```swift
-let bar = inspector.tabBarArea
-let rect = bar.area(thickness: 64)              // the band, hugging its edge
-let inset = bar.contentInset(thickness: 64)     // padding to keep content clear of it
+let rect = bar.area(thickness: 64)                 // the band, hugging its edge
+let inset = bar.contentInset(thickness: 64)        // padding to keep content clear of it
 
 MyScrollingContent()
     .safeAreaPadding(inset.edge, inset.value)
 ```
 
-Pin it to a specific edge when the design already dictates one — the geometry is still solved
-around the reserved regions:
+Pin a specific edge when the design already dictates one — the geometry is still solved around whatever's reserved there:
 
 ```swift
 let rail = inspector.tabBarArea(on: .leading)
 ```
 
-#### Requirements
+## Layout & Frame Helpers
 
-- iOS 17.0 or later, which is the library's floor as of 2.0. `LayoutInspector` is iOS-only —
-  `DeviceHinge` and `ReservedRegion` ship in the iOS SDK only.
-- The hinge, occlusions and divisions need iOS 27.1. Below that the placement still honours the
-  bounds and the safe area, there is simply nothing reserved to avoid.
-
-</details>
-
-<details>
-  <summary>Window buttons (macOS)</summary>
-
-### Custom Window Navigation Buttons
-
-This custom set of window navigation buttons provides close, minimize, and fullscreen functionality to replace the default macOS window buttons. This feature is ideal for designs that require a modified or customized appearance for window controls. After hiding the default buttons on the window, these custom buttons can be used as follows:
-
-#### Usage
-
-The buttons are highly customizable. By default, the minimize and fullscreen buttons are disabled. To enable them, pass a closure (e.g., `{ /* action */ }`) as an argument for the respective button, and you'll gain access to the button's tap action.
-
-<img width="152" alt="Screenshot 2024-11-01 at 11 15 09 PM" src="https://github.com/user-attachments/assets/ebb60b0a-f784-46e2-89b8-b479b46b32e8">
-
-Here’s how you can use each button:
+### Filling available space
 
 ```swift
-// Close button only
-windowButtons(closeHandler: {
-    // Close action
-})
+Text("Hi")
+    .fullFrame()                       // fills the parent, both axes
+    .fullFrame(alignment: .topLeading)
 
-// Close and Minimize buttons
-windowButtons(closeHandler: {
-    // Close action
-}, miniaturizeHandler: {
-    // Minimize action
-})
+Text("Hi").fullWidth()                 // full width, natural height
+Text("Hi").fullWidth(height: 44)       // full width, fixed height
 
-// Close, Minimize, and Fullscreen buttons
-windowButtons(closeHandler: {
-    // Close action
-}, miniaturizeHandler: {
-    // Minimize action
-}, resizeHandler: {
-    // Fullscreen action
-})
+Text("Hi").fullHeight()                // full height, natural width
+Text("Hi").fullHeight(width: 200)      // full height, fixed width
+
+Text("Hi").squareFrame(size: 44)       // equal width and height
+
+myView.sizeToFrame(size: someSize)     // frame(width:height:) from a CGSize
+
+Text("Hi").horizontalPadding(16)       // .padding(.horizontal, 16)
+Text("Hi").verticalPadding(8)          // .padding(.vertical, 8)
 ```
 
+### Screen dimensions & safe area (legacy)
 
-
-Each button’s action can be customized to fit your application’s requirements, allowing you to handle close, minimize, and resize events in a way that suits your design.
-
-</details>
-
-<details>
-  <summary>BlurView</summary>
-
-The `BlurView` is a SwiftUI view that creates a visual blur effect, primarily designed for iOS.
-
-### Features
-
-- **Visual Blur Effect**: `BlurView` is a `UIViewRepresentable` that wraps a `UIVisualEffectView` to apply a blur effect to its content based on the specified `UIBlurEffect.Style`.
-- **Customizable Style**: You can customize the blur effect by providing a different `UIBlurEffect.Style` during initialization. The default style is `.systemChromeMaterial`, representing the standard system blur appearance.
-
-### Usage Example
-- iOS
-```swift
-import SwiftUI
-
-struct ContentView: View {
-    var body: some View {
-        ZStack {
-            // Your content here...
-            
-            // Apply a blur effect to the content
-            BlurView(style: .systemUltraThinMaterial)
-        }
-    }
-}
-
-```
-- macOS
-```swift
-import SwiftUI
-
-struct ContentView: View {
-    var body: some View {
-        ZStack {
-            // Your content here...
-            
-            // Apply a blur effect to the content
-            BlurView(material: .hudWindow, blendingMode: .behindWindow, overlayColor: .clear)
-        }
-    }
-}
-
-```
-### Requirements
-
-- iOS 13.0 or later
-- macOS 12.0 or later
-</details>
-<details>
-  <summary>Force Update Alert (iOS)</summary>
-
-### Force Update Alert
-
-Easily ensure users are on the latest version of your app with the `forceUpdateModel`. With just one line of code, you can check if an update is required, displaying a mandatory update screen that prevents further use until the app is updated. Alternatively, you can show a non-blocking alert with a close button, allowing users to continue using the app.
-
-#### Usage
-
-1. **Default Update Alert**
-   The default update alert displays an app icon (automatically updated to match your app) and an option to enforce the update or allow dismissal with a close button.
-
-   <img width="200" alt="Force Update alert" src="https://github.com/user-attachments/assets/dda434c5-7f96-4844-9c81-ed962a1fdf6b">
-
-
-   ```swift
-   if isForceUpdateOn {
-       forceUpdateModel.shared.checkVersion(appID: "1599080641", showCloseButton: false)
-   }
-   ```
-
-   - **`isForceUpdateOn`**: A flag to enable or disable the forced update feature.
-   - **`showCloseButton`**: Set to `false` for a mandatory update screen; set to `true` if you want users to have an option to close the alert.
-
-
-1. **Custom Update Alert**
-
-   If you prefer to display a custom update screen, set `showDefaultDisplay` to `false` and handle the `doesAppNeedUpdate` callback to display your custom UI.
-
-   ```swift
-   forceUpdateModel.shared.showDefaultDisplay = false
-   forceUpdateModel.shared.checkVersion(appID: "1599080641", showCloseButton: false)
-   forceUpdateModel.shared.doesAppNeedUpdate = { isUpdateRequired in
-       if isUpdateRequired {
-           // Show your custom update screen here
-       }
-   }
-   ```
-
-With these options, you can control whether to enforce or simply recommend an update, with either a default or custom user interface.
-
-</details>
-
-<details>
-  <summary>HTMLWebView</summary>
-  
-The `HTMLWebView` is a SwiftUI view that displays a `WKWebView` with HTML content from a specified file path.
-
-### Features
-
-- **Load HTML Content**: `HTMLWebView` is a `UIViewRepresentable` that loads and displays HTML content from a given file path in a `WKWebView`.
-- **Transparent Background**: The `WKWebView` and its scroll view have a transparent background, allowing seamless integration with other SwiftUI views.
-- **Optional Scroll Event Handling**: You can optionally receive scroll events from the web view's scroll view through the `scrollViewDidScroll` closure parameter.
-
-### Usage Example
+Kept for existing call sites; `LayoutInspector` above is the recommended way to read layout going forward, since it's correct under Split View, Slide Over and Stage Manager. These read straight from `UIScreen`/`UIDevice` (iOS only):
 
 ```swift
-import SwiftUI
+myView.screenWidth       // UIScreen.main.bounds.width
+myView.screenHeight
+myView.isSmallScreen     // true when the screen is under 815pt tall
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            // Your other SwiftUI views here...
-            
-            // Display the HTML content from a specified file path
-            HTMLWebView(filePath: Bundle.main.path(forResource: "sample", ofType: "html"))
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        }
-    }
-}
+myView.topSafeAreaHeight            // via LayoutInspector.shared under the hood
+myView.topSafeAreaHeight(ifZero: 16, plus: 4)
+myView.bottomSafeAreaHeight(ifZero: 16, plus: 4)
+
+myView.safeArea(of: .leading, ifZero: 0, plus: 0)
+
+Spacer().topSafeArea()                          // a spacer sized to the top inset
+Spacer().bottomSafeArea(plus: 30, ifZero: 16)   // ...with extra room, and a floor when the inset is 0
+
+myView.screenCornerRadius(minimum: 20)  // the device's real display corner radius, or `minimum`
 ```
 
-### Requirements
-
-- iOS 13.0 or later for `HTMLWebView` on iOS.
-- macOS 11.0 or later for `HTMLWebView` on macOS.
-</details>
-<details>
-  <summary>TransparentBackground</summary>
-  
-
-The `TransparentBackground` is a SwiftUI `UIViewRepresentable` that makes the background transparent for a presented sheet or fullscreen cover, primarily designed for iOS.
-
-### Usage Caution
-
-Setting the background color of the superview's superview directly (as done in this struct) might have unintended side effects and may not be reliable across all SwiftUI versions or implementations. It's essential to thoroughly test this code and consider potential edge cases before using it in production.
-
-### Usage Example
+`hideHomeIndicator` hides the home indicator entirely while the view is visible:
 
 ```swift
-import SwiftUI
-
-struct ContentView: View {
-    @State private var isSheetPresented = false
-    
-    var body: some View {
-        Button("Present Sheet") {
-            isSheetPresented.toggle()
-        }
-        .sheet(isPresented: $isSheetPresented, content: {
-            // Your sheet content here...
-            YourView()
-                  .background(TransparentBackground())   // Apply the transparent background to the presented sheet
-          
-           
-        })
-    }
-}
+MyView().hideHomeIndicator(visibility: .hidden)
 ```
 
-### Requirements
-
-- iOS 13.0 or later
-
-</details>
-
-### Extensions
-<details>
-      
-<summary>swiftui Views Extensions</summary>
-
-1. **Device Dimensions**
-   - `screenWidth`: Retrieves the width of the device screen in `CGFloat`.
-   - `screenHeight`: Retrieves the height of the device screen in `CGFloat`.
-   - `topSafeAreaHeight`: Retrieves the height of the top safe area (notch, if applicable) in `CGFloat`.
-   - `bottomSafeAreaHeight`: Retrieves the height of the bottom safe area in `CGFloat`.
-
-3. **Screen Corner Radius**
-   - `screenCornerRadius(minimum:)`: Calculates and returns the corner radius of the device's display. Optional minimum value can be set.
-
-4. **Home Indicator**
-   - `hideHomeIndicator()`: Hides the home indicator on devices running iOS 16.0 or later. Compatibility handled for earlier iOS versions.
-
-5. **Haptic Feedback**
-   - `playHapticFeedback(_:)`: Plays haptic feedback using the specified `feedbackType`.
-
-6. **View Frame Manipulation**
-   - `fullframe(alignment:)`: Makes a view occupy the full parent's space with optional alignment.
-   - `fullWidth(height:alignment:)`: Sets the frame with full available width and optional height.
-   - `fullHeight(width:alignment:)`: Sets the frame with full available height and optional width.
-   - `squareFrame(size:alignment:)`: Creates a square frame for views with a specified size and alignment.
-
-7. **Safe Area Ignoring**
-   - `ignoreSafeArea_C()`: Ignores the safe area insets of the device on iOS 14 and above.
-
-8. **View Masking**
-   - `cornerRadius(_:)`: Adds a continuous corner radius to the view.
-
-9. **Scroll Position Detection**
-   - `getScrollPosition(key:handler:)`: Detects the scroll position of a view and calls the handler with the offset.
-
-10. **System Icon Image View**
-   - `systemImage(_:)`: Creates an image view with a system icon.
-
-11. **View Border**
-    - `border(lineWidth:cornerRadius:color:)`: Adds a border to the view with specified line width, corner radius, and color.
-
-</details>
-
-<details>
-  <summary>SwiftUI Image Extensions</summary>
-
-A set of helpful SwiftUI extensions to manipulate image views easily.
-
-### Features
-
-1. **Square Frame with Aspect Ratio**
-   - `squareFrameWithApectRatio(value:contentMode:)`: Resizes the image to a square frame with a specified size while maintaining its aspect ratio. The `contentMode` parameter allows you to control how the image fills the frame.
-
-2. **Resize with Aspect Ratio**
-   - `resizeWithApectRatio(contentMode:)`: Resizes the image while maintaining its aspect ratio. The `contentMode` parameter lets you control how the image fits within its new frame.
-
-### Usage Example
+### Corners & borders
 
 ```swift
-import SwiftUI
+myView.cornerRadius(12)                              // continuous corner radius (all corners)
+myView.cornerRadius(12, corners: [.topLeft, .topRight]) // iOS: specific corners via UIRectCorner
 
-struct ContentView: View {
-    var body: some View {
-        Image("exampleImage")
-            .squareFrameWithApectRatio(value: 100, contentMode: .fill)
-            .border(lineWidth: 2, cornerRadius: 10, color: .blue)
-    }
-}
-```
-      
-</details>
-
-<details>
-  <summary>Thread Extensions</summary>
-      
-A collection of useful extensions for managing threads in Swift.
-
-### Features
-
-1. **On Main Thread Execution**
-   - `OnMainThread(_:)`: Executes the given closure on the main thread if the current thread is already the main thread. Otherwise, dispatches it asynchronously to the main thread for execution.
-
-2. **On Background Thread Execution**
-   - `OnBackGroudThread(_:)`: Executes the given closure on a background thread using a global background queue.
-
-3. **Delayed Execution on Main Thread**
-   - `runAfter(_:completion:)`: Schedules the given closure to run after a specified delay (in seconds) on the main thread using `DispatchQueue.main.asyncAfter`.
-
-4. **Custom Thread Creation**
-   - `startNewThread(name:qos:execute:)`: Creates and manages custom threads with specific configurations. This extension allows you to start a new thread with a custom name and Quality of Service (QoS).
-
-### Usage Example
-
-```swift
-import Foundation
-
-// Execute a closure on the main thread after a delay of 2 seconds
-Thread.runAfter(2) {
-    print("This will be executed after 2 seconds on the main thread.")
-}
-
-// Execute a closure on the main thread
-Thread.OnMainThread {
-    print("This will be executed on the main thread.")
-}
-
-// Execute a closure on a background thread
-Thread.OnBackGroudThread {
-    print("This will be executed on a background thread.")
-}
-
-// Create and start a custom thread
-Thread.startNewThread(name: "CustomThread", qos: .userInitiated) {
-    print("This is a custom thread with name 'CustomThread' and QoS 'userInitiated'.")
-}
+myView.border(lineWidth: 2, cornerRadius: 10, color: .blue)
 ```
 
-</details>
-
-<details>
-  <summary>Date Extensions</summary> 
-
-A set of useful extensions for working with Date objects in Swift.
-
-### Features
-
-1. **Readable Time**
-   - `getReadableTime()`: Formats a Date object into a human-readable time string in a 12-hour format with AM/PM indicator. Example output: "03:30 PM" or "11:45 AM".
-
-2. **Readable Date**
-   - `getReadableDate()`: Formats a Date object into a human-readable date string in the format "MM/DD/YYYY". Example output: "07/22/2023" or "01/05/2024".
-
-3. **Readable Date and Time**
-   - `getReadableDateTime()`: Formats a Date object into a human-readable date and time string. Example output: "07/22/2023 03:30 PM" or "01/05/2024 11:45 AM".
-
-4. **Timestamp Generation**
-   - `TimeStemp(format:)`: Provides a unique timestamp according to the given format. The default format is "yyyyMMdd'T'HHmmssSSS".
-
-5. **Month and Day Names**
-   - `getMonthName()`: Gets the full month name from the date, like "January," "February," etc.
-   - `getShortMonthName()`: Gets the short month name from the date, like "Jan," "Feb," etc.
-   - `getDayName()`: Gets the full day name from the date, like "Sunday," "Monday," etc.
-   - `getShortDayName()`: Gets the short day name from the date, like "Sun," "Mon," etc.
-
-6. **Date Component Retrieval**
-   - `getDateComponent(_:calendar:)`: Returns the value of a specific component (e.g., day, month, year, hour, minute) from the Date object using the provided Calendar. If no Calendar is provided, it defaults to the current calendar.
-
-### Usage Example
+On macOS, rounding specific corners uses its own `RectCorner` option set (there's no `UIRectCorner`):
 
 ```swift
-import Foundation
-
-let currentDate = Date()
-
-let readableTime = currentDate.getReadableTime()
-print("Readable Time: \(readableTime)")
-
-let readableDate = currentDate.getReadableDate()
-print("Readable Date: \(readableDate)")
-
-let readableDateTime = currentDate.getReadableDateTime()
-print("Readable Date and Time: \(readableDateTime)")
-
-let timestamp = currentDate.TimeStemp()
-print("Timestamp: \(timestamp)")
-
-let monthName = currentDate.getMonthName()
-print("Month Name: \(monthName)")
-
-let shortMonthName = currentDate.getShortMonthName()
-print("Short Month Name: \(shortMonthName)")
-
-let dayName = currentDate.getDayName()
-print("Day Name: \(dayName)")
-
-let shortDayName = currentDate.getShortDayName()
-print("Short Day Name: \(shortDayName)")
-
-let day = currentDate.getDateComponent(.day)
-print("Day: \(day)")
-
-let month = currentDate.getDateComponent(.month)
-print("Month: \(month)")
-
-let year = currentDate.getDateComponent(.year)
-print("Year: \(year)")
-```
-
-</details>
-
-<details>
-       <summary> Data Extension</summary> 
-
-A convenient extension for working with Data objects in Swift.
-
-### Features
-
-1. **Readable Data Size**
-   - `getReadableDataSize()`: Converts the size of a Data object into a human-readable format, displaying units like KB, MB, GB, etc.
-
-### Usage Example
-
-```swift
-import Foundation
-
-let testData = Data(repeating: 0, count: 1024) // 1 KB
-let readableSize = testData.getReadableDataSize()
-print("Readable Size: \(readableSize)") // Output: "1 KB"
-```
-
-</details>
-
-<details>
-       <summary> Color Extensions</summary> 
-
-### Features
-
-1. **Initialization from Hex String**
-   - `init(hexString:)`: Initializes a Color object from a valid hex color string (e.g., "#RRGGBB" or "#AARRGGBB").
-
-2. **Conversion to Hex String**
-   - `toHex()`: Converts the Color object to its hex representation. For macOS, this function is only available on macOS 11.0 and later, and for iOS, it requires iOS 14.0 and later.
-
-3. **Conversion from `UIColor` (iOS) or `NSColor` (macOS) to Hex Code**
-   - `toHexCode()`: Converts a `UIColor` object (iOS) or `NSColor` object (macOS) to its hex representation.
-
-### Usage Example
-
-```swift
-import SwiftUI
-
-let redColor = Color(hexString: "#FF0000")
-let hexCode = redColor.toHex()
-print("Hex Code: \(hexCode ?? "Unknown")") // Output: "Hex Code: #FF0000"
-
-#if os(iOS)
-if let uiColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).toHexCode() {
-    print("UI Color Hex Code: \(uiColor)") // Output: "UI Color Hex Code: #7F7F7F"
-}
-#elseif os(macOS)
-if let nsColor = NSColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).toHexCode() {
-    print("NS Color Hex Code: \(nsColor)") // Output: "NS Color Hex Code: #7F7F7F"
-}
+#if os(macOS)
+myView.roundedCorners(radius: 12, corners: [.topLeft, .topRight])
 #endif
 ```
-      
-</details>
 
-<details>
-  <summary>KeyboardMonitor (iOS)</summary>
-
-### ⌨️ KeyboardMonitor
-
-`KeyboardMonitor` is a lightweight utility that observes iOS keyboard frame changes and publishes the current keyboard height. It works seamlessly with **SwiftUI** and **Combine**, making it easy to adjust layouts when the keyboard appears or disappears.
-
-### Features
-
-- Publishes real-time keyboard height
-- Handles keyboard show, hide, and frame changes
-- Automatically subtracts bottom safe area
-- Works in both SwiftUI Views and ViewModels
-- Singleton-based for shared access
-- iOS 13+ compatible
-
----
-
-### SwiftUI Usage
-
-Use the shared monitor as a `@StateObject` and apply padding:
+### Masking
 
 ```swift
-import SwiftUI
+myView.reverseMask {
+    Circle()   // punches this shape *out* of myView
+}
+```
 
+### Scroll position
+
+```swift
+ScrollView {
+    content
+        .background(GeometryReader { _ in Color.clear })
+}
+.getScrollPosition(key: "scroll") { offset in
+    print("Scrolled to", offset)
+}
+```
+
+### System images & buttons
+
+`systemImage` is a `View` extension, so call it with `self` inside a view's body — it hands back a pre-configured, resizable `Image(systemName:)`, ignoring whatever view it was called on:
+
+```swift
+var body: some View {
+    self.systemImage("star.fill")
+}
+
+Image("photo").squareFrameWithAspectRatio(value: 100, contentMode: .fill)
+Image("photo").resizeWithAspectRatio(contentMode: .fit)
+
+Button("Cancel") { }.borderless()   // .buttonStyle(BorderlessButtonStyle())
+
+Button("Tap me") { }
+    .buttonStyle(BounceButtonStyle())   // scales down on press, springs back
+```
+
+## Glass & Blur Effects
+
+### Liquid Glass, with a fallback
+
+`safeGlassEffect` uses the real Liquid Glass material on iOS/macOS 26+, and falls back to whatever `ShapeStyle` (a `Material`, a `Color`, a gradient…) you give it below that:
+
+```swift
+Text("Expand")
+    .padding(12)
+    .safeGlassEffect(
+        .clear,                     // or .regular
+        fallback: Color.white,      // used pre-26
+        isInteractive: true,
+        clipShape: .capsule,
+        tintColor: .accentColor,
+        glassEffectID: "ExpandButton",
+        nameSpace: glassNamespace   // for a morphing transition between two glass elements
+    )
+```
+
+Group multiple glass elements so they can morph into and combine with one another, the same way `GlassEffectContainer` does on 26 — this is a no-op wrapper below that:
+
+```swift
+SafeGlassContainer(spacing: 16) {
+    HStack {
+        Text("A").safeGlassEffect(.clear, fallback: Color.white, glassEffectID: "a", nameSpace: ns)
+        Text("B").safeGlassEffect(.clear, fallback: Color.white, glassEffectID: "b", nameSpace: ns)
+    }
+}
+```
+
+### Blur views
+
+```swift
+#if os(iOS)
+BlurView(style: .systemChromeMaterial)   // wraps UIVisualEffectView / UIBlurEffect
+#endif
+
+#if os(macOS)
+BlurView(material: .hudWindow, blendingMode: .behindWindow, overlayColor: .white.opacity(0.2))
+#endif
+```
+
+### Variable blur
+
+A blur whose radius fades across the view — for a bar that blurs content scrolling underneath it without a hard edge (iOS/UIKit only):
+
+```swift
+ZStack(alignment: .top) {
+    content
+
+    VariableBlurView(maxBlurRadius: 20, direction: .blurredTopClearBottom)
+        .frame(height: 120)
+        .ignoresSafeArea()
+}
+```
+
+`direction` is one of `.blurredTopClearBottom`, `.blurredBottomClearTop`, `.blurredLeftClearRight`, `.blurredRightClearLeft`.
+
+### Transparent sheet background
+
+Removes the default dimmed background behind a presented sheet or full-screen cover (iOS only — test carefully, it reaches into the view hierarchy above its superview):
+
+```swift
+YourView()
+    .background(TransprentBackground())
+```
+
+## Alerts, Share Sheets & Drops
+
+Available on any `View`, any `ObservableObject` (so a view model can call these directly), and any `UIViewController` — the same three calls, everywhere (iOS only):
+
+```swift
+// A native UIAlertController
+self.showAlert(
+    title: "Delete item?",
+    message: "This can't be undone.",
+    actions: [
+        UIAlertAction(title: "Cancel", style: .cancel),
+        UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
+    ]
+)
+
+// UIActivityViewController
+self.ShareSheet(activityItems: ["Check this out!", url])
+
+// A small, Apple-style banner that drops from the top — like the mute-switch toggle indicator
+self.showDrop(
+    title: "Saved",
+    subtitle: "Your changes were saved",
+    icon: UIImage(systemName: "checkmark.circle.fill"),
+    position: .top,           // or .bottom
+    duration: .seconds(2),    // or .recommended, .enteredByUser, .short, .long
+    haptic: .success          // plays a haptic alongside the drop
+)
+```
+
+`Drop` (the underlying type, from a vendored copy of [omaralbeik/Drops](https://github.com/omaralbeik/Drops)) also supports a tap `action` and custom `accessibility` text — see its doc comments for the full initializer.
+
+## Haptics
+
+```swift
+#if os(iOS)
+self.playHapticFeedback(.success)   // .error, .success, .warning, .light, .medium, .heavy
+#endif
+
+#if os(macOS)
+self.generateFeedback(.alignment, performTime: .now)   // NSHapticFeedbackManager.FeedbackPattern
+// or, from a View:
+myView.playHapticFeedback(.alignment, performTime: .now)
+#endif
+```
+
+Every haptic call — on both platforms — checks a single kill switch first:
+
+```swift
+UserDefaults.isHapticEnabled = false   // globally silences playHapticFeedback everywhere, default true
+```
+
+## Keyboard Handling
+
+Dismiss the keyboard from anywhere — a `View`, an `ObservableObject`, or `UIApplication.shared` directly (iOS only):
+
+```swift
+self.hideKeyboard()
+```
+
+`KeyboardMonitor` publishes the live keyboard height (already net of the bottom safe area), so you can slide content up as the keyboard appears (iOS only):
+
+```swift
 struct ContentView: View {
-    
     @StateObject private var keyboard = KeyboardMonitor.shared
-    
+
     var body: some View {
         VStack {
-            TextField("Message", text: .constant(""))
+            TextField("Message", text: $text)
         }
         .padding(.bottom, keyboard.height)
         .animation(.easeOut(duration: 0.25), value: keyboard.height)
     }
 }
 ```
-### ViewModel (Combine) Usage
+
+Or subscribe from a view model with Combine:
 
 ```swift
 final class MyViewModel: ObservableObject {
-    
     @Published var keyboardHeight: CGFloat = 0
     private var cancellables = Set<AnyCancellable>()
-    
+
     init() {
         KeyboardMonitor.shared.heightPublisher
             .removeDuplicates()
@@ -683,9 +509,255 @@ final class MyViewModel: ObservableObject {
     }
 }
 ```
-</details>
 
+## Force-Update Prompt
 
-### License
+One call checks the App Store for a newer version and, if the user is behind, presents a full-screen prompt over your app (iOS only):
+
+```swift
+forceUpdateModel.shared.checkVersion(appID: "1234567890", showCloseButton: false)
+```
+
+`showCloseButton: false` makes the update mandatory (no way to dismiss); `true` adds a close button so the user can continue on the current version. To build your own UI instead of the bundled screen:
+
+```swift
+forceUpdateModel.shared.showDefaultDisplay = false
+forceUpdateModel.shared.doesAppNeedUpdate = { needsUpdate in
+    if needsUpdate {
+        // present your own update screen
+    }
+}
+forceUpdateModel.shared.checkVersion(appID: "1234567890")
+```
+
+## App & Bundle Info
+
+Cross-platform, straight off `Bundle`:
+
+```swift
+Bundle.main.displayName    // "MyApp" — respects InfoPlist.strings localization
+Bundle.main.appVersion     // "1.4.2"  (CFBundleShortVersionString)
+Bundle.main.buildNumber    // "87"     (CFBundleVersion)
+Bundle.main.fullVersion    // "1.4.2 (87)"
+Bundle.main.appIcon        // PlatformImage? — UIImage on iOS, NSImage on macOS
+```
+
+On iOS, the same five properties are also available as shorthand straight off `UIApplication.shared`:
+
+```swift
+UIApplication.shared.displayName
+UIApplication.shared.appVersion
+UIApplication.shared.fullVersion
+```
+
+Debug / TestFlight / App Store detection, and a matching debug-only logger — see [Logging](#logging):
+
+```swift
+switch myView.appEnvironment {     // Config.appConfiguration, exposed on any View
+case .Debug:      break
+case .TestFlight:  break
+case .AppStore:    break
+}
+```
+
+## Logging
+
+Routes to `os_log`, and — regardless of build configuration — only prints anything at all while `appEnvironment == .Debug`. Nothing this library logs reaches a TestFlight or App Store build:
+
+```swift
+Log.debug("Fetching page \(page)")
+Log.info("User logged in")
+Log.defaultLog("Cache warmed")
+Log.error("Request failed: \(error)")
+Log.fault("Unexpected nil where a value was required")
+```
+
+## Color Utilities
+
+```swift
+let brand = Color(hexString: "#FF5733")   // also accepts "F53", "FF5733", or "AAFF5733" (alpha-first)
+
+let hex = brand.toHex()          // "FF5733" or "AAFF5733" if not fully opaque — iOS 14+ / macOS 11+
+
+#if os(iOS)
+let hex2 = UIColor.red.toHexCode()   // "#FF0000"
+#elseif os(macOS)
+let hex2 = NSColor.red.toHexCode()   // "#FF0000"
+#endif
+```
+
+## Date Utilities
+
+```swift
+let now = Date()
+
+now.getReadableTime()       // "03:30 PM"
+now.getReadableDate()       // "07/22/2023"      (MM/DD/YYYY)
+now.getReadableDateTime()   // "07/22/2023 03:30 PM"
+
+now.getMonthName()          // "July"
+now.getShortMonthName()     // "Jul"
+now.getDayName()            // "Saturday"
+now.getShortDayName()       // "Sat"
+
+now.getDateComponent(.year)              // 2023
+now.getDateComponent(.day, calendar: myCalendar)
+
+now.TimeStemp()                          // "20230722T153000123" — unique, sortable
+now.TimeStemp(format: "yyyy-MM-dd")      // any DateFormatter pattern
+```
+
+## Data & Number Formatting
+
+```swift
+someData.getReadableDataSize()      // "1.2 MB" — via ByteCountFormatter
+
+let bytes: Int64 = 3_400_000
+bytes.toReadableSize()              // "3.24 MB" — a lightweight, formatter-free alternative
+```
+
+## Threading Helpers
+
+```swift
+Thread.OnMainThread {
+    // runs immediately if already on main, otherwise dispatched async
+}
+
+Thread.OnBackgroundThread {
+    // DispatchQueue.global(qos: .background).async
+}
+
+Thread.runAfter(2.0) {
+    // main thread, after a 2 second delay
+}
+
+Thread.startNewThread(name: "com.myapp.worker", qos: .userInitiated) {
+    // a dedicated, named Thread
+}
+```
+
+## Notifications
+
+```swift
+extension Notification.Name {
+    static let didUpdateProfile = Notification.Name("didUpdateProfile")
+}
+
+Notification.Name.didUpdateProfile.fire()
+Notification.Name.didUpdateProfile.fire(value: ["userID": 42])
+```
+
+## Photos (PHAsset)
+
+Async/await image loading straight off a `PHAsset` — no completion-handler boilerplate (iOS only):
+
+```swift
+if let image = await asset.loadImage(targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill) {
+    // a resized thumbnail
+}
+
+if let original = await asset.loadOriginalImage() {
+    // the exact original bytes, via requestImageDataAndOrientation
+}
+```
+
+## Device, Screen & App Store Helpers
+
+```swift
+UIDevice.current.hasNotch          // true on notched/Dynamic Island devices
+UIDevice.current.isIPad
+UIDevice.current.topSafeArea       // cached after first read
+UIDevice.current.bottomSafeArea
+UIDevice.current.leadingSafeArea
+UIDevice.current.trailingSafeArea
+
+UIScreen.main.displayCornerRadius             // the device's real corner radius (private API, safely wrapped)
+UIScreen.main.displayCorner(minimum: 20)
+
+UIApplication.shared.findKeyWindow()          // the active scene's key window, across iOS versions
+UIApplication.shared.topViewController()      // the top-most presented/visible view controller
+
+SKStoreReviewController().requestReviewInCS() // requests an App Store review on the active scene (iOS 14+)
+
+// Every font family and its face names on the device — handy for a font-picker screen
+let fonts: [String: [String]] = self.getAllFonts()   // on any View or ObservableObject
+```
+
+## Embedding SwiftUI in UIKit
+
+Drop a SwiftUI view into a `UIViewController` without wiring up a `UIHostingController` yourself:
+
+```swift
+class MyViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addSwiftUIChildView(MySwiftUIView())                  // fills self.view
+        addSwiftUIChildView(AnotherView(), to: someContainer)  // fills a specific UIView
+    }
+}
+```
+
+## macOS Window Chrome
+
+Custom traffic-light-style window controls, for a borderless or otherwise customized window:
+
+```swift
+#if os(macOS)
+windowButtons(
+    closeHandler: { NSApp.terminate(nil) },
+    miniaturizeHandler: { NSApp.keyWindow?.miniaturize(nil) },
+    resizeHandler: { NSApp.keyWindow?.toggleFullScreen(nil) }
+)
+#endif
+```
+
+Pass only `closeHandler` for a close-only button; the minimize/resize buttons render disabled (gray) when their handlers are `nil`.
+
+```swift
+#if os(macOS)
+someWindow.transparentWindow(level: .screenSaver)   // borderless, clear, no shadow
+#endif
+```
+
+## Optional Firebase Analytics Bridge
+
+If your app already links `FirebaseAnalytics`, SwiftyUIX adds a one-line event logger on top of it — this code only compiles in if that framework is present, and SwiftyUIX does **not** depend on it otherwise:
+
+```swift
+myView.setEvent("screen_viewed")
+myViewModel.setEvent("button_tapped")     // any ObservableObject
+myViewController.setEvent("screen_viewed") // iOS UIViewController
+"screen_viewed".asFirebaseEvent()
+```
+
+## Platform & Availability Matrix
+
+| Feature | iOS | macOS | Minimum |
+|---|:---:|:---:|---|
+| `LayoutInspector` / `TabBarArea` | ✅ | — | iOS 17 (hinge & reserved regions need iOS 27.1) |
+| Frame & layout helpers | ✅ | partial | — |
+| `safeGlassEffect` / `SafeGlassContainer` | ✅ | ✅ | iOS 15 / macOS 12 (real glass on 26+) |
+| `BlurView` | ✅ | ✅ | separate iOS/macOS implementations |
+| `VariableBlurView` | ✅ | — | UIKit only |
+| `TransprentBackground` | ✅ | — | — |
+| Alerts / Share Sheet / Drops | ✅ | — | — |
+| Haptics | ✅ | ✅ | different APIs per platform |
+| `KeyboardMonitor` | ✅ | — | — |
+| `forceUpdateModel` | ✅ | — | — |
+| Bundle & app info | ✅ | ✅ | — |
+| `Log` | ✅ | ✅ | — |
+| Color hex utilities | ✅ | ✅ | `toHex()` needs iOS 14 / macOS 11 |
+| Date / Data / Thread / Notification helpers | ✅ | ✅ | — |
+| `PHAsset` loaders | ✅ | — | — |
+| `SKStoreReviewController.requestReviewInCS()` | ✅ | — | iOS 14 |
+| `addSwiftUIChildView` | ✅ | — | — |
+| `windowButtons` / `NSWindow.transparentWindow` | — | ✅ | — |
+| Firebase bridge | ✅ | ✅ | only compiles if `FirebaseAnalytics` is linked |
+
+## Example App
+
+`swiftyUIXExamples/` in this repository is a working demo of most of the above — including a bento-grid `LayoutInspector` dashboard and a fold-aware book reader that lays its gutter on the real crease of a foldable device. Open `SwiftyUIX.xcodeproj`, select the `swiftyUIXExamples` scheme, and run.
+
+## License
 
 This project is licensed under the [MIT License](LICENSE). Feel free to use and modify it as per your requirements.
