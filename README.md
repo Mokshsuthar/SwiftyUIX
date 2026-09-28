@@ -323,13 +323,48 @@ myView.reverseMask {
 
 ### Scroll position
 
+`getScrollPosition(key:handler:)` reports how far a view has scrolled inside a named coordinate space — pair it with a matching `.coordinateSpace(name:)` on the scroll view itself. Combined with [`LayoutInspector`](#foldable--adaptive-layout), the offset can drive a live readout parked wherever `tabBarArea` says a bar belongs:
+
 ```swift
-ScrollView {
-    content
-        .background(GeometryReader { _ in Color.clear })
-}
-.getScrollPosition(key: "scroll") { offset in
-    print("Scrolled to", offset)
+struct ScrollOffsetExample: View {
+    @Environment(LayoutInspector.self) private var inspector
+    @State private var scrollOffsetY: CGFloat = .zero
+
+    private var offsetReadout: some View {
+        let bar = inspector.tabBarArea
+        return Text("Scroll offset Y: \(String(format: "%.2f", scrollOffsetY))")
+            .font(.system(size: 11, weight: .bold))
+            .foregroundStyle(.white)
+            .rotationEffect(.degrees(bar.isRail ? -90 : 0))
+            .placeInTabBarArea(bar)
+            .allowsHitTesting(false)
+    }
+
+    var body: some View {
+        ZStack {
+            ScrollView(.vertical) {
+                LazyVStack(spacing: 16) {
+                    ForEach(0...100, id: \.self) { index in
+                        Text("\(index)")
+                            .fullFrame()
+                            .fullWidth(height: 60)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                }
+                .padding()
+                .getScrollPosition(key: "ScrollKey") { scrollOffsetY = $0 }
+            }
+            .coordinateSpace(name: "ScrollKey")   // must match the key above
+            .safeAreaPadding(inspector.horizontalSafeAreaInsets.edge, inspector.horizontalSafeAreaInsets.value)
+            .safeAreaPadding(.top, inspector.topSafeArea)
+            .safeAreaPadding(.bottom, inspector.bottomSafeArea)
+            .fullFrame()
+
+            offsetReadout
+        }
+        .ignoresSafeArea()
+    }
 }
 ```
 
