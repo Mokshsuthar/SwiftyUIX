@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "SwiftyUIX"
-  spec.version      = "2.0.0"
+  spec.version      = "2.0.1"
   spec.summary      = "SwiftyUIX is a library providing useful extensions and custom views to simplify iOS development."
   spec.description  = <<-DESC
     SwiftyUIX is a comprehensive library offering practical extensions and custom views for streamlined development on iOS and macOS.

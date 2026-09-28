@@ -83,7 +83,21 @@ public extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
-    
+
+    // "yyyy" is the calendar year; the capital "YYYY" is the ISO week-numbering year, which
+    // disagrees with it on a handful of days near each year boundary.
+    func MonthStemp(format: String = "yyyyMM") -> Int {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return Int(formatter.string(from: self)) ?? 0
+    }
+
+    func dateStamp(format: String = "yyyyMMdd") -> Int {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return Int(formatter.string(from: self)) ?? 0
+    }
+
     //get month name from date like January, Fabruary ...
     func getMonthName() -> String {
         let formatter = DateFormatter()
@@ -120,3 +134,5 @@ public extension Date {
         return calendar.component(component, from: self)
     }
 }
+
+
