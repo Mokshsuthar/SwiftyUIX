@@ -1,7 +1,7 @@
-![Static Badge](https://img.shields.io/badge/iOS-13.0%2B-red)
+![Static Badge](https://img.shields.io/badge/iOS-17.0%2B-red)
 ![Static Badge](https://img.shields.io/badge/macOS-12.0%2B-red)
 ![Static Badge](https://img.shields.io/badge/swift_package_manager-compatible-green)
-![Static Badge](https://img.shields.io/badge/swift_version-4.2%2B-blue)
+![Static Badge](https://img.shields.io/badge/swift_version-5.9%2B-blue)
 ![Static Badge](https://img.shields.io/badge/License-MIT-yellow)
 
 # SwiftyUIX
@@ -48,6 +48,131 @@ Log.error("Error")        // For logging errors
 
 
 ### Views
+<details>
+  <summary>LayoutInspector &amp; tab bar placement</summary>
+
+`LayoutInspector` tracks the live layout — bounds, safe area, orientation, device type and,
+on a foldable, the hinge and the regions the system reserves — and turns it into a concrete
+answer to "where can my custom tab bar go?".
+
+#### Setup
+
+Install `LayoutInspectionView` once at the root. It reads the geometry, observes the hinge and
+writes into `LayoutInspector.shared`; nothing else is needed.
+
+```swift
+@main
+struct MyApp: App {
+    @State private var inspector = LayoutInspector.shared
+
+    var body: some Scene {
+        WindowGroup {
+            ZStack {
+                ContentView().environment(inspector)
+                LayoutInspectionView()
+            }
+        }
+    }
+}
+```
+
+#### Reading the layout
+
+```swift
+@Environment(LayoutInspector.self) private var inspector
+
+inspector.currentLayoutBounds   // CGRect of the window
+inspector.safeAreaInsets        // EdgeInsets
+inspector.orientation           // .portrait / .landscape, from the bounds, so Split View and
+                                // Stage Manager are handled
+inspector.deviceType            // .phone, .foldablePhone, .pad, .mac, .tv, .carPlay, .vision
+inspector.isIPhoneDuo           // true once the system reports a hinge
+inspector.foldPosture           // .closed / .partiallyOpen / .fullyOpen
+inspector.hingeAngle            // Angle?
+inspector.hasActiveDivision     // the fold currently splits the window
+```
+
+#### Placing a tab bar
+
+A foldable reserves a column beside its camera housing and reports it as a side safe-area
+inset — that strip is where the system renders its own tab rail. So `tabBarArea` puts the bar
+**in** that column when the panel has one, and along the bottom when it does not. Non-foldable
+devices always get a bottom bar, in either orientation.
+
+The band runs to the screen edge rather than stopping at the home indicator, the way
+`UITabBar` does — so the bar's background fills the corner and nothing is left over beneath it.
+Pad the bar's *contents* by `safeContentInsets` to keep them off the indicator:
+
+```swift
+MyTabBar()
+    .padding(bar.safeContentInsets)
+    .background(.bar)
+    .placeInTabBarArea(bar)   // or pass your own thickness
+```
+
+Either way the rect is solved against the reserved regions: the largest run on that edge that
+clears every active occlusion (camera housing, home indicator) and every active division (the
+crease). A region eating into the run shortens it and is reported through `coverage` rather
+than moving the bar somewhere else.
+
+```swift
+let bar = inspector.tabBarArea
+
+bar.edge            // .bottom / .leading / .trailing
+bar.axis            // .horizontal for a bar, .vertical for a rail
+bar.isRail          // axis == .vertical
+bar.alignment       // matching Alignment for a ZStack or overlay
+bar.availableArea   // CGRect of free space, in full-bleed window coordinates
+bar.edgeInsets      // insets from the window to that rect
+bar.safeContentInsets  // how far the safe area reaches into the band
+bar.recommendedThickness  // 49pt of controls plus the safe area it covers, or the column width
+bar.maxThickness    // how tall (or wide) the bar can be before it hits a reserved region
+bar.maxLength       // how far it can run along the edge
+bar.coverage        // 0...1 — how much of the edge survived
+bar.isReservedColumn   // the bar is in the foldable's camera column
+bar.isShortenedByOcclusion
+bar.isSplitByFold
+bar.summary         // "Trailing column rail · 84 × 515 · 81% of edge"
+```
+
+Place a view in it with `placeInTabBarArea(_:thickness:)`, applied inside a container that
+ignores the safe area:
+
+```swift
+ContentView()
+    .overlay {
+        MyTabBar()
+            .placeInTabBarArea(inspector.tabBarArea, thickness: 64)
+    }
+```
+
+Or lay it out yourself — the numbers are all there:
+
+```swift
+let bar = inspector.tabBarArea
+let rect = bar.area(thickness: 64)              // the band, hugging its edge
+let inset = bar.contentInset(thickness: 64)     // padding to keep content clear of it
+
+MyScrollingContent()
+    .safeAreaPadding(inset.edge, inset.value)
+```
+
+Pin it to a specific edge when the design already dictates one — the geometry is still solved
+around the reserved regions:
+
+```swift
+let rail = inspector.tabBarArea(on: .leading)
+```
+
+#### Requirements
+
+- iOS 17.0 or later, which is the library's floor as of 2.0. `LayoutInspector` is iOS-only —
+  `DeviceHinge` and `ReservedRegion` ship in the iOS SDK only.
+- The hinge, occlusions and divisions need iOS 27.1. Below that the placement still honours the
+  bounds and the safe area, there is simply nothing reserved to avoid.
+
+</details>
+
 <details>
   <summary>Window buttons (macOS)</summary>
 

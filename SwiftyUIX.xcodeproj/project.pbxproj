@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57D991CECEEC4158AD72CF6D /* TabBarArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25247D6D4B814274A982F2F5 /* TabBarArea.swift */; };
 		662950452A69A311004EE91B /* SwiftyUIX.docc in Sources */ = {isa = PBXBuildFile; fileRef = 662950442A69A311004EE91B /* SwiftyUIX.docc */; };
 		6629504B2A69A311004EE91B /* SwiftyUIX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 662950402A69A311004EE91B /* SwiftyUIX.framework */; };
 		662950502A69A311004EE91B /* SwiftyUIXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629504F2A69A311004EE91B /* SwiftyUIXTests.swift */; };
@@ -33,7 +34,6 @@
 		662950982A6C3187004EE91B /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662950972A6C3187004EE91B /* HapticFeedbackManager.swift */; };
 		6629509C2A6C32D3004EE91B /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629509B2A6C32D3004EE91B /* BlurView.swift */; };
 		6629509E2A6C34D4004EE91B /* HTMLWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629509D2A6C34D4004EE91B /* HTMLWebView.swift */; };
-		666399882ABF2B5C0026F4B1 /* firebaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666399872ABF2B5C0026F4B1 /* firebaseExtensions.swift */; };
 		666399A32AC027A00026F4B1 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666399A22AC027A00026F4B1 /* NotificationExtension.swift */; };
 		666399A52AC0452A0026F4B1 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666399A42AC0452A0026F4B1 /* UIApplicationExtension.swift */; };
 		666399A72AC09A610026F4B1 /* ObservableObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666399A62AC09A610026F4B1 /* ObservableObjectExtension.swift */; };
@@ -42,7 +42,6 @@
 		9C0B2FBF2CD5411D00FD5C1C /* Logs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FBE2CD5411A00FD5C1C /* Logs.swift */; };
 		9C0B2FC12CD5453200FD5C1C /* BlurBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FC02CD5453200FD5C1C /* BlurBackgroundView.swift */; };
 		9C0B2FC32CD5473200FD5C1C /* windowNavigationButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B2FC22CD5473200FD5C1C /* windowNavigationButtons.swift */; };
-		9C4E5D212EBD1D5B0080117A /* BounceButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E5D202EBD1D5B0080117A /* BounceButtonStyle.swift */; };
 		9C4E5D232EBD1F370080117A /* BouncyButtonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E5D222EBD1F370080117A /* BouncyButtonExample.swift */; };
 		9C4E5D9F2EBD20B90080117A /* PHAssetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E5D9E2EBD20B90080117A /* PHAssetExtensions.swift */; };
 		9C4E5DA12EBD26210080117A /* Userdefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E5DA02EBD26210080117A /* Userdefaults.swift */; };
@@ -68,9 +67,13 @@
 		9CD96A652F2E34940027098E /* KeyboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96A642F2E34940027098E /* KeyboardMonitor.swift */; };
 		9CD96A672F2E34D70027098E /* KeyboardMonitorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96A662F2E34D70027098E /* KeyboardMonitorTest.swift */; };
 		9CD96B222F2E62230027098E /* SafeGlassEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96B212F2E62230027098E /* SafeGlassEffect.swift */; };
+		EA5CF4E5749A4163AF72078E /* BookReaderExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4379471085014AC59D082BEC /* BookReaderExample.swift */; };
 		9CD96B242F2E66000027098E /* AllFontsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96B232F2E66000027098E /* AllFontsListView.swift */; };
 		9CD96B262F2E6B700027098E /* VariableBlurDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96B252F2E6B700027098E /* VariableBlurDirection.swift */; };
 		9CD96B282F2E6B8C0027098E /* VeriableBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD96B272F2E6B8C0027098E /* VeriableBlurView.swift */; };
+		E17A294B3062BD6700C8690D /* DuoTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A294A3062BD6700C8690D /* DuoTestView.swift */; };
+		E17A294E3062E5C600C8690D /* LayoutInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A294D3062E5B400C8690D /* LayoutInspector.swift */; };
+		E17A296830630B2700C8690D /* GlassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A296730630B2000C8690D /* GlassExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +115,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		25247D6D4B814274A982F2F5 /* TabBarArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarArea.swift; sourceTree = "<group>"; };
 		662950402A69A311004EE91B /* SwiftyUIX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyUIX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		662950432A69A311004EE91B /* SwiftyUIX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyUIX.h; sourceTree = "<group>"; };
 		662950442A69A311004EE91B /* SwiftyUIX.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SwiftyUIX.docc; sourceTree = "<group>"; };
@@ -141,7 +145,6 @@
 		662950972A6C3187004EE91B /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
 		6629509B2A6C32D3004EE91B /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		6629509D2A6C34D4004EE91B /* HTMLWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLWebView.swift; sourceTree = "<group>"; };
-		666399872ABF2B5C0026F4B1 /* firebaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseExtensions.swift; sourceTree = "<group>"; };
 		666399A22AC027A00026F4B1 /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		666399A42AC0452A0026F4B1 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		666399A62AC09A610026F4B1 /* ObservableObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObjectExtension.swift; sourceTree = "<group>"; };
@@ -150,7 +153,6 @@
 		9C0B2FBE2CD5411A00FD5C1C /* Logs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logs.swift; sourceTree = "<group>"; };
 		9C0B2FC02CD5453200FD5C1C /* BlurBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurBackgroundView.swift; sourceTree = "<group>"; };
 		9C0B2FC22CD5473200FD5C1C /* windowNavigationButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = windowNavigationButtons.swift; sourceTree = "<group>"; };
-		9C4E5D202EBD1D5B0080117A /* BounceButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BounceButtonStyle.swift; sourceTree = "<group>"; };
 		9C4E5D222EBD1F370080117A /* BouncyButtonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyButtonExample.swift; sourceTree = "<group>"; };
 		9C4E5D9E2EBD20B90080117A /* PHAssetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetExtensions.swift; sourceTree = "<group>"; };
 		9C4E5DA02EBD26210080117A /* Userdefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Userdefaults.swift; sourceTree = "<group>"; };
@@ -174,9 +176,13 @@
 		9CD96A642F2E34940027098E /* KeyboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMonitor.swift; sourceTree = "<group>"; };
 		9CD96A662F2E34D70027098E /* KeyboardMonitorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMonitorTest.swift; sourceTree = "<group>"; };
 		9CD96B212F2E62230027098E /* SafeGlassEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeGlassEffect.swift; sourceTree = "<group>"; };
+		4379471085014AC59D082BEC /* BookReaderExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReaderExample.swift; sourceTree = "<group>"; };
 		9CD96B232F2E66000027098E /* AllFontsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFontsListView.swift; sourceTree = "<group>"; };
 		9CD96B252F2E6B700027098E /* VariableBlurDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableBlurDirection.swift; sourceTree = "<group>"; };
 		9CD96B272F2E6B8C0027098E /* VeriableBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeriableBlurView.swift; sourceTree = "<group>"; };
+		E17A294A3062BD6700C8690D /* DuoTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuoTestView.swift; sourceTree = "<group>"; };
+		E17A294D3062E5B400C8690D /* LayoutInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInspector.swift; sourceTree = "<group>"; };
+		E17A296730630B2000C8690D /* GlassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,8 +285,10 @@
 				9C4E5D222EBD1F370080117A /* BouncyButtonExample.swift */,
 				9CD96A662F2E34D70027098E /* KeyboardMonitorTest.swift */,
 				9CD96B212F2E62230027098E /* SafeGlassEffect.swift */,
+				4379471085014AC59D082BEC /* BookReaderExample.swift */,
 				9CD96B232F2E66000027098E /* AllFontsListView.swift */,
 				9CD96B272F2E6B8C0027098E /* VeriableBlurView.swift */,
+				E17A294A3062BD6700C8690D /* DuoTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -288,11 +296,10 @@
 		662950882A6C2299004EE91B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E17A296730630B2000C8690D /* GlassExtensions.swift */,
 				9CD96A642F2E34940027098E /* KeyboardMonitor.swift */,
 				9C4E5DA22EBD29A50080117A /* SKStoreReviewControllerExtension.swift */,
 				9C4E5D9E2EBD20B90080117A /* PHAssetExtensions.swift */,
-				9C4E5D202EBD1D5B0080117A /* BounceButtonStyle.swift */,
-				666399862ABF0E680026F4B1 /* ExtraExtensions */,
 				9C6A478F2CD3A32800C503FC /* WindowExtensions.swift */,
 				9C6A47352CD2563B00C503FC /* ButtonExtension.swift */,
 				6629507A2A69BA6D004EE91B /* UIdeviceExtensions.swift */,
@@ -327,6 +334,7 @@
 		6629508A2A6C2308004EE91B /* ViewModifires */ = {
 			isa = PBXGroup;
 			children = (
+				E17A294C3062E59400C8690D /* LayoutInspector */,
 				9C6302C72CD8F4C00052A2E7 /* ForceUpdate */,
 				9C6A47832CD38F8B00C503FC /* Drops */,
 				662950972A6C3187004EE91B /* HapticFeedbackManager.swift */,
@@ -345,14 +353,6 @@
 				662950882A6C2299004EE91B /* Extensions */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		666399862ABF0E680026F4B1 /* ExtraExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				666399872ABF2B5C0026F4B1 /* firebaseExtensions.swift */,
-			);
-			path = ExtraExtensions;
 			sourceTree = "<group>";
 		};
 		9C0B2FBD2CD5411100FD5C1C /* Logs */ = {
@@ -395,6 +395,15 @@
 				9C6A47822CD38F8B00C503FC /* WindowViewController.swift */,
 			);
 			path = Drops;
+			sourceTree = "<group>";
+		};
+		E17A294C3062E59400C8690D /* LayoutInspector */ = {
+			isa = PBXGroup;
+			children = (
+				E17A294D3062E5B400C8690D /* LayoutInspector.swift */,
+				25247D6D4B814274A982F2F5 /* TabBarArea.swift */,
+			);
+			path = LayoutInspector;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -548,8 +557,11 @@
 				9C6302C92CD8F5230052A2E7 /* forceUpdateModel.swift in Sources */,
 				666399A92AC09A990026F4B1 /* UIViewControllerExtension.swift in Sources */,
 				666399A32AC027A00026F4B1 /* NotificationExtension.swift in Sources */,
+				E17A294E3062E5C600C8690D /* LayoutInspector.swift in Sources */,
+				57D991CECEEC4158AD72CF6D /* TabBarArea.swift in Sources */,
 				6629509E2A6C34D4004EE91B /* HTMLWebView.swift in Sources */,
 				6629506D2A69A655004EE91B /* ViewExtensions.swift in Sources */,
+				E17A296830630B2700C8690D /* GlassExtensions.swift in Sources */,
 				9C6302CB2CD9E6D50052A2E7 /* ForceUpdateViewController.swift in Sources */,
 				9C4E5DA12EBD26210080117A /* Userdefaults.swift in Sources */,
 				662950942A6C30A0004EE91B /* DataExtensions.swift in Sources */,
@@ -574,12 +586,10 @@
 				9C6A478C2CD38F8B00C503FC /* WindowViewController.swift in Sources */,
 				9C6A478D2CD38F8B00C503FC /* Weak.swift in Sources */,
 				9C0B2FC32CD5473200FD5C1C /* windowNavigationButtons.swift in Sources */,
-				9C4E5D212EBD1D5B0080117A /* BounceButtonStyle.swift in Sources */,
 				9C6A47902CD3A33300C503FC /* WindowExtensions.swift in Sources */,
 				9CD96A652F2E34940027098E /* KeyboardMonitor.swift in Sources */,
 				6629507B2A69BA6D004EE91B /* UIdeviceExtensions.swift in Sources */,
 				9CD96B262F2E6B700027098E /* VariableBlurDirection.swift in Sources */,
-				666399882ABF2B5C0026F4B1 /* firebaseExtensions.swift in Sources */,
 				9C6A47342CD251BE00C503FC /* AppConfigure.swift in Sources */,
 				6629508C2A6C233F004EE91B /* ThreadExtensions.swift in Sources */,
 				666399A52AC0452A0026F4B1 /* UIApplicationExtension.swift in Sources */,
@@ -600,7 +610,9 @@
 			files = (
 				662950772A69AFF4004EE91B /* FrameExamples.swift in Sources */,
 				9CD96B222F2E62230027098E /* SafeGlassEffect.swift in Sources */,
+				EA5CF4E5749A4163AF72078E /* BookReaderExample.swift in Sources */,
 				662950812A69BE68004EE91B /* ColorHexCodeExample.swift in Sources */,
+				E17A294B3062BD6700C8690D /* DuoTestView.swift in Sources */,
 				662950632A69A3B4004EE91B /* ContentView.swift in Sources */,
 				662950792A69B26D004EE91B /* ColorExtention.swift in Sources */,
 				662950612A69A3B4004EE91B /* swiftyUIXExamplesApp.swift in Sources */,
@@ -762,7 +774,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = NG992SYUWX;
+				DEVELOPMENT_TEAM = KJC6C4RFXH;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -770,7 +782,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -805,7 +817,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = NG992SYUWX;
+				DEVELOPMENT_TEAM = KJC6C4RFXH;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -813,7 +825,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
@@ -846,9 +858,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = NG992SYUWX;
+				DEVELOPMENT_TEAM = KJC6C4RFXH;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moksh.SwiftyUIXTests;
@@ -867,9 +879,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = NG992SYUWX;
+				DEVELOPMENT_TEAM = KJC6C4RFXH;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moksh.SwiftyUIXTests;
@@ -890,7 +902,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"swiftyUIXExamples/Preview Content\"";
-				DEVELOPMENT_TEAM = Q8YKQZH7BZ;
+				DEVELOPMENT_TEAM = KJC6C4RFXH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = swiftyUIXExamples/Info.plist;
@@ -898,7 +910,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -925,7 +937,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"swiftyUIXExamples/Preview Content\"";
-				DEVELOPMENT_TEAM = Q8YKQZH7BZ;
+				DEVELOPMENT_TEAM = KJC6C4RFXH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = swiftyUIXExamples/Info.plist;
@@ -933,7 +945,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -61,7 +61,7 @@ struct ScreenCornerRadiusExample: View {
         }
         .fullFrame()
         .background(Color.black.opacity(0.2))
-        .ignoreSafeArea_C()
+        .ignoresSafeArea()
         .preferredColorScheme(.light)
     }
 }

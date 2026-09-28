@@ -65,7 +65,7 @@ struct SafeAreaExample: View {
                     .bottomSafeArea()
             }
         }.fullFrame()
-        .ignoreSafeArea_C()
+        .ignoresSafeArea()
     }
 }
 

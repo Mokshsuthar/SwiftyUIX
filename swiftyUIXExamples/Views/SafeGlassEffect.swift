@@ -33,7 +33,7 @@ struct SafeGlassEffect: View {
                         .fontWeight(.regular)
                         .foregroundColor(Color.black)
                         .padding()
-                        .safe_glassEffect(.clear, .ultraThin, isintractive: true, clipShape: .capsule, tintColor: nil)
+                        .safeGlassEffect(.clear, fallback: .ultraThinMaterial, isInteractive: true, clipShape: .capsule, tintColor: nil)
                     
                     
                     Text("Safe regular glass with Blur view")
@@ -41,7 +41,7 @@ struct SafeGlassEffect: View {
                         .fontWeight(.regular)
                         .foregroundColor(Color.black)
                         .padding()
-                        .safe_glassEffect(.regular, .ultraThin, isintractive: true, clipShape: .capsule, tintColor: nil)
+                        .safeGlassEffect(.regular, fallback: .ultraThinMaterial, isInteractive: true, clipShape: .capsule, tintColor: nil)
                     
                     
                     Text("Safe clear glass with Blur view and tint")
@@ -49,7 +49,7 @@ struct SafeGlassEffect: View {
                         .fontWeight(.regular)
                         .foregroundColor(Color.black)
                         .padding()
-                        .safe_glassEffect(.clear, .ultraThin, isintractive: true, clipShape: .capsule, tintColor: Color.purple.opacity(0.4))
+                        .safeGlassEffect(.clear, fallback: .ultraThinMaterial, isInteractive: true, clipShape: .capsule, tintColor: Color.purple.opacity(0.4))
                     
                     
                 } else {
@@ -63,7 +63,7 @@ struct SafeGlassEffect: View {
         }
         .fullFrame()
         .background(Color(hexString: "F2F2F2"))
-        .ignoreSafeArea_C()
+        .ignoresSafeArea()
     }
 }
 

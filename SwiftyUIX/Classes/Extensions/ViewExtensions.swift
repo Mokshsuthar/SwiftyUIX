@@ -20,6 +20,8 @@ public extension View {
     
 #if os(iOS)
     // Get the height of the device screen
+    
+    
     var screenHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
@@ -32,21 +34,15 @@ public extension View {
     // Get the height of the device's notch (if applicable)
     
     var topSafeAreaHeight: CGFloat {
-        return self.topSafeAreaHeight()
+        return LayoutInspector.shared.topSafeArea
     }
     
-    func topSafeAreaHeight(plus: CGFloat = 0) -> CGFloat {
-        return UIDevice.current.topSafeArea + plus
-    }
-    
-    // Get the height of the device's notch (if applicable)
-    var bottomSafeAreaHeight: CGFloat {
-        return self.bottomSafeAreaHeight()
+    func topSafeAreaHeight(ifZero: CGFloat = 0 ,plus: CGFloat = 0) -> CGFloat {
+        LayoutInspector.shared.safeArea(of: .top, ifZero: ifZero, plus: plus)
     }
     
     func bottomSafeAreaHeight(ifZero: CGFloat = 0 ,plus: CGFloat = 0) -> CGFloat {
-        let bottomSafeAreaSize = UIDevice.current.bottomSafeArea
-        return (bottomSafeAreaSize == 0 ? ifZero : bottomSafeAreaSize) + plus
+        LayoutInspector.shared.safeArea(of: .bottom, ifZero: ifZero, plus: plus)
     }
 
     // Check if the device height is less than the small screen height threshold
@@ -56,58 +52,15 @@ public extension View {
     }
     
     // Returns the corner radius of the device's display, capped at the specified minimum value
-    func screenCornerRadius(minimum: CGFloat = 0) -> CGFloat {
+    func screenCornerRadius(minimum: CGFloat = 0, padding: CGFloat = 0) -> CGFloat {
         // Retrieve the display corner radius from the main screen
-        return UIScreen.main.displayCorner(minimum: minimum)
-    }
-    
-    // Hides the home indicator on devices running iOS 16.0 or later
-    func hideHomeIndicator() -> some View {
-        if #available(iOS 16.0, *) {
-            // Use the `persistentSystemOverlays` modifier with `.hidden` to hide the home indicator
-            return self.persistentSystemOverlays(.hidden)
-        } else {
-            // Return the original view as is for devices running earlier versions of iOS
-            return self
-        }
-    }
-    
-    
-    @available(iOS 15.0, *)
-    @ViewBuilder
-    func safe_glassEffect(_ type : GlassEffectProperties, _ fallBackMaterial: Material,isintractive: Bool = false, clipShape: some Shape = .capsule, tintColor: Color? = nil, glassEffectID: String? = nil) -> some View {
-        if #available(iOS 26.0, *){
-            switch type {
-            case .clear:
-                self.glassEffect(.clear.tint(tintColor).interactive(isintractive),in: clipShape)
-                    
-            case .regular:
-                self.glassEffect(.regular.tint(tintColor).interactive(isintractive),in: clipShape)
-            }
-           
-        } else {
-            self.background(fallBackMaterial).clipShape(clipShape)
-        }
+        return UIScreen.main.displayCorner(minimum: padding + minimum) - padding
     }
     
     @ViewBuilder
-    func safe_glassEffectWithFallBackColor(_ type : GlassEffectProperties, _ fallBackColor: Color,isintractive: Bool = false, clipShape: some Shape = .capsule, tintColor: Color? = nil, glassEffectID: String? = nil) -> some View {
-        if #available(iOS 26.0, *){
-            switch type {
-            case .clear:
-                self.glassEffect(.clear.tint(tintColor).interactive(isintractive),in: clipShape)
-                    
-            case .regular:
-                self.glassEffect(.regular.tint(tintColor).interactive(isintractive),in: clipShape)
-            }
-           
-        } else {
-            self.background(fallBackColor).clipShape(clipShape)
-        }
+    func hideHomeIndicator(visibility: Visibility) -> some View {
+        self.persistentSystemOverlays(visibility)
     }
-   
-    
-    
     //to play HapticFeedback
     func playHapticFeedback(_ type : feedbackType) {
         HapticFeedbackManager.shared.hapticFeedback(type: type)
@@ -120,46 +73,32 @@ public extension View {
         clipShape(RoundedCorner(radius: radius, corners: corners) )
     }
     
+    
+    func safeArea(of edge: Edge, ifZero: CGFloat = 0,plus: CGFloat = 0) -> CGFloat {
+        LayoutInspector.shared.safeArea(of: edge, ifZero: ifZero, plus: plus)
+    }
+    
     // Adjusts the view's frame to account for the bottom safe area
-    func bottomSafeArea(width: CGFloat = 0, plus: CGFloat = 0, ifZero: CGFloat = 0) -> some View {
-        if UIDevice.current.bottomSafeArea == 0 {
-            // If the bottom safe area size is 0, return the view with the adjusted height
-            return self.frame(width: width, height: ifZero + plus, alignment: .center)
-        } else {
-            // If the bottom safe area size is not 0, return the view with the adjusted height
-            return self.frame(width: width, height: UIDevice.current.bottomSafeArea + plus, alignment: .center)
-        }
+    func bottomSafeArea(width: CGFloat = 0, plus: CGFloat = 0, ifZero: CGFloat = 0, alignment : Alignment = .center) -> some View {
+        let bottomSafeArea =  LayoutInspector.shared.safeArea(of: .bottom, ifZero: ifZero, plus: plus)
+        
+        return self.frame(width: width, height: bottomSafeArea, alignment: alignment)
     }
     
     // Adjusts the view's frame to account for the notch size on the device
-    func topSafeArea(width: CGFloat = 0, plus: CGFloat = 0) -> some View {
+    func topSafeArea(width: CGFloat = 0, ifZero: CGFloat = 0, plus: CGFloat = 0,alignment : Alignment = .center) -> some View {
         // Get the notch size from the current device
-        let notchSize = UIDevice.current.topSafeArea
+        let topSafeArea =  LayoutInspector.shared.safeArea(of: .top, ifZero: ifZero, plus: plus)
         
-        // Return the view with the adjusted height to accommodate the notch
-        return self.frame(width: width, height: notchSize + plus, alignment: .center)
-    }
-    
-    func variableBlurViewWithBackground(maxBlurRadius: CGFloat,direction: VariableBlurDirection,startOffset: CGFloat = .zero, linearGradientColors: [Color]) -> some View {
-        return VariableBlurView(maxBlurRadius: maxBlurRadius, direction: direction, startOffset: startOffset)
-                .fullFrame()
-              .background(LinearGradient(colors: linearGradientColors, startPoint: direction == .blurredBottomClearTop ? .bottom : .top, endPoint:  direction == .blurredBottomClearTop ? .top : .bottom))
+        return self.frame(width: width, height: topSafeArea, alignment: alignment)
     }
     
     
     
 #endif
    
-    // Ignores the safe area insets of the device on iOS 14 and above
-    func ignoreSafeArea_C() -> some View {
-        if #available(iOS 14.0, *) {
-            return self.ignoresSafeArea()
-        } else {
-            return self
-        }
-    }
 
-    func frame(size: CGSize,alignment : Alignment = .center) -> some View {
+    func sizeToFrame(size: CGSize,alignment : Alignment = .center) -> some View {
         return self.frame(width: size.width, height: size.height, alignment: alignment)
     }
     
@@ -214,7 +153,7 @@ public extension View {
     
     
     func cornerRadius(_ continuesRadius : CGFloat) -> some View {
-        return self.mask(RoundedRectangle(cornerRadius: continuesRadius,style: .continuous).fill(Color.white))
+        return self.clipShape(RoundedRectangle(cornerRadius: continuesRadius,style: .continuous))
     }
     
     //scroll position Detection
@@ -246,6 +185,11 @@ public extension View {
         }
     
     
+    // Ignores the safe area insets of the device on iOS 14 and above
+    @available(*, deprecated)
+    func ignoreSafeArea_C() -> some View {
+        return self.ignoresSafeArea()
+    }
   
     #if os(macOS)
     func roundedCorners(radius: CGFloat, corners: RectCorner) -> some View {
@@ -277,7 +221,7 @@ public extension View {
     //show System Alert
     func showAlert(title : String,message : String,actions : [UIAlertAction],preferredStyle : UIAlertController.Style = .alert) {
         
-        if let topView = UIApplication.topViewController() {
+        if let topView = UIApplication.shared.topViewController() {
             let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
             for action in actions {
                 alert.addAction(action)
@@ -326,7 +270,7 @@ public extension View {
     
     #endif
     
-    var appEnvirement : AppConfiguration {
+    var appEnvironment : AppConfiguration {
         return Config.appConfiguration
     }
 

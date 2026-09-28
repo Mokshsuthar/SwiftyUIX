@@ -120,7 +120,7 @@ struct ForceUpdateView: View {
          }
          .fullFrame()
          .background(BlurView(style: .regular))
-         .ignoreSafeArea_C()
+         .ignoresSafeArea()
       
     }
 }

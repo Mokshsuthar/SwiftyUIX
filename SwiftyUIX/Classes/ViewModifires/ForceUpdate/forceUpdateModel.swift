@@ -51,7 +51,7 @@ public class forceUpdateModel {
                        self.doesAppNeedUpdate?(true)
                        if self.showDefaultDisplay {
                            DispatchQueue.main.async {
-                               if let rootViewController = UIApplication.topViewController() {
+                               if let rootViewController = UIApplication.shared.topViewController() {
                                    let forceUpdateViewController = ForceUpdateViewController()
                                    forceUpdateViewController.appID = self.appID
                                    forceUpdateViewController.modalPresentationStyle = .overFullScreen

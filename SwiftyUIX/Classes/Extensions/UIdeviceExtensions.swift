@@ -60,6 +60,30 @@ extension UIDevice {
         return window.safeAreaInsets.bottom
     }
     
+    
+    /// Returns the height of the bottom safe area, or 0 if not applicable
+    public var trailingSafeArea: CGFloat {
+        guard
+            let scene = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive }),
+            let window = scene.windows.first(where: { $0.isKeyWindow })
+        else { return 0 }
+//        UserDefaults.bottomSafeArea = window.safeAreaInsets.bottom
+        return window.safeAreaInsets.right
+    }
+    
+    public var leadingSafeArea: CGFloat {
+        guard
+            let scene = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive }),
+            let window = scene.windows.first(where: { $0.isKeyWindow })
+        else { return 0 }
+//        UserDefaults.bottomSafeArea = window.safeAreaInsets.bottom
+        return window.safeAreaInsets.left
+    }
+    
     /// Returns `true` if the device is an iPad
     public var isIPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad

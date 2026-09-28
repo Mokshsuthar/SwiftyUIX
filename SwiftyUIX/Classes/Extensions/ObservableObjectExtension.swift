@@ -13,7 +13,7 @@ public extension ObservableObject {
     //Show UIAlertView from Model
     func showAlert(title : String,message : String,actions : [UIAlertAction],preferredStyle : UIAlertController.Style = .alert) {
         
-        if let topView = UIApplication.topViewController() {
+        if let topView = UIApplication.shared.topViewController() {
             let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
             for action in actions {
                 alert.addAction(action)

@@ -8,113 +8,260 @@
 import SwiftUI
 import SwiftyUIX
 
+enum BlurCases: String, CaseIterable {
+    case none = "None"
+    case vertical = "Vertical"
+    case horizontal = "Horizontal"
+}
+
 struct VeriableBlurView: View {
     
-    @State var showVariableBlur: Bool = true
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
+    @State var blurCases: BlurCases = .vertical
+    
+    
+    
+    @State var applyMask: Bool = true
     
     
     @ViewBuilder
-    var scrollView : some View {
+    var verticalScrollView : some View {
         ScrollView(.vertical) {
-            VStack{
-                Spacer()
-                    .topSafeArea()
-                HStack(alignment: .top, content: {
-                    VStack{
-                        Image(.car1)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car3)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car5)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car7)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car2)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car4)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car6)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                    }
-                    .fullWidth()
+            HStack(alignment: .top, content: {
+                VStack{
+                    Image(.car1)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
                     
-                    VStack{
-                        Image(.car2)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car4)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car6)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car1)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car3)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                        Image(.car5)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(10)
-                        
-                    }
-                    .fullWidth()
-                })
-                .padding(.horizontal)
+                    Image(.car3)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car5)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car7)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car2)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car4)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car6)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                }
+                .fullWidth()
                 
-                Spacer()
-                    .bottomSafeArea()
+                VStack{
+                    Image(.car2)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car4)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car6)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car1)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car3)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car5)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                }
+                .fullWidth()
+            })
+            .padding(.horizontal)
+            
+        }
+        .safeAreaPadding(.top, self.topSafeAreaHeight + 66)
+        .safeAreaPadding(.bottom, self.bottomSafeAreaHeight(plus: 66))
+        
+        .mask {
+            ZStack{
+                if applyMask {
+                    switch blurCases {
+                    case .vertical:
+                        VStack(spacing: 0){
+                            LinearGradient(colors: [Color.clear,Color.white], startPoint: .top, endPoint: .bottom)
+                                .fullWidth(height: self.topSafeAreaHeight(plus: 66))
+                            
+                           Rectangle()
+                            
+                            LinearGradient(colors: [Color.clear,Color.white], startPoint: .bottom, endPoint: .top)
+                                .fullWidth(height: self.bottomSafeAreaHeight(ifZero: 16,plus: 66))
+                        }
+                            .transition(.blurReplace)
+                    case .horizontal:
+                        HStack(spacing: 0){
+                            LinearGradient(colors: [Color.clear,Color.white], startPoint: .leading, endPoint: .trailing)
+                                .fullHeight(width: 50)
+                            
+                           Rectangle()
+                            
+                            LinearGradient(colors: [Color.clear,Color.white], startPoint: .trailing, endPoint: .leading)
+                                .fullHeight(width: 50)
+                        }
+                            .transition(.blurReplace)
+                    case .none:
+                        Rectangle()
+                    }
+                } else {
+                    Rectangle()
+                }
+              
             }
-            
-            
-            
+            .allowsHitTesting(false)
         }
         
     }
     
+    
+    
+    
+    
     @ViewBuilder
-    var overlayView : some View {
+    var VerticalOverlayView : some View {
         VStack{
-            variableBlurViewWithBackground(maxBlurRadius: 3, direction: .blurredTopClearBottom, linearGradientColors: [Color.blackWhite.opacity(0.2),Color.blackWhite.opacity(0)])
-                .fullWidth(height: self.topSafeAreaHeight(plus: 40))
+            VariableBlurView(maxBlurRadius: 3, direction: .blurredTopClearBottom)
+           
+            Spacer()
+            
+            VariableBlurView(maxBlurRadius: 3, direction: .blurredBottomClearTop)
+                .fullWidth(height: self.bottomSafeAreaHeight(plus: 100))
+            
+            
+        }
+    }
+    
+    @ViewBuilder
+    var horizontalScrollView : some View {
+        ScrollView(.horizontal) {
+            VStack(alignment: .leading, content: {
+                HStack{
+                    Image(.car1)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car3)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car5)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car7)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car2)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car4)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car6)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                }
+                .fullHeight()
+                
+                HStack{
+                    Image(.car2)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car4)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car6)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car1)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car3)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                    Image(.car5)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
+                }
+                 .fullHeight()
+            })
+            .padding(.vertical)
+            
+        }
+//        .safeAreaPadding(.top, self.topSafeAreaHeight + 66)
+        .safeAreaPadding(.horizontal, self.bottomSafeAreaHeight(ifZero: 16))
+        .safeAreaPadding(.bottom, 116)
+      
+//        .ignoreSafeArea_C()
+        
+    }
+    
+    @ViewBuilder
+    var HorizontalOverlayView : some View {
+        HStack{
+            VariableBlurView(maxBlurRadius: 3, direction: .blurredLeftClearRight)
+                .fullHeight(width: self.bottomSafeAreaHeight(ifZero: 16))
             
             
             Spacer()
             
-            variableBlurViewWithBackground(maxBlurRadius: 3, direction: .blurredBottomClearTop, linearGradientColors: [Color.blackWhite.opacity(0.2),Color.blackWhite.opacity(0)])
-                .fullWidth(height: self.bottomSafeAreaHeight(plus: 100))
+            VariableBlurView(maxBlurRadius: 3, direction:  .blurredRightClearLeft)
+                .fullHeight(width: 101)
             
             
         }
@@ -123,29 +270,103 @@ struct VeriableBlurView: View {
     
     var body: some View {
         ZStack{
-            scrollView
-            
-            if showVariableBlur {
-                overlayView
+            ZStack{
+                
+                switch blurCases {
+                case .vertical:
+                    verticalScrollView
+                        .ignoresSafeArea(edges: .vertical)
+                    VerticalOverlayView
+                        .ignoresSafeArea()
+                        .transition(.blurReplace)
+                case .horizontal:
+                    horizontalScrollView
+//
+                        .mask {
+                            ZStack{
+                                if applyMask {
+                                    switch blurCases {
+                                    case .vertical:
+                                        VStack(spacing: 0){
+                                            LinearGradient(colors: [Color.clear,Color.white], startPoint: .top, endPoint: .bottom)
+                                                .fullWidth(height: self.topSafeAreaHeight(plus: 66))
+                                            
+                                           Rectangle()
+                                            
+                                            LinearGradient(colors: [Color.clear,Color.white], startPoint: .bottom, endPoint: .top)
+                                                .fullWidth(height: self.bottomSafeAreaHeight(ifZero: 16,plus: 66))
+                                        }
+                                            .transition(.blurReplace)
+                                    case .horizontal:
+                                        HStack(spacing: 0){
+                                            LinearGradient(colors: [Color.clear,Color.white], startPoint: .leading, endPoint: .trailing)
+                                                .fullHeight(width: 50)
+                                            
+                                           Rectangle()
+                                            
+                                            LinearGradient(colors: [Color.clear,Color.white], startPoint: .trailing, endPoint: .leading)
+                                                .fullHeight(width: 101)
+                                        }
+                                            .transition(.blurReplace)
+                                    case .none:
+                                        Rectangle()
+                                    }
+                                } else {
+                                    Rectangle()
+                                }
+                              
+                            }
+                            .allowsHitTesting(false)
+                            .ignoresSafeArea()
+                        }
+                    HorizontalOverlayView
+                        .ignoresSafeArea()
+                        .transition(.blurReplace)
+                case .none:
+                    verticalScrollView
+                        .ignoresSafeArea(edges: .vertical)
+                }
             }
+            .animation(.smooth, value: blurCases)
          
             
             VStack {
                 Spacer()
                 
-                Toggle(isOn: $showVariableBlur) {
-                    Text("Toggle Variable Blur")
-                }
-                .padding()
-                .safe_glassEffectWithFallBackColor(.regular, Color.white, isintractive: true, clipShape: .capsule, tintColor: nil, glassEffectID: nil)
-                .padding(.horizontal)
-               
                 
-                Spacer()
-                    .bottomSafeArea()
+                VStack{
+                    Toggle(isOn: $applyMask) {
+                        Text("Apply Mask")
+                            .font(.subheadline)
+                    }
+                    .padding(.horizontal, 12)
+                    
+                    Divider()
+                    
+                    Picker(selection: $blurCases) {
+                        ForEach(BlurCases.allCases,id: \.self){ blurType in
+                            Text(blurType.rawValue)
+                                .font(.headline)
+                        }
+                    } label: {
+                        Text("Blur Type")
+                    }
+                    .pickerStyle(.segmented)
+                    .controlSize(.large)
+                    .padding(.horizontal, 12)
+                }
+                .padding(.vertical, 12)
+                .safeGlassEffect(.regular, fallback: Color.white, isInteractive: true, clipShape: RoundedRectangle(cornerRadius: self.screenCornerRadius(minimum: self.bottomSafeAreaHeight(ifZero: 16) + 10) - self.bottomSafeAreaHeight(ifZero: 16)))
+                
+                
+//
+//                
+//
             }
+            .padding(.horizontal,self.bottomSafeAreaHeight(ifZero: 16))
+//            .ignoreSafeArea_C()
         }
-        .ignoreSafeArea_C()
+//
         .fullFrame()
         
     }
